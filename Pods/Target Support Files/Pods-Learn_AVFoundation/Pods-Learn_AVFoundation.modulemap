@@ -1,0 +1,6 @@
+framework module Pods_Learn_AVFoundation {
+  umbrella header "Pods-Learn_AVFoundation-umbrella.h"
+
+  export *
+  module * { export * }
+}
