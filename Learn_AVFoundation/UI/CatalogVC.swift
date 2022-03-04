@@ -14,11 +14,15 @@ class CatalogVC: BaseViewController {
         $0.dataSource = self
         $0.estimatedRowHeight = 50
         $0.backgroundColor = .white
-        $0.separatorStyle = .none
+//        $0.separatorStyle = .none
         $0.frame = view.bounds
         $0.cq.register(cellClass: UITableViewCell.self)
     }
-    private let dataList: [[String: String]] = [["title": "AVSpeechSynthesizer(语音播放)", "vc": "L_AVSpeechSynthesizer"]]
+    private let dataList: [[String: String]] = [["title": "AVSpeechSynthesizer(语音播放)", "vc": "L_AVSpeechSynthesizer"],
+                                                ["title": "AVAudioPlayer(音频播放,LooperDemo)", "vc": "L_AudioLooper"],
+                                                ["title": "--", "vc": "BaseViewController"],
+                                                ["title": "--", "vc": "BaseViewController"],
+                                                ["title": "--", "vc": "BaseViewController"],]
     
     override func viewDidLoad() {
         super.viewDidLoad()
