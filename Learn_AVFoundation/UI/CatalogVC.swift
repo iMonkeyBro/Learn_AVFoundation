@@ -13,16 +13,23 @@ class CatalogVC: BaseViewController {
         $0.delegate = self
         $0.dataSource = self
         $0.estimatedRowHeight = 50
+        
         $0.backgroundColor = .white
 //        $0.separatorStyle = .none
         $0.frame = view.bounds
         $0.cq.register(cellClass: UITableViewCell.self)
     }
     private let dataList: [[String: String]] = [["title": "AVSpeechSynthesizer(语音播放)", "vc": "L_AVSpeechSynthesizer"],
-                                                ["title": "AVAudioPlayer(音频播放,LooperDemo)", "vc": "L_AudioLooper"],
+                                                ["title": "AVAudioPlayer(音频播放,Audio Looper)", "vc": "L_AudioLooper"],
+                                                ["title": "AVAudioRecorder(音频录制,Voice Memo)", "vc": "L_VoiceMemo"],
                                                 ["title": "--", "vc": "BaseViewController"],
                                                 ["title": "--", "vc": "BaseViewController"],
-                                                ["title": "--", "vc": "BaseViewController"],]
+                                                ["title": "--", "vc": "BaseViewController"],
+                                                ["title": "--", "vc": "BaseViewController"],
+                                                ["title": "--", "vc": "BaseViewController"],
+                                                ["title": "--", "vc": "BaseViewController"],
+                                                ["title": "--", "vc": "BaseViewController"],
+                                                ["title": "沙盒目录查看", "vc": "JXFileBrowserController"],]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,7 +44,7 @@ class CatalogVC: BaseViewController {
 extension CatalogVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        let classType = NSClassFromString(KPROJECT_NAME+dataList[indexPath.row]["vc"]!) as! BaseViewController.Type
+        let classType = NSClassFromString(KPROJECT_NAME+dataList[indexPath.row]["vc"]!) as! UIViewController.Type
         let viewController = classType.init().cq.then {
             $0.title = dataList[indexPath.row]["title"]!
         }

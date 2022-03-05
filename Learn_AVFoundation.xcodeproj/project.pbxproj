@@ -11,6 +11,16 @@
 		902923D727D2528C004E7D13 /* drums.caf in Resources */ = {isa = PBXBuildFile; fileRef = 902923D427D2528C004E7D13 /* drums.caf */; };
 		902923D827D2528C004E7D13 /* guitar.caf in Resources */ = {isa = PBXBuildFile; fileRef = 902923D527D2528C004E7D13 /* guitar.caf */; };
 		902923D927D2528C004E7D13 /* bass.caf in Resources */ = {isa = PBXBuildFile; fileRef = 902923D627D2528C004E7D13 /* bass.caf */; };
+		902923DE27D3589F004E7D13 /* L_VoiceMemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 902923DD27D3589F004E7D13 /* L_VoiceMemo.swift */; };
+		902923E827D359D9004E7D13 /* JXDatabaseConnector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 902923E127D359D9004E7D13 /* JXDatabaseConnector.swift */; };
+		902923E927D359D9004E7D13 /* ExcelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 902923E227D359D9004E7D13 /* ExcelView.swift */; };
+		902923EA27D359D9004E7D13 /* JXTableListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 902923E327D359D9004E7D13 /* JXTableListViewController.swift */; };
+		902923EB27D359D9004E7D13 /* JXFileBrowserController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 902923E427D359D9004E7D13 /* JXFileBrowserController.swift */; };
+		902923EC27D359D9004E7D13 /* JXTextPreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 902923E527D359D9004E7D13 /* JXTextPreviewViewController.swift */; };
+		902923ED27D359D9004E7D13 /* JXFilePreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 902923E627D359D9004E7D13 /* JXFilePreviewViewController.swift */; };
+		902923EE27D359D9004E7D13 /* JXTableContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 902923E727D359D9004E7D13 /* JXTableContentViewController.swift */; };
+		902923F227D3695D004E7D13 /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 902923F127D3695D004E7D13 /* R.generated.swift */; };
+		902923F427D396CD004E7D13 /* Asyncs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 902923F327D396CD004E7D13 /* Asyncs.swift */; };
 		902DF17C27CF424500A78688 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 902DF17B27CF424500A78688 /* AppDelegate.swift */; };
 		902DF18527CF424700A78688 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 902DF18427CF424700A78688 /* Assets.xcassets */; };
 		902DF18827CF424700A78688 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 902DF18627CF424700A78688 /* LaunchScreen.storyboard */; };
@@ -56,6 +66,16 @@
 		902923D427D2528C004E7D13 /* drums.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = drums.caf; sourceTree = "<group>"; };
 		902923D527D2528C004E7D13 /* guitar.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = guitar.caf; sourceTree = "<group>"; };
 		902923D627D2528C004E7D13 /* bass.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = bass.caf; sourceTree = "<group>"; };
+		902923DD27D3589F004E7D13 /* L_VoiceMemo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = L_VoiceMemo.swift; sourceTree = "<group>"; };
+		902923E127D359D9004E7D13 /* JXDatabaseConnector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JXDatabaseConnector.swift; sourceTree = "<group>"; };
+		902923E227D359D9004E7D13 /* ExcelView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExcelView.swift; sourceTree = "<group>"; };
+		902923E327D359D9004E7D13 /* JXTableListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JXTableListViewController.swift; sourceTree = "<group>"; };
+		902923E427D359D9004E7D13 /* JXFileBrowserController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JXFileBrowserController.swift; sourceTree = "<group>"; };
+		902923E527D359D9004E7D13 /* JXTextPreviewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JXTextPreviewViewController.swift; sourceTree = "<group>"; };
+		902923E627D359D9004E7D13 /* JXFilePreviewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JXFilePreviewViewController.swift; sourceTree = "<group>"; };
+		902923E727D359D9004E7D13 /* JXTableContentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JXTableContentViewController.swift; sourceTree = "<group>"; };
+		902923F127D3695D004E7D13 /* R.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = R.generated.swift; path = Learn_AVFoundation/R.generated.swift; sourceTree = SOURCE_ROOT; };
+		902923F327D396CD004E7D13 /* Asyncs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Asyncs.swift; sourceTree = "<group>"; };
 		902DF17827CF424500A78688 /* Learn_AVFoundation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Learn_AVFoundation.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		902DF17B27CF424500A78688 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		902DF18427CF424700A78688 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -135,6 +155,28 @@
 			path = Loops;
 			sourceTree = "<group>";
 		};
+		902923DF27D359B1004E7D13 /* Lib */ = {
+			isa = PBXGroup;
+			children = (
+				902923E027D359D9004E7D13 /* JXFileBrowserController */,
+			);
+			path = Lib;
+			sourceTree = "<group>";
+		};
+		902923E027D359D9004E7D13 /* JXFileBrowserController */ = {
+			isa = PBXGroup;
+			children = (
+				902923E127D359D9004E7D13 /* JXDatabaseConnector.swift */,
+				902923E227D359D9004E7D13 /* ExcelView.swift */,
+				902923E327D359D9004E7D13 /* JXTableListViewController.swift */,
+				902923E427D359D9004E7D13 /* JXFileBrowserController.swift */,
+				902923E527D359D9004E7D13 /* JXTextPreviewViewController.swift */,
+				902923E627D359D9004E7D13 /* JXFilePreviewViewController.swift */,
+				902923E727D359D9004E7D13 /* JXTableContentViewController.swift */,
+			);
+			path = JXFileBrowserController;
+			sourceTree = "<group>";
+		};
 		902DF16F27CF424500A78688 = {
 			isa = PBXGroup;
 			children = (
@@ -164,8 +206,10 @@
 				9DF46B5C27D1290A007369CF /* UI */,
 				9DF46B6727D12ED5007369CF /* Extension */,
 				9DF46B5D27D12913007369CF /* Tool */,
+				902923DF27D359B1004E7D13 /* Lib */,
 				902923D027D24D31004E7D13 /* Resource */,
 				9DF46B7627D13164007369CF /* Other */,
+				902923F127D3695D004E7D13 /* R.generated.swift */,
 				902DF18927CF424700A78688 /* Info.plist */,
 			);
 			path = Learn_AVFoundation;
@@ -201,6 +245,7 @@
 			isa = PBXGroup;
 			children = (
 				9DF46B6527D12D9C007369CF /* Common.swift */,
+				902923F327D396CD004E7D13 /* Asyncs.swift */,
 			);
 			path = Tool;
 			sourceTree = "<group>";
@@ -241,6 +286,7 @@
 			children = (
 				9DF46B7827D1324E007369CF /* L_AVSpeechSynthesizer.swift */,
 				902923D127D25240004E7D13 /* L_AudioLooper.swift */,
+				902923DD27D3589F004E7D13 /* L_VoiceMemo.swift */,
 			);
 			path = Learn;
 			sourceTree = "<group>";
@@ -266,6 +312,7 @@
 				902DF17527CF424500A78688 /* Frameworks */,
 				902DF17627CF424500A78688 /* Resources */,
 				C193D16D05557261DA6FFA62 /* [CP] Embed Pods Frameworks */,
+				902923DA27D30945004E7D13 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -407,6 +454,25 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		902923DA27D30945004E7D13 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"$TEMP_DIR/rswift-lastrun",
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				$SRCROOT/R.generated.swift,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n\"$PODS_ROOT/R.swift/rswift\" generate \"$SRCROOT/R.generated.swift\"\n";
+		};
 		C193D16D05557261DA6FFA62 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -431,20 +497,30 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				902923F427D396CD004E7D13 /* Asyncs.swift in Sources */,
 				9DF46B6427D129D2007369CF /* CatalogVC.swift in Sources */,
 				902DF17C27CF424500A78688 /* AppDelegate.swift in Sources */,
 				9DF46B6227D1294E007369CF /* BaseNavController.swift in Sources */,
+				902923E827D359D9004E7D13 /* JXDatabaseConnector.swift in Sources */,
 				9DF46B7527D12EEB007369CF /* UITableViewExtension.swift in Sources */,
 				9DF46B7327D12EEB007369CF /* UIImageExtension.swift in Sources */,
 				9DF46B7927D1324E007369CF /* L_AVSpeechSynthesizer.swift in Sources */,
+				902923E927D359D9004E7D13 /* ExcelView.swift in Sources */,
 				9DF46B6627D12D9C007369CF /* Common.swift in Sources */,
+				902923EB27D359D9004E7D13 /* JXFileBrowserController.swift in Sources */,
 				9DF46B7227D12EEB007369CF /* UICollectionViewExtension.swift in Sources */,
 				9DF46B6027D12938007369CF /* BaseViewController.swift in Sources */,
+				902923F227D3695D004E7D13 /* R.generated.swift in Sources */,
+				902923EA27D359D9004E7D13 /* JXTableListViewController.swift in Sources */,
+				902923EE27D359D9004E7D13 /* JXTableContentViewController.swift in Sources */,
 				9DF46B7027D12EEB007369CF /* CQBaseExtension.swift in Sources */,
+				902923DE27D3589F004E7D13 /* L_VoiceMemo.swift in Sources */,
 				902923D227D25240004E7D13 /* L_AudioLooper.swift in Sources */,
+				902923EC27D359D9004E7D13 /* JXTextPreviewViewController.swift in Sources */,
 				9DF46B6F27D12EEB007369CF /* UIColorExtension.swift in Sources */,
 				9DF46B7427D12EEB007369CF /* StringExtension.swift in Sources */,
 				9DF46B7127D12EEB007369CF /* AnyObjectExtension.swift in Sources */,
+				902923ED27D359D9004E7D13 /* JXFilePreviewViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

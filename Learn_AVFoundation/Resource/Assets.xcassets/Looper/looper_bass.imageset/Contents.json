@@ -1,12 +1,12 @@
 {
   "images" : [
     {
-      "filename" : "guitar.png",
+      "filename" : "looper_bass.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "guitar@2x.png",
+      "filename" : "looper_bass@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },

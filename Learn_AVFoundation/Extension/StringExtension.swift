@@ -16,4 +16,8 @@ public extension CQ where Base == String {
             ("0"..."9").contains(c)
         }.count
     }
+    
+    static var documentsDirectory: String {
+        NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.documentDirectory, FileManager.SearchPathDomainMask.userDomainMask, true)[0]
+    }
 }

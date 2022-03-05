@@ -25,6 +25,10 @@ class L_AVSpeechSynthesizer: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        
+    }
+    
+    private func test() {
         let speechSynthesizer: AVSpeechSynthesizer = AVSpeechSynthesizer()
         let utterance = AVSpeechUtterance(string: "Hello AV Foundation")
         speechSynthesizer.speak(utterance)

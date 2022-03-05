@@ -21,7 +21,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         confitAudioSession()
         return true
     }
-    
+}
+
+private extension AppDelegate {
     /**
      配置音频会话，音频会话的详细介绍，书籍22页
      */
@@ -37,9 +39,5 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         } catch {
             CQLog(error)
         }
-        
-        
     }
-
 }
-

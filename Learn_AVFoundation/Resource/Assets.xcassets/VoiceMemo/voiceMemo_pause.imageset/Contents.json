@@ -1,12 +1,12 @@
 {
   "images" : [
     {
-      "filename" : "drum.png",
+      "filename" : "voiceMemo_pause.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "drum@2x.png",
+      "filename" : "voiceMemo_pause@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
