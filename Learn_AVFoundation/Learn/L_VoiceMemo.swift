@@ -35,13 +35,15 @@ class L_VoiceMemo: BaseViewController {
     }
     
     private let recorder: VoiceMemoRecorder = VoiceMemoRecorder()
+    private var observerRecorder: NSKeyValueObservation?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         configUI()
+        observerRecorder = recorder.observe(\VoiceMemoRecorder.formattedCurrentTime) { voiceMemoRecorder, change in
+            self.timeLabel.text = voiceMemoRecorder.formattedCurrentTime
+        }
     }
-    
-    
 }
 
 // MARK: - Event
@@ -125,7 +127,7 @@ private class VoiceMemoRecorder: NSObject {
     typealias StopCompletionClosure = (Bool) -> ()
     typealias SaveCompletionClosure = (Bool, Any) -> ()
     
-    var formattedCurrentTime: String = ""
+    @objc dynamic var formattedCurrentTime: String = ""
     var averagePower: Float = 0.0
     var peakPower: Float = 0.0
     
@@ -133,22 +135,28 @@ private class VoiceMemoRecorder: NSObject {
     @discardableResult
     func record() -> Bool {
         CQLog("开始录制")
-        timer?.schedule(deadline: .now(), repeating: .milliseconds(500))
-        timer?.setEventHandler(handler: {
-            self.reloadCuttentTimeAndVolum()
-        })
-        return recorder.record()
+        let result = recorder.record()
+        if result == true {
+            timer?.schedule(deadline: .now(), repeating: .milliseconds(100))
+            timer?.setEventHandler(handler: {
+                DispatchQueue.main.async {
+                    self.reloadCuttentTimeAndVolum()
+                }
+            })
+            timer?.resume()
+        }
+        return result
     }
     
     func pause() {
-        timer?.resume()
+        timer?.suspend()
         CQLog("暂停录制")
         recorder.pause()
     }
     
     func stop(_ handler: StopCompletionClosure?) {
+        timer?.suspend()
         CQLog("结束录制")
-        timer?.resume()
         stopHandler = handler
         recorder.stop()
     }
@@ -203,19 +211,19 @@ private class VoiceMemoRecorder: NSObject {
     
     private func reloadCuttentTimeAndVolum() {
         let time = recorder.currentTime
-        let hours = time/3600
-        let minutes = (time/60).truncatingRemainder(dividingBy: 60)
-        let seconds = time.truncatingRemainder(dividingBy: 60)
+        let hours: Int = Int(time/3600)
+        let minutes: Int = Int((time/60).truncatingRemainder(dividingBy: 60))
+        let seconds: Int = Int(time.truncatingRemainder(dividingBy: 60))
         formattedCurrentTime = String(format: "%02i:%02i:%02i", hours, minutes, seconds)
         
         // 该方法一定要在读取之前调用
         recorder.updateMeters()
-        // 平均，因为是单声道录制，所以询问第一个声道即可
+        // 平均，因为是单声道录制，所以询问第一个声道即可 ,范围0 - -160
         averagePower = recorder.averagePower(forChannel: 0)
-        // 峰值，因为是单声道录制，所以询问第一个声道即可
+        // 峰值，因为是单声道录制，所以询问第一个声道即可 ,范围0 - -160
         peakPower = recorder.peakPower(forChannel: 0)
         
-        CQLog("\(formattedCurrentTime)-\(averagePower)-\(peakPower)")
+        CQLog("录制时间:\(formattedCurrentTime),平均功率：\(averagePower)，峰值功率：\(peakPower)")
     }
     
     private func removeTmpFile() {
