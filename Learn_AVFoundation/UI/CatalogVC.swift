@@ -22,7 +22,7 @@ class CatalogVC: BaseViewController {
     private let dataList: [[String: String]] = [["title": "AVSpeechSynthesizer(语音播放)", "vc": "L_AVSpeechSynthesizer"],
                                                 ["title": "AVAudioPlayer(音频播放,Audio Looper)", "vc": "L_AudioLooper"],
                                                 ["title": "AVAudioRecorder(音频录制,Voice Memo)", "vc": "L_VoiceMemo"],
-                                                ["title": "--", "vc": "BaseViewController"],
+                                                ["title": "AVAsset(AVAsset学习)", "vc": "L_AVAsset"],
                                                 ["title": "--", "vc": "BaseViewController"],
                                                 ["title": "--", "vc": "BaseViewController"],
                                                 ["title": "--", "vc": "BaseViewController"],

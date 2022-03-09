@@ -21,6 +21,8 @@
 		902923EE27D359D9004E7D13 /* JXTableContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 902923E727D359D9004E7D13 /* JXTableContentViewController.swift */; };
 		902923F227D3695D004E7D13 /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 902923F127D3695D004E7D13 /* R.generated.swift */; };
 		902923F427D396CD004E7D13 /* Asyncs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 902923F327D396CD004E7D13 /* Asyncs.swift */; };
+		902C9D9027D8D2640060AB4C /* L_AVAsset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 902C9D8F27D8D2640060AB4C /* L_AVAsset.swift */; };
+		902C9D9227D8D2AA0060AB4C /* 可能否-木小雅.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 902C9D9127D8D2AA0060AB4C /* 可能否-木小雅.mp3 */; };
 		902DF17C27CF424500A78688 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 902DF17B27CF424500A78688 /* AppDelegate.swift */; };
 		902DF18527CF424700A78688 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 902DF18427CF424700A78688 /* Assets.xcassets */; };
 		902DF18827CF424700A78688 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 902DF18627CF424700A78688 /* LaunchScreen.storyboard */; };
@@ -76,6 +78,8 @@
 		902923E727D359D9004E7D13 /* JXTableContentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JXTableContentViewController.swift; sourceTree = "<group>"; };
 		902923F127D3695D004E7D13 /* R.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = R.generated.swift; path = Learn_AVFoundation/R.generated.swift; sourceTree = SOURCE_ROOT; };
 		902923F327D396CD004E7D13 /* Asyncs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Asyncs.swift; sourceTree = "<group>"; };
+		902C9D8F27D8D2640060AB4C /* L_AVAsset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = L_AVAsset.swift; sourceTree = "<group>"; };
+		902C9D9127D8D2AA0060AB4C /* 可能否-木小雅.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "可能否-木小雅.mp3"; sourceTree = "<group>"; };
 		902DF17827CF424500A78688 /* Learn_AVFoundation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Learn_AVFoundation.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		902DF17B27CF424500A78688 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		902DF18427CF424700A78688 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -138,6 +142,7 @@
 		902923D027D24D31004E7D13 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				902C9D9127D8D2AA0060AB4C /* 可能否-木小雅.mp3 */,
 				902923D327D2528C004E7D13 /* Loops */,
 				902DF18427CF424700A78688 /* Assets.xcassets */,
 				902DF18627CF424700A78688 /* LaunchScreen.storyboard */,
@@ -287,6 +292,7 @@
 				9DF46B7827D1324E007369CF /* L_AVSpeechSynthesizer.swift */,
 				902923D127D25240004E7D13 /* L_AudioLooper.swift */,
 				902923DD27D3589F004E7D13 /* L_VoiceMemo.swift */,
+				902C9D8F27D8D2640060AB4C /* L_AVAsset.swift */,
 			);
 			path = Learn;
 			sourceTree = "<group>";
@@ -409,6 +415,7 @@
 			files = (
 				902DF18827CF424700A78688 /* LaunchScreen.storyboard in Resources */,
 				902923D727D2528C004E7D13 /* drums.caf in Resources */,
+				902C9D9227D8D2AA0060AB4C /* 可能否-木小雅.mp3 in Resources */,
 				902923D827D2528C004E7D13 /* guitar.caf in Resources */,
 				902923D927D2528C004E7D13 /* bass.caf in Resources */,
 				902DF18527CF424700A78688 /* Assets.xcassets in Resources */,
@@ -503,6 +510,7 @@
 				9DF46B6227D1294E007369CF /* BaseNavController.swift in Sources */,
 				902923E827D359D9004E7D13 /* JXDatabaseConnector.swift in Sources */,
 				9DF46B7527D12EEB007369CF /* UITableViewExtension.swift in Sources */,
+				902C9D9027D8D2640060AB4C /* L_AVAsset.swift in Sources */,
 				9DF46B7327D12EEB007369CF /* UIImageExtension.swift in Sources */,
 				9DF46B7927D1324E007369CF /* L_AVSpeechSynthesizer.swift in Sources */,
 				902923E927D359D9004E7D13 /* ExcelView.swift in Sources */,
