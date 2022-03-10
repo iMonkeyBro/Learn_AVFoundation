@@ -20,5 +20,7 @@
 	<string>同意才能使用相册</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
 	<string>同意才能向相册添加内容</string>
+	<key>NSAppleMusicUsageDescription</key>
+	<string>同意才能访问媒体资源</string>
 </dict>
 </plist>
