@@ -130,14 +130,64 @@ struct R: Rswift.Validatable {
     fileprivate init() {}
   }
 
-  /// This `R.file` struct is generated, and contains static references to 3 files.
+  /// This `R.file` struct is generated, and contains static references to 10 files.
   struct file {
+    /// Resource file `01 Demo AAC.m4a`.
+    static let demoAACM4a = Rswift.FileResource(bundle: R.hostingBundle, name: "01 Demo AAC", pathExtension: "m4a")
+    /// Resource file `02 Demo ID3v2.2.mp3`.
+    static let demoID3v22Mp3 = Rswift.FileResource(bundle: R.hostingBundle, name: "02 Demo ID3v2.2", pathExtension: "mp3")
+    /// Resource file `03 Demo ID3v2.3.mp3`.
+    static let demoID3v23Mp3 = Rswift.FileResource(bundle: R.hostingBundle, name: "03 Demo ID3v2.3", pathExtension: "mp3")
+    /// Resource file `04 Demo ID3v2.4.mp3`.
+    static let demoID3v24Mp3 = Rswift.FileResource(bundle: R.hostingBundle, name: "04 Demo ID3v2.4", pathExtension: "mp3")
+    /// Resource file `Charlie The Unicorn.m4v`.
+    static let charlieTheUnicornM4v = Rswift.FileResource(bundle: R.hostingBundle, name: "Charlie The Unicorn", pathExtension: "m4v")
+    /// Resource file `Hubblecast.mov`.
+    static let hubblecastMov = Rswift.FileResource(bundle: R.hostingBundle, name: "Hubblecast", pathExtension: "mov")
     /// Resource file `bass.caf`.
     static let bassCaf = Rswift.FileResource(bundle: R.hostingBundle, name: "bass", pathExtension: "caf")
     /// Resource file `drums.caf`.
     static let drumsCaf = Rswift.FileResource(bundle: R.hostingBundle, name: "drums", pathExtension: "caf")
     /// Resource file `guitar.caf`.
     static let guitarCaf = Rswift.FileResource(bundle: R.hostingBundle, name: "guitar", pathExtension: "caf")
+    /// Resource file `可能否-木小雅.mp3`.
+    static let 可能否木小雅Mp3 = Rswift.FileResource(bundle: R.hostingBundle, name: "可能否-木小雅", pathExtension: "mp3")
+
+    /// `bundle.url(forResource: "01 Demo AAC", withExtension: "m4a")`
+    static func demoAACM4a(_: Void = ()) -> Foundation.URL? {
+      let fileResource = R.file.demoAACM4a
+      return fileResource.bundle.url(forResource: fileResource)
+    }
+
+    /// `bundle.url(forResource: "02 Demo ID3v2.2", withExtension: "mp3")`
+    static func demoID3v22Mp3(_: Void = ()) -> Foundation.URL? {
+      let fileResource = R.file.demoID3v22Mp3
+      return fileResource.bundle.url(forResource: fileResource)
+    }
+
+    /// `bundle.url(forResource: "03 Demo ID3v2.3", withExtension: "mp3")`
+    static func demoID3v23Mp3(_: Void = ()) -> Foundation.URL? {
+      let fileResource = R.file.demoID3v23Mp3
+      return fileResource.bundle.url(forResource: fileResource)
+    }
+
+    /// `bundle.url(forResource: "04 Demo ID3v2.4", withExtension: "mp3")`
+    static func demoID3v24Mp3(_: Void = ()) -> Foundation.URL? {
+      let fileResource = R.file.demoID3v24Mp3
+      return fileResource.bundle.url(forResource: fileResource)
+    }
+
+    /// `bundle.url(forResource: "Charlie The Unicorn", withExtension: "m4v")`
+    static func charlieTheUnicornM4v(_: Void = ()) -> Foundation.URL? {
+      let fileResource = R.file.charlieTheUnicornM4v
+      return fileResource.bundle.url(forResource: fileResource)
+    }
+
+    /// `bundle.url(forResource: "Hubblecast", withExtension: "mov")`
+    static func hubblecastMov(_: Void = ()) -> Foundation.URL? {
+      let fileResource = R.file.hubblecastMov
+      return fileResource.bundle.url(forResource: fileResource)
+    }
 
     /// `bundle.url(forResource: "bass", withExtension: "caf")`
     static func bassCaf(_: Void = ()) -> Foundation.URL? {
@@ -154,6 +204,12 @@ struct R: Rswift.Validatable {
     /// `bundle.url(forResource: "guitar", withExtension: "caf")`
     static func guitarCaf(_: Void = ()) -> Foundation.URL? {
       let fileResource = R.file.guitarCaf
+      return fileResource.bundle.url(forResource: fileResource)
+    }
+
+    /// `bundle.url(forResource: "可能否-木小雅", withExtension: "mp3")`
+    static func 可能否木小雅Mp3(_: Void = ()) -> Foundation.URL? {
+      let fileResource = R.file.可能否木小雅Mp3
       return fileResource.bundle.url(forResource: fileResource)
     }
 

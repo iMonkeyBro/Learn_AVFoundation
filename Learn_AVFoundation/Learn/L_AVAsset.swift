@@ -11,51 +11,72 @@ import Photos
 import MediaPlayer
 
 class L_AVAsset: BaseViewController {
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        testAVURLAsset()
-  
+//        testAVURLAsset()
+        
+        print(CMTimeCompare(CMTime(value: 99999, timescale: 600), CMTime.invalid))
     }
 }
 
 private extension L_AVAsset {
-
+    
     func testAVURLAsset() {
-        let assetURL = URL(fileURLWithPath: Bundle.main.path(forResource: "可能否-木小雅", ofType: "mp3")!)
+        // 生成asset
+        let assetURL = URL(fileURLWithPath: Bundle.main.path(forResource: "01 Demo AAC", ofType: "m4a")!)
         // 更精确的时长和计时信息，但加载时间也会长一些
         let options = [AVURLAssetPreferPreciseDurationAndTimingKey: true]
-        let asset = AVURLAsset(url: assetURL, options: options)
-//        CQLog(asset.duration.seconds)
+        let asset: AVURLAsset = AVURLAsset(url: assetURL, options: options)
         
+        // 获取asset的属性，当然可以直接获取不用这么麻烦
         let keys = ["tracks", "availableMetadataFormats"]
         asset.loadValuesAsynchronously(forKeys: keys) {
             var error: NSError? = nil
             let tracksStatus = asset.statusOfValue(forKey: "tracks", error: &error)
             switch tracksStatus {
             case .loaded:
-                CQLog(asset.tracks)
+//                CQLog(asset.tracks)
+                break
             case .loading: break
             case .cancelled: break
             case .failed: break
             case .unknown: break
             @unknown default: break
             }
-            var metadata: [Any] = []
-            for format: AVMetadataFormat in asset.availableMetadataFormats {
-                metadata.append(asset.metadata(forFormat: format))
-            }
-            let keySpace: AVMetadataKeySpace = AVMetadataKeySpace.iTunes
-            let artisKey = AVMetadataKey.iTunesMetadataKeyArtist
-            let albumKey = AVMetadataKey.iTunesMetadataKeyAlbum
-            
         }
+        
+        // 获取asset的AVMetadataItem
+        var metadataItems: [AVMetadataItem] = []
+        for format: AVMetadataFormat in asset.availableMetadataFormats {
+            metadataItems.append(contentsOf: asset.metadata(forFormat: format))
+        }
+        CQLog("\(metadataItems.last!.key!)"+"--"+"\(metadataItems.last!.keyString())"+"--"+"\(metadataItems.last!.value!)")
+        // 根据键空间和键筛选AVMetadataItem
+        let keySpace: AVMetadataKeySpace = AVMetadataKeySpace.audioFile
+        let artisKey = AVMetadataKey.iTunesMetadataKeyArtist
+        let albumKey = AVMetadataKey.iTunesMetadataKeyAlbum
+        let artistMetadata = AVMetadataItem.metadataItems(from: metadataItems, withKey: artisKey, keySpace: keySpace)
+        let albumMetadata = AVMetadataItem.metadataItems(from: metadataItems, withKey: albumKey, keySpace: keySpace)
+        let artistItem, albumItem : AVMetadataItem?
+        artistItem = artistMetadata.first
+        albumItem = albumMetadata.first
+        if artistItem != nil {CQLog(artistItem!)}
+        if albumItem != nil {CQLog(albumItem!)}
+        // 根据标识符筛选AVMetadataItem
+        let nameKeyId: AVMetadataIdentifier = AVMetadataIdentifier.iTunesMetadataSongName
+        let nameMetadata = AVMetadataItem.metadataItems(from: metadataItems, filteredByIdentifier: nameKeyId)
+        let nameItem: AVMetadataItem? = nameMetadata.first
+        if nameItem != nil {CQLog(nameItem!.keyString())}
+        
+        // 使用AVMetadataItem
+        
     }
     
     func testPhotos() {
         // 利用Phtots框架获取用户相册的资源
         let allPhotoOptions = PHFetchOptions()
-//        allPhotoOptions.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
+        //        allPhotoOptions.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
         let allPhotos: PHFetchResult = PHAsset.fetchAssets(with: allPhotoOptions)
         allPhotos.enumerateObjects { asset, index, stop in
             if asset.mediaType == .video {

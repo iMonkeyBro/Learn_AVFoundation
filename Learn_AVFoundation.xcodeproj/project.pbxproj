@@ -29,6 +29,14 @@
 		902DF19327CF424800A78688 /* Learn_AVFoundationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 902DF19227CF424800A78688 /* Learn_AVFoundationTests.swift */; };
 		902DF19D27CF424800A78688 /* Learn_AVFoundationUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 902DF19C27CF424800A78688 /* Learn_AVFoundationUITests.swift */; };
 		902DF19F27CF424800A78688 /* Learn_AVFoundationUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 902DF19E27CF424800A78688 /* Learn_AVFoundationUITestsLaunchTests.swift */; };
+		90760C5027EB1E4C001050C0 /* 02 Demo ID3v2.2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 90760C4A27EB1E4C001050C0 /* 02 Demo ID3v2.2.mp3 */; };
+		90760C5127EB1E4C001050C0 /* 04 Demo ID3v2.4.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 90760C4B27EB1E4C001050C0 /* 04 Demo ID3v2.4.mp3 */; };
+		90760C5227EB1E4C001050C0 /* 03 Demo ID3v2.3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 90760C4C27EB1E4C001050C0 /* 03 Demo ID3v2.3.mp3 */; };
+		90760C5327EB1E4C001050C0 /* Hubblecast.mov in Resources */ = {isa = PBXBuildFile; fileRef = 90760C4D27EB1E4C001050C0 /* Hubblecast.mov */; };
+		90760C5427EB1E4C001050C0 /* Charlie The Unicorn.m4v in Resources */ = {isa = PBXBuildFile; fileRef = 90760C4E27EB1E4C001050C0 /* Charlie The Unicorn.m4v */; };
+		90760C5527EB1E4C001050C0 /* 01 Demo AAC.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 90760C4F27EB1E4C001050C0 /* 01 Demo AAC.m4a */; };
+		90760C6227EB23CC001050C0 /* NSFileManager+DirectoryLocations.m in Sources */ = {isa = PBXBuildFile; fileRef = 90760C6127EB23CC001050C0 /* NSFileManager+DirectoryLocations.m */; };
+		90760C6A27EB4066001050C0 /* AVMetadataItem+CQ.m in Sources */ = {isa = PBXBuildFile; fileRef = 90760C6927EB4066001050C0 /* AVMetadataItem+CQ.m */; };
 		9DF46B6027D12938007369CF /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DF46B5F27D12938007369CF /* BaseViewController.swift */; };
 		9DF46B6227D1294E007369CF /* BaseNavController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DF46B6127D1294E007369CF /* BaseNavController.swift */; };
 		9DF46B6427D129D2007369CF /* CatalogVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DF46B6327D129D2007369CF /* CatalogVC.swift */; };
@@ -90,6 +98,17 @@
 		902DF19827CF424800A78688 /* Learn_AVFoundationUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Learn_AVFoundationUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		902DF19C27CF424800A78688 /* Learn_AVFoundationUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Learn_AVFoundationUITests.swift; sourceTree = "<group>"; };
 		902DF19E27CF424800A78688 /* Learn_AVFoundationUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Learn_AVFoundationUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		90760C4A27EB1E4C001050C0 /* 02 Demo ID3v2.2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "02 Demo ID3v2.2.mp3"; sourceTree = "<group>"; };
+		90760C4B27EB1E4C001050C0 /* 04 Demo ID3v2.4.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "04 Demo ID3v2.4.mp3"; sourceTree = "<group>"; };
+		90760C4C27EB1E4C001050C0 /* 03 Demo ID3v2.3.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "03 Demo ID3v2.3.mp3"; sourceTree = "<group>"; };
+		90760C4D27EB1E4C001050C0 /* Hubblecast.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = Hubblecast.mov; sourceTree = "<group>"; };
+		90760C4E27EB1E4C001050C0 /* Charlie The Unicorn.m4v */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Charlie The Unicorn.m4v"; sourceTree = "<group>"; };
+		90760C4F27EB1E4C001050C0 /* 01 Demo AAC.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "01 Demo AAC.m4a"; sourceTree = "<group>"; };
+		90760C5B27EB2352001050C0 /* Learn_AVFoundation-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Learn_AVFoundation-Bridging-Header.h"; sourceTree = "<group>"; };
+		90760C6027EB23CC001050C0 /* NSFileManager+DirectoryLocations.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSFileManager+DirectoryLocations.h"; sourceTree = "<group>"; };
+		90760C6127EB23CC001050C0 /* NSFileManager+DirectoryLocations.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSFileManager+DirectoryLocations.m"; sourceTree = "<group>"; };
+		90760C6827EB4066001050C0 /* AVMetadataItem+CQ.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AVMetadataItem+CQ.h"; sourceTree = "<group>"; };
+		90760C6927EB4066001050C0 /* AVMetadataItem+CQ.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "AVMetadataItem+CQ.m"; sourceTree = "<group>"; };
 		9DF46B5F27D12938007369CF /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		9DF46B6127D1294E007369CF /* BaseNavController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseNavController.swift; sourceTree = "<group>"; };
 		9DF46B6327D129D2007369CF /* CatalogVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatalogVC.swift; sourceTree = "<group>"; };
@@ -142,6 +161,12 @@
 		902923D027D24D31004E7D13 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				90760C4F27EB1E4C001050C0 /* 01 Demo AAC.m4a */,
+				90760C4A27EB1E4C001050C0 /* 02 Demo ID3v2.2.mp3 */,
+				90760C4C27EB1E4C001050C0 /* 03 Demo ID3v2.3.mp3 */,
+				90760C4B27EB1E4C001050C0 /* 04 Demo ID3v2.4.mp3 */,
+				90760C4E27EB1E4C001050C0 /* Charlie The Unicorn.m4v */,
+				90760C4D27EB1E4C001050C0 /* Hubblecast.mov */,
 				902C9D9127D8D2AA0060AB4C /* 可能否-木小雅.mp3 */,
 				902923D327D2528C004E7D13 /* Loops */,
 				902DF18427CF424700A78688 /* Assets.xcassets */,
@@ -207,6 +232,7 @@
 		902DF17A27CF424500A78688 /* Learn_AVFoundation */ = {
 			isa = PBXGroup;
 			children = (
+				90760C5F27EB2372001050C0 /* OC */,
 				9DF46B7727D1319C007369CF /* Learn */,
 				9DF46B5C27D1290A007369CF /* UI */,
 				9DF46B6727D12ED5007369CF /* Extension */,
@@ -235,6 +261,18 @@
 				902DF19E27CF424800A78688 /* Learn_AVFoundationUITestsLaunchTests.swift */,
 			);
 			path = Learn_AVFoundationUITests;
+			sourceTree = "<group>";
+		};
+		90760C5F27EB2372001050C0 /* OC */ = {
+			isa = PBXGroup;
+			children = (
+				90760C5B27EB2352001050C0 /* Learn_AVFoundation-Bridging-Header.h */,
+				90760C6027EB23CC001050C0 /* NSFileManager+DirectoryLocations.h */,
+				90760C6127EB23CC001050C0 /* NSFileManager+DirectoryLocations.m */,
+				90760C6827EB4066001050C0 /* AVMetadataItem+CQ.h */,
+				90760C6927EB4066001050C0 /* AVMetadataItem+CQ.m */,
+			);
+			path = OC;
 			sourceTree = "<group>";
 		};
 		9DF46B5C27D1290A007369CF /* UI */ = {
@@ -377,6 +415,7 @@
 				TargetAttributes = {
 					902DF17727CF424500A78688 = {
 						CreatedOnToolsVersion = 13.0;
+						LastSwiftMigration = 1300;
 					};
 					902DF18D27CF424800A78688 = {
 						CreatedOnToolsVersion = 13.0;
@@ -413,10 +452,16 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				90760C5227EB1E4C001050C0 /* 03 Demo ID3v2.3.mp3 in Resources */,
 				902DF18827CF424700A78688 /* LaunchScreen.storyboard in Resources */,
+				90760C5527EB1E4C001050C0 /* 01 Demo AAC.m4a in Resources */,
 				902923D727D2528C004E7D13 /* drums.caf in Resources */,
 				902C9D9227D8D2AA0060AB4C /* 可能否-木小雅.mp3 in Resources */,
+				90760C5427EB1E4C001050C0 /* Charlie The Unicorn.m4v in Resources */,
+				90760C5027EB1E4C001050C0 /* 02 Demo ID3v2.2.mp3 in Resources */,
+				90760C5127EB1E4C001050C0 /* 04 Demo ID3v2.4.mp3 in Resources */,
 				902923D827D2528C004E7D13 /* guitar.caf in Resources */,
+				90760C5327EB1E4C001050C0 /* Hubblecast.mov in Resources */,
 				902923D927D2528C004E7D13 /* bass.caf in Resources */,
 				902DF18527CF424700A78688 /* Assets.xcassets in Resources */,
 			);
@@ -505,6 +550,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				902923F427D396CD004E7D13 /* Asyncs.swift in Sources */,
+				90760C6227EB23CC001050C0 /* NSFileManager+DirectoryLocations.m in Sources */,
 				9DF46B6427D129D2007369CF /* CatalogVC.swift in Sources */,
 				902DF17C27CF424500A78688 /* AppDelegate.swift in Sources */,
 				9DF46B6227D1294E007369CF /* BaseNavController.swift in Sources */,
@@ -516,6 +562,7 @@
 				902923E927D359D9004E7D13 /* ExcelView.swift in Sources */,
 				9DF46B6627D12D9C007369CF /* Common.swift in Sources */,
 				902923EB27D359D9004E7D13 /* JXFileBrowserController.swift in Sources */,
+				90760C6A27EB4066001050C0 /* AVMetadataItem+CQ.m in Sources */,
 				9DF46B7227D12EEB007369CF /* UICollectionViewExtension.swift in Sources */,
 				9DF46B6027D12938007369CF /* BaseViewController.swift in Sources */,
 				902923F227D3695D004E7D13 /* R.generated.swift in Sources */,
@@ -698,6 +745,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = SY5B3H4K8B;
@@ -716,6 +764,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "cq.Learn-AVFoundation";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "Learn_AVFoundation/OC/Learn_AVFoundation-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -727,6 +777,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = SY5B3H4K8B;
@@ -745,6 +796,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "cq.Learn-AVFoundation";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "Learn_AVFoundation/OC/Learn_AVFoundation-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
