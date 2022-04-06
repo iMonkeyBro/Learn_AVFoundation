@@ -150,8 +150,8 @@ struct R: Rswift.Validatable {
     static let drumsCaf = Rswift.FileResource(bundle: R.hostingBundle, name: "drums", pathExtension: "caf")
     /// Resource file `guitar.caf`.
     static let guitarCaf = Rswift.FileResource(bundle: R.hostingBundle, name: "guitar", pathExtension: "caf")
-    /// Resource file `可能否-木小雅.mp3`.
-    static let 可能否木小雅Mp3 = Rswift.FileResource(bundle: R.hostingBundle, name: "可能否-木小雅", pathExtension: "mp3")
+    /// Resource file `kenengfou.mp3`.
+    static let kenengfouMp3 = Rswift.FileResource(bundle: R.hostingBundle, name: "kenengfou", pathExtension: "mp3")
 
     /// `bundle.url(forResource: "01 Demo AAC", withExtension: "m4a")`
     static func demoAACM4a(_: Void = ()) -> Foundation.URL? {
@@ -207,9 +207,9 @@ struct R: Rswift.Validatable {
       return fileResource.bundle.url(forResource: fileResource)
     }
 
-    /// `bundle.url(forResource: "可能否-木小雅", withExtension: "mp3")`
-    static func 可能否木小雅Mp3(_: Void = ()) -> Foundation.URL? {
-      let fileResource = R.file.可能否木小雅Mp3
+    /// `bundle.url(forResource: "kenengfou", withExtension: "mp3")`
+    static func kenengfouMp3(_: Void = ()) -> Foundation.URL? {
+      let fileResource = R.file.kenengfouMp3
       return fileResource.bundle.url(forResource: fileResource)
     }
 

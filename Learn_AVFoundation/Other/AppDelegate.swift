@@ -33,7 +33,7 @@ private extension AppDelegate {
     private func confitAudioSession() {
         let audioSession = AVAudioSession.sharedInstance()
         do {
-            _ = try audioSession.setCategory(.playAndRecord)
+            _ = try audioSession.setCategory(.playAndRecord, options: .defaultToSpeaker)
         } catch {
             CQLog(error)
         }

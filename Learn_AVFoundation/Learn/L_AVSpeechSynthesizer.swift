@@ -31,6 +31,11 @@ class L_AVSpeechSynthesizer: BaseViewController {
         
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+         super.viewWillDisappear(animated)
+//        synthesizer.stopSpeaking(at: .immediate)
+    }
+    
     private func test() {
         
         // 创建播放话语
