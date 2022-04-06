@@ -7,17 +7,15 @@
 
 import Foundation
 
-public protocol DDYThen { }
-extension DDYThen where Self: AnyObject {
+public protocol CQThen { }
+extension CQThen where Self: AnyObject {
     @discardableResult
     public func ddy_then(_ block: (Self) throws -> Void) rethrows -> Self {
         try block(self)
         return self
     }
 }
-
-extension NSObject: DDYThen { }
-
+extension NSObject: CQThen { }
 
 
 extension NSObject: CQCompatible { }
