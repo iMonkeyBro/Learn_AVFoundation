@@ -20,7 +20,8 @@ class CatalogVC: BaseViewController {
         $0.cq.register(cellClass: UITableViewCell.self)
     }
     private let dataList: [[String: String]] = [["title": "AVSpeechSynthesizer(语音播放)", "vc": "L_AVSpeechSynthesizer"],
-                                                ["title": "AVAudioPlayer(音频播放,Audio Looper)", "vc": "L_AudioLooper"],
+                                                ["title": "AVAudioPlayer(音频播放)", "vc": "L_AVAudioPlayer"],
+                                                ["title": "Audio Looper Demo(AVAudioPlayer示例)", "vc": "L_AudioLooper"],
                                                 ["title": "AVAudioRecorder(音频录制,Voice Memo)", "vc": "L_VoiceMemo"],
                                                 ["title": "AVAsset(AVAsset学习)", "vc": "L_AVAsset"],
                                                 ["title": "--", "vc": "BaseViewController"],

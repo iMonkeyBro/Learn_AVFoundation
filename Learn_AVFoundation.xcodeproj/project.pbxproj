@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		902388BF27FDC94200C9F922 /* kenengfou.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 902388BE27FDC94200C9F922 /* kenengfou.mp3 */; };
+		902388CB27FF212400C9F922 /* L_AVAudioPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 902388CA27FF212400C9F922 /* L_AVAudioPlayer.swift */; };
 		902923D227D25240004E7D13 /* L_AudioLooper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 902923D127D25240004E7D13 /* L_AudioLooper.swift */; };
 		902923D727D2528C004E7D13 /* drums.caf in Resources */ = {isa = PBXBuildFile; fileRef = 902923D427D2528C004E7D13 /* drums.caf */; };
 		902923D827D2528C004E7D13 /* guitar.caf in Resources */ = {isa = PBXBuildFile; fileRef = 902923D527D2528C004E7D13 /* guitar.caf */; };
@@ -73,6 +74,7 @@
 		1D69C9C80505E1D6EEB1F05F /* Pods-Learn_AVFoundation.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Learn_AVFoundation.release.xcconfig"; path = "Target Support Files/Pods-Learn_AVFoundation/Pods-Learn_AVFoundation.release.xcconfig"; sourceTree = "<group>"; };
 		6B0C4E64625B48003FA9414D /* Pods-Learn_AVFoundation.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Learn_AVFoundation.debug.xcconfig"; path = "Target Support Files/Pods-Learn_AVFoundation/Pods-Learn_AVFoundation.debug.xcconfig"; sourceTree = "<group>"; };
 		902388BE27FDC94200C9F922 /* kenengfou.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = kenengfou.mp3; sourceTree = "<group>"; };
+		902388CA27FF212400C9F922 /* L_AVAudioPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = L_AVAudioPlayer.swift; sourceTree = "<group>"; };
 		902923D127D25240004E7D13 /* L_AudioLooper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = L_AudioLooper.swift; sourceTree = "<group>"; };
 		902923D427D2528C004E7D13 /* drums.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = drums.caf; sourceTree = "<group>"; };
 		902923D527D2528C004E7D13 /* guitar.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = guitar.caf; sourceTree = "<group>"; };
@@ -328,6 +330,7 @@
 			isa = PBXGroup;
 			children = (
 				9DF46B7827D1324E007369CF /* L_AVSpeechSynthesizer.swift */,
+				902388CA27FF212400C9F922 /* L_AVAudioPlayer.swift */,
 				902923D127D25240004E7D13 /* L_AudioLooper.swift */,
 				902923DD27D3589F004E7D13 /* L_VoiceMemo.swift */,
 				902C9D8F27D8D2640060AB4C /* L_AVAsset.swift */,
@@ -570,6 +573,7 @@
 				902923EE27D359D9004E7D13 /* JXTableContentViewController.swift in Sources */,
 				9DF46B7027D12EEB007369CF /* CQBaseExtension.swift in Sources */,
 				902923DE27D3589F004E7D13 /* L_VoiceMemo.swift in Sources */,
+				902388CB27FF212400C9F922 /* L_AVAudioPlayer.swift in Sources */,
 				902923D227D25240004E7D13 /* L_AudioLooper.swift in Sources */,
 				902923EC27D359D9004E7D13 /* JXTextPreviewViewController.swift in Sources */,
 				9DF46B6F27D12EEB007369CF /* UIColorExtension.swift in Sources */,
