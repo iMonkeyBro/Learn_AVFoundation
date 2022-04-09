@@ -105,6 +105,7 @@ private extension L_VoiceMemo {
 
 // MARK: - testRecorder
 private extension L_VoiceMemo {
+    // 简单测试
     func testRecorder() {
         let directory = NSTemporaryDirectory()
         let filePath = directory + "voice.m4a"
@@ -204,7 +205,6 @@ private class VoiceMemoRecorder: NSObject {
     }
     
     // MARK: - Private
-    private var player: AVAudioPlayer?
     private var recorder: AVAudioRecorder
     private var stopHandler: StopCompletionClosure?
     var timer: DispatchSourceTimer?
@@ -240,5 +240,8 @@ private class VoiceMemoRecorder: NSObject {
 extension VoiceMemoRecorder: AVAudioRecorderDelegate {
     func audioRecorderDidFinishRecording(_ recorder: AVAudioRecorder, successfully flag: Bool) {
         stopHandler?(flag)
+    }
+    func audioRecorderEncodeErrorDidOccur(_ recorder: AVAudioRecorder, error: Error?) {
+        CQLog("编码错误")
     }
 }
