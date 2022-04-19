@@ -39,6 +39,16 @@ class CatalogVC: BaseViewController {
         mainTableView.delegate = self
         mainTableView.dataSource = self
     }
+    
+    func testPrintFontNames() {
+        for fontfamilyName in UIFont.familyNames {
+            CQLog(fontfamilyName)
+            let fontNames = UIFont.fontNames(forFamilyName: fontfamilyName)
+            for fontName in fontNames {
+                CQLog(fontName)
+            }
+        }
+    }
 }
 
 // MARK: - UITableViewDelegate,UITableViewDataSource
