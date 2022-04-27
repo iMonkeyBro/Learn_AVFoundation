@@ -14,9 +14,7 @@ class L_AVAsset: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        testAVURLAsset()
-        
-        print(CMTimeCompare(CMTime(value: 99999, timescale: 600), CMTime.invalid))
+        testAVURLAsset()
     }
 }
 
@@ -30,6 +28,11 @@ private extension L_AVAsset {
         let asset: AVURLAsset = AVURLAsset(url: assetURL, options: options)
         
         // 获取asset的属性，当然可以直接获取不用这么麻烦
+        /**
+         这里需要注意，即便通过keys传了多个key，但也只会回调一次
+         回调有可能不在主线程，如果要做UI操作，需要异步回主线程
+         需要为每个key调用statusOfValue函数，不能假设所有的属性都返回相同的状态值
+         */
         let keys = ["tracks", "availableMetadataFormats"]
         asset.loadValuesAsynchronously(forKeys: keys) {
             var error: NSError? = nil
@@ -69,8 +72,7 @@ private extension L_AVAsset {
         let nameItem: AVMetadataItem? = nameMetadata.first
         if nameItem != nil {CQLog(nameItem!.keyString())}
         
-        // 使用AVMetadataItem
-        
+        // TODO: - 使用/编辑AVMetadataItem
     }
     
     func testPhotos() {

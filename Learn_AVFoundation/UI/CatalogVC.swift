@@ -24,7 +24,7 @@ class CatalogVC: BaseViewController {
                                                 ["title": "Audio Looper Demo(AVAudioPlayer示例)", "vc": "L_AudioLooper"],
                                                 ["title": "AVAudioRecorder(音频录制,Voice Memo)", "vc": "L_VoiceMemo"],
                                                 ["title": "AVAsset(AVAsset学习)", "vc": "L_AVAsset"],
-                                                ["title": "--", "vc": "BaseViewController"],
+                                                ["title": "AVPlayer(AVPlayer学习)", "vc": "L_AVPlayer"],
                                                 ["title": "--", "vc": "BaseViewController"],
                                                 ["title": "--", "vc": "BaseViewController"],
                                                 ["title": "--", "vc": "BaseViewController"],
