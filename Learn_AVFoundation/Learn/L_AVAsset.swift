@@ -78,10 +78,12 @@ private extension L_AVAsset {
     func testPhotos() {
         // 利用Phtots框架获取用户相册的资源
         let allPhotoOptions = PHFetchOptions()
+        // 按日期倒序
         //        allPhotoOptions.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
         let allPhotos: PHFetchResult = PHAsset.fetchAssets(with: allPhotoOptions)
         allPhotos.enumerateObjects { asset, index, stop in
             if asset.mediaType == .video {
+                // 视频资源
                 let options = PHVideoRequestOptions()
                 options.version = .current
                 options.deliveryMode = .automatic
@@ -90,7 +92,10 @@ private extension L_AVAsset {
                         CQLog(urlAsset.url)
                     }
                 }
+            } else if asset.mediaType == .audio {
+                // 音频资源
             } else if asset.mediaType == .image {
+                // 图片资源
                 let options: PHImageRequestOptions = PHImageRequestOptions()
                 options.resizeMode = .exact
                 options.isNetworkAccessAllowed = true
@@ -101,24 +106,30 @@ private extension L_AVAsset {
                     if uti == "public.heif" || uti == "public.heic" {
                     }
                 }
+            } else if asset.mediaType == .unknown {
+                // 未知资源
             }
         }
     }
     
     func testQueryIPod() {
         // 利用MediaPlayer 查询iPod库，查询到后创建一个AVAsset
+        // 查询条件
         let artistPredicate: MPMediaPropertyPredicate = MPMediaPropertyPredicate(value: "Foo Fighters", forProperty: MPMediaItemPropertyArtist)
         let albumPredicate: MPMediaPropertyPredicate = MPMediaPropertyPredicate(value: "In Your Honor", forProperty: MPMediaItemPropertyTitle)
         let songPredicate: MPMediaPropertyPredicate = MPMediaPropertyPredicate(value: "Best of You", forProperty: MPMediaItemPropertyTitle)
+        // 添加查询条件
         let query: MPMediaQuery = MPMediaQuery()
         query.addFilterPredicate(artistPredicate)
         query.addFilterPredicate(albumPredicate)
         query.addFilterPredicate(songPredicate)
+        // 查询结果
         let results = query.items
         if let tempResults = results, tempResults.count > 0 {
             let item: MPMediaItem = tempResults.first!
             if let assetURL: URL = item.value(forProperty: MPMediaItemPropertyAssetURL) as? URL {
                 CQLog(assetURL)
+                // 获取ipod内资源url并创建AVAsset
                 let asset: AVAsset = AVAsset(url: assetURL)
             }
         }
