@@ -39,6 +39,7 @@
 		90760C5527EB1E4C001050C0 /* 01 Demo AAC.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 90760C4F27EB1E4C001050C0 /* 01 Demo AAC.m4a */; };
 		90760C6227EB23CC001050C0 /* NSFileManager+DirectoryLocations.m in Sources */ = {isa = PBXBuildFile; fileRef = 90760C6127EB23CC001050C0 /* NSFileManager+DirectoryLocations.m */; };
 		90760C6A27EB4066001050C0 /* AVMetadataItem+CQ.m in Sources */ = {isa = PBXBuildFile; fileRef = 90760C6927EB4066001050C0 /* AVMetadataItem+CQ.m */; };
+		90B86B9E281A950A009E4220 /* CQPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90B86B9D281A9509009E4220 /* CQPlayer.swift */; };
 		9DF46B6027D12938007369CF /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DF46B5F27D12938007369CF /* BaseViewController.swift */; };
 		9DF46B6227D1294E007369CF /* BaseNavController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DF46B6127D1294E007369CF /* BaseNavController.swift */; };
 		9DF46B6427D129D2007369CF /* CatalogVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DF46B6327D129D2007369CF /* CatalogVC.swift */; };
@@ -113,6 +114,7 @@
 		90760C6127EB23CC001050C0 /* NSFileManager+DirectoryLocations.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSFileManager+DirectoryLocations.m"; sourceTree = "<group>"; };
 		90760C6827EB4066001050C0 /* AVMetadataItem+CQ.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AVMetadataItem+CQ.h"; sourceTree = "<group>"; };
 		90760C6927EB4066001050C0 /* AVMetadataItem+CQ.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "AVMetadataItem+CQ.m"; sourceTree = "<group>"; };
+		90B86B9D281A9509009E4220 /* CQPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CQPlayer.swift; sourceTree = "<group>"; };
 		9DF46B5F27D12938007369CF /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		9DF46B6127D1294E007369CF /* BaseNavController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseNavController.swift; sourceTree = "<group>"; };
 		9DF46B6327D129D2007369CF /* CatalogVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatalogVC.swift; sourceTree = "<group>"; };
@@ -337,6 +339,7 @@
 				902923DD27D3589F004E7D13 /* L_VoiceMemo.swift */,
 				902C9D8F27D8D2640060AB4C /* L_AVAsset.swift */,
 				9017F58D281441F40090345A /* L_AVPlayer.swift */,
+				90B86B9D281A9509009E4220 /* CQPlayer.swift */,
 			);
 			path = Learn;
 			sourceTree = "<group>";
@@ -581,6 +584,7 @@
 				902923D227D25240004E7D13 /* L_AudioLooper.swift in Sources */,
 				902923EC27D359D9004E7D13 /* JXTextPreviewViewController.swift in Sources */,
 				9DF46B6F27D12EEB007369CF /* UIColorExtension.swift in Sources */,
+				90B86B9E281A950A009E4220 /* CQPlayer.swift in Sources */,
 				9DF46B7427D12EEB007369CF /* StringExtension.swift in Sources */,
 				9DF46B7127D12EEB007369CF /* AnyObjectExtension.swift in Sources */,
 				902923ED27D359D9004E7D13 /* JXFilePreviewViewController.swift in Sources */,
