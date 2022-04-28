@@ -40,6 +40,7 @@
 		90760C6227EB23CC001050C0 /* NSFileManager+DirectoryLocations.m in Sources */ = {isa = PBXBuildFile; fileRef = 90760C6127EB23CC001050C0 /* NSFileManager+DirectoryLocations.m */; };
 		90760C6A27EB4066001050C0 /* AVMetadataItem+CQ.m in Sources */ = {isa = PBXBuildFile; fileRef = 90760C6927EB4066001050C0 /* AVMetadataItem+CQ.m */; };
 		90B86B9E281A950A009E4220 /* CQPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90B86B9D281A9509009E4220 /* CQPlayer.swift */; };
+		9D49D91C281AE7BD009C4BE2 /* hubblecast2.m4v in Resources */ = {isa = PBXBuildFile; fileRef = 9D49D91B281AE7BD009C4BE2 /* hubblecast2.m4v */; };
 		9DF46B6027D12938007369CF /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DF46B5F27D12938007369CF /* BaseViewController.swift */; };
 		9DF46B6227D1294E007369CF /* BaseNavController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DF46B6127D1294E007369CF /* BaseNavController.swift */; };
 		9DF46B6427D129D2007369CF /* CatalogVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DF46B6327D129D2007369CF /* CatalogVC.swift */; };
@@ -115,6 +116,7 @@
 		90760C6827EB4066001050C0 /* AVMetadataItem+CQ.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AVMetadataItem+CQ.h"; sourceTree = "<group>"; };
 		90760C6927EB4066001050C0 /* AVMetadataItem+CQ.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "AVMetadataItem+CQ.m"; sourceTree = "<group>"; };
 		90B86B9D281A9509009E4220 /* CQPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CQPlayer.swift; sourceTree = "<group>"; };
+		9D49D91B281AE7BD009C4BE2 /* hubblecast2.m4v */ = {isa = PBXFileReference; lastKnownFileType = file; path = hubblecast2.m4v; sourceTree = "<group>"; };
 		9DF46B5F27D12938007369CF /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		9DF46B6127D1294E007369CF /* BaseNavController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseNavController.swift; sourceTree = "<group>"; };
 		9DF46B6327D129D2007369CF /* CatalogVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatalogVC.swift; sourceTree = "<group>"; };
@@ -167,6 +169,7 @@
 		902923D027D24D31004E7D13 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				9D49D91B281AE7BD009C4BE2 /* hubblecast2.m4v */,
 				902388BE27FDC94200C9F922 /* kenengfou.mp3 */,
 				90760C4F27EB1E4C001050C0 /* 01 Demo AAC.m4a */,
 				90760C4A27EB1E4C001050C0 /* 02 Demo ID3v2.2.mp3 */,
@@ -467,6 +470,7 @@
 				902923D727D2528C004E7D13 /* drums.caf in Resources */,
 				90760C5427EB1E4C001050C0 /* Charlie The Unicorn.m4v in Resources */,
 				90760C5027EB1E4C001050C0 /* 02 Demo ID3v2.2.mp3 in Resources */,
+				9D49D91C281AE7BD009C4BE2 /* hubblecast2.m4v in Resources */,
 				90760C5127EB1E4C001050C0 /* 04 Demo ID3v2.4.mp3 in Resources */,
 				902923D827D2528C004E7D13 /* guitar.caf in Resources */,
 				90760C5327EB1E4C001050C0 /* Hubblecast.mov in Resources */,
