@@ -25,7 +25,7 @@ class CatalogVC: BaseViewController {
                                                 ["title": "AVAudioRecorder(音频录制,Voice Memo)", "vc": "L_VoiceMemo"],
                                                 ["title": "AVAsset(AVAsset学习)", "vc": "L_AVAsset"],
                                                 ["title": "AVPlayer(AVPlayer学习)", "vc": "L_AVPlayer"],
-                                                ["title": "--", "vc": "BaseViewController"],
+                                                ["title": "AVKit(AVKit学习)", "vc": "L_AVKit"],
                                                 ["title": "--", "vc": "BaseViewController"],
                                                 ["title": "--", "vc": "BaseViewController"],
                                                 ["title": "--", "vc": "BaseViewController"],
@@ -38,6 +38,11 @@ class CatalogVC: BaseViewController {
         view.addSubview(mainTableView)
         mainTableView.delegate = self
         mainTableView.dataSource = self
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        mainTableView.reloadData()
     }
     
     func testPrintFontNames() {

@@ -40,6 +40,7 @@
 		90760C6227EB23CC001050C0 /* NSFileManager+DirectoryLocations.m in Sources */ = {isa = PBXBuildFile; fileRef = 90760C6127EB23CC001050C0 /* NSFileManager+DirectoryLocations.m */; };
 		90760C6A27EB4066001050C0 /* AVMetadataItem+CQ.m in Sources */ = {isa = PBXBuildFile; fileRef = 90760C6927EB4066001050C0 /* AVMetadataItem+CQ.m */; };
 		90B86B9E281A950A009E4220 /* CQPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90B86B9D281A9509009E4220 /* CQPlayer.swift */; };
+		90D547012850A8810053ADEF /* L_AVKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90D547002850A8810053ADEF /* L_AVKit.swift */; };
 		9D49D91C281AE7BD009C4BE2 /* hubblecast2.m4v in Resources */ = {isa = PBXBuildFile; fileRef = 9D49D91B281AE7BD009C4BE2 /* hubblecast2.m4v */; };
 		9DF46B6027D12938007369CF /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DF46B5F27D12938007369CF /* BaseViewController.swift */; };
 		9DF46B6227D1294E007369CF /* BaseNavController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DF46B6127D1294E007369CF /* BaseNavController.swift */; };
@@ -116,6 +117,7 @@
 		90760C6827EB4066001050C0 /* AVMetadataItem+CQ.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AVMetadataItem+CQ.h"; sourceTree = "<group>"; };
 		90760C6927EB4066001050C0 /* AVMetadataItem+CQ.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "AVMetadataItem+CQ.m"; sourceTree = "<group>"; };
 		90B86B9D281A9509009E4220 /* CQPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CQPlayer.swift; sourceTree = "<group>"; };
+		90D547002850A8810053ADEF /* L_AVKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = L_AVKit.swift; sourceTree = "<group>"; };
 		9D49D91B281AE7BD009C4BE2 /* hubblecast2.m4v */ = {isa = PBXFileReference; lastKnownFileType = file; path = hubblecast2.m4v; sourceTree = "<group>"; };
 		9DF46B5F27D12938007369CF /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		9DF46B6127D1294E007369CF /* BaseNavController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseNavController.swift; sourceTree = "<group>"; };
@@ -343,6 +345,7 @@
 				902C9D8F27D8D2640060AB4C /* L_AVAsset.swift */,
 				9017F58D281441F40090345A /* L_AVPlayer.swift */,
 				90B86B9D281A9509009E4220 /* CQPlayer.swift */,
+				90D547002850A8810053ADEF /* L_AVKit.swift */,
 			);
 			path = Learn;
 			sourceTree = "<group>";
@@ -567,6 +570,7 @@
 				9DF46B6427D129D2007369CF /* CatalogVC.swift in Sources */,
 				902DF17C27CF424500A78688 /* AppDelegate.swift in Sources */,
 				9DF46B6227D1294E007369CF /* BaseNavController.swift in Sources */,
+				90D547012850A8810053ADEF /* L_AVKit.swift in Sources */,
 				902923E827D359D9004E7D13 /* JXDatabaseConnector.swift in Sources */,
 				9DF46B7527D12EEB007369CF /* UITableViewExtension.swift in Sources */,
 				902C9D9027D8D2640060AB4C /* L_AVAsset.swift in Sources */,

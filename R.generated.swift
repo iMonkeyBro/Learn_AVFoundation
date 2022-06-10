@@ -130,7 +130,7 @@ struct R: Rswift.Validatable {
     fileprivate init() {}
   }
 
-  /// This `R.file` struct is generated, and contains static references to 10 files.
+  /// This `R.file` struct is generated, and contains static references to 11 files.
   struct file {
     /// Resource file `01 Demo AAC.m4a`.
     static let demoAACM4a = Rswift.FileResource(bundle: R.hostingBundle, name: "01 Demo AAC", pathExtension: "m4a")
@@ -150,6 +150,8 @@ struct R: Rswift.Validatable {
     static let drumsCaf = Rswift.FileResource(bundle: R.hostingBundle, name: "drums", pathExtension: "caf")
     /// Resource file `guitar.caf`.
     static let guitarCaf = Rswift.FileResource(bundle: R.hostingBundle, name: "guitar", pathExtension: "caf")
+    /// Resource file `hubblecast2.m4v`.
+    static let hubblecast2M4v = Rswift.FileResource(bundle: R.hostingBundle, name: "hubblecast2", pathExtension: "m4v")
     /// Resource file `kenengfou.mp3`.
     static let kenengfouMp3 = Rswift.FileResource(bundle: R.hostingBundle, name: "kenengfou", pathExtension: "mp3")
 
@@ -204,6 +206,12 @@ struct R: Rswift.Validatable {
     /// `bundle.url(forResource: "guitar", withExtension: "caf")`
     static func guitarCaf(_: Void = ()) -> Foundation.URL? {
       let fileResource = R.file.guitarCaf
+      return fileResource.bundle.url(forResource: fileResource)
+    }
+
+    /// `bundle.url(forResource: "hubblecast2", withExtension: "m4v")`
+    static func hubblecast2M4v(_: Void = ()) -> Foundation.URL? {
+      let fileResource = R.file.hubblecast2M4v
       return fileResource.bundle.url(forResource: fileResource)
     }
 
