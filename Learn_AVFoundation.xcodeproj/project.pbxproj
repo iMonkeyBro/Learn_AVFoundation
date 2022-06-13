@@ -31,6 +31,10 @@
 		902DF19327CF424800A78688 /* Learn_AVFoundationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 902DF19227CF424800A78688 /* Learn_AVFoundationTests.swift */; };
 		902DF19D27CF424800A78688 /* Learn_AVFoundationUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 902DF19C27CF424800A78688 /* Learn_AVFoundationUITests.swift */; };
 		902DF19F27CF424800A78688 /* Learn_AVFoundationUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 902DF19E27CF424800A78688 /* Learn_AVFoundationUITestsLaunchTests.swift */; };
+		905C3E5F285715F2005C83AF /* L_Capture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 905C3E5E285715F2005C83AF /* L_Capture.swift */; };
+		905C3E612857165E005C83AF /* L_AVAssetReaderWriter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 905C3E602857165E005C83AF /* L_AVAssetReaderWriter.swift */; };
+		905C3E64285739B1005C83AF /* L_Waveform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 905C3E63285739B1005C83AF /* L_Waveform.swift */; };
+		905C3E6628573CF8005C83AF /* SamepleDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 905C3E6528573CF8005C83AF /* SamepleDataProvider.swift */; };
 		90760C5027EB1E4C001050C0 /* 02 Demo ID3v2.2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 90760C4A27EB1E4C001050C0 /* 02 Demo ID3v2.2.mp3 */; };
 		90760C5127EB1E4C001050C0 /* 04 Demo ID3v2.4.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 90760C4B27EB1E4C001050C0 /* 04 Demo ID3v2.4.mp3 */; };
 		90760C5227EB1E4C001050C0 /* 03 Demo ID3v2.3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 90760C4C27EB1E4C001050C0 /* 03 Demo ID3v2.3.mp3 */; };
@@ -105,6 +109,10 @@
 		902DF19827CF424800A78688 /* Learn_AVFoundationUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Learn_AVFoundationUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		902DF19C27CF424800A78688 /* Learn_AVFoundationUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Learn_AVFoundationUITests.swift; sourceTree = "<group>"; };
 		902DF19E27CF424800A78688 /* Learn_AVFoundationUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Learn_AVFoundationUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		905C3E5E285715F2005C83AF /* L_Capture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = L_Capture.swift; sourceTree = "<group>"; };
+		905C3E602857165E005C83AF /* L_AVAssetReaderWriter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = L_AVAssetReaderWriter.swift; sourceTree = "<group>"; };
+		905C3E63285739B1005C83AF /* L_Waveform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = L_Waveform.swift; sourceTree = "<group>"; };
+		905C3E6528573CF8005C83AF /* SamepleDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SamepleDataProvider.swift; sourceTree = "<group>"; };
 		90760C4A27EB1E4C001050C0 /* 02 Demo ID3v2.2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "02 Demo ID3v2.2.mp3"; sourceTree = "<group>"; };
 		90760C4B27EB1E4C001050C0 /* 04 Demo ID3v2.4.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "04 Demo ID3v2.4.mp3"; sourceTree = "<group>"; };
 		90760C4C27EB1E4C001050C0 /* 03 Demo ID3v2.3.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "03 Demo ID3v2.3.mp3"; sourceTree = "<group>"; };
@@ -274,6 +282,15 @@
 			path = Learn_AVFoundationUITests;
 			sourceTree = "<group>";
 		};
+		905C3E622857398E005C83AF /* L_Waveform */ = {
+			isa = PBXGroup;
+			children = (
+				905C3E63285739B1005C83AF /* L_Waveform.swift */,
+				905C3E6528573CF8005C83AF /* SamepleDataProvider.swift */,
+			);
+			path = L_Waveform;
+			sourceTree = "<group>";
+		};
 		90760C5F27EB2372001050C0 /* OC */ = {
 			isa = PBXGroup;
 			children = (
@@ -346,6 +363,9 @@
 				9017F58D281441F40090345A /* L_AVPlayer.swift */,
 				90B86B9D281A9509009E4220 /* CQPlayer.swift */,
 				90D547002850A8810053ADEF /* L_AVKit.swift */,
+				905C3E5E285715F2005C83AF /* L_Capture.swift */,
+				905C3E602857165E005C83AF /* L_AVAssetReaderWriter.swift */,
+				905C3E622857398E005C83AF /* L_Waveform */,
 			);
 			path = Learn;
 			sourceTree = "<group>";
@@ -574,7 +594,10 @@
 				902923E827D359D9004E7D13 /* JXDatabaseConnector.swift in Sources */,
 				9DF46B7527D12EEB007369CF /* UITableViewExtension.swift in Sources */,
 				902C9D9027D8D2640060AB4C /* L_AVAsset.swift in Sources */,
+				905C3E5F285715F2005C83AF /* L_Capture.swift in Sources */,
 				9DF46B7327D12EEB007369CF /* UIImageExtension.swift in Sources */,
+				905C3E6628573CF8005C83AF /* SamepleDataProvider.swift in Sources */,
+				905C3E64285739B1005C83AF /* L_Waveform.swift in Sources */,
 				9DF46B7927D1324E007369CF /* L_AVSpeechSynthesizer.swift in Sources */,
 				902923E927D359D9004E7D13 /* ExcelView.swift in Sources */,
 				9DF46B6627D12D9C007369CF /* Common.swift in Sources */,
@@ -594,6 +617,7 @@
 				9DF46B6F27D12EEB007369CF /* UIColorExtension.swift in Sources */,
 				90B86B9E281A950A009E4220 /* CQPlayer.swift in Sources */,
 				9DF46B7427D12EEB007369CF /* StringExtension.swift in Sources */,
+				905C3E612857165E005C83AF /* L_AVAssetReaderWriter.swift in Sources */,
 				9DF46B7127D12EEB007369CF /* AnyObjectExtension.swift in Sources */,
 				902923ED27D359D9004E7D13 /* JXFilePreviewViewController.swift in Sources */,
 			);

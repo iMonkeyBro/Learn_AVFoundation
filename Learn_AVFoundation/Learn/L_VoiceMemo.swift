@@ -163,7 +163,7 @@ private class VoiceMemoRecorder: NSObject {
     }
     
     func saveRecording(name: String, completionHandler: SaveCompletionClosure?) {
-        // 将临时文件夹的问价赋值到doc目录
+        // 将临时文件夹的文件赋值到doc目录
         let timestamp = Date.timeIntervalSinceReferenceDate
         let fileName = "\(name)-\(timestamp).caf"
         let destPath = String.cq.documentsDirectory+fileName

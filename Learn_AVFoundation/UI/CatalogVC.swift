@@ -8,17 +8,20 @@
 import UIKit
 
 class CatalogVC: BaseViewController {
-    private let cellIdentifier = "CatalogVCCell"
     private lazy var mainTableView: UITableView = UITableView().cq.then {
         $0.delegate = self
         $0.dataSource = self
         $0.estimatedRowHeight = 50
-        
         $0.backgroundColor = .white
-//        $0.separatorStyle = .none
-        $0.frame = view.bounds
         $0.cq.register(cellClass: UITableViewCell.self)
     }
+    private lazy var rightBtn: UIButton = UIButton(type: .custom).cq.then {
+        $0.setTitle("沙盒", for: .normal)
+        $0.titleLabel?.font = .systemFont(ofSize: 13)
+        $0.setTitleColor(.systemBlue, for: .normal)
+        $0.addTarget(self, action: #selector(pushFileBrowser), for: .touchUpInside)
+    }
+    
     private let dataList: [[String: String]] = [["title": "AVSpeechSynthesizer(语音播放)", "vc": "L_AVSpeechSynthesizer"],
                                                 ["title": "AVAudioPlayer(音频播放)", "vc": "L_AVAudioPlayer"],
                                                 ["title": "Audio Looper Demo(AVAudioPlayer示例)", "vc": "L_AudioLooper"],
@@ -26,11 +29,13 @@ class CatalogVC: BaseViewController {
                                                 ["title": "AVAsset(AVAsset学习)", "vc": "L_AVAsset"],
                                                 ["title": "AVPlayer(AVPlayer学习)", "vc": "L_AVPlayer"],
                                                 ["title": "AVKit(AVKit学习)", "vc": "L_AVKit"],
+                                                ["title": "ACFoundation捕捉", "vc": "L_Capture"],
+                                                ["title": "AVAssetReader/Writer(读取和写入资源)", "vc": "L_AVAssetReaderWriter"],
+                                                ["title": "学习音频波形图", "vc": "L_Waveform"],
                                                 ["title": "--", "vc": "BaseViewController"],
                                                 ["title": "--", "vc": "BaseViewController"],
                                                 ["title": "--", "vc": "BaseViewController"],
-                                                ["title": "--", "vc": "BaseViewController"],
-                                                ["title": "沙盒目录查看", "vc": "JXFileBrowserController"],]
+                                                ["title": "--", "vc": "BaseViewController"],]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,6 +43,8 @@ class CatalogVC: BaseViewController {
         view.addSubview(mainTableView)
         mainTableView.delegate = self
         mainTableView.dataSource = self
+        mainTableView.frame = view.bounds
+        navigationItem.rightBarButtonItem = UIBarButtonItem(customView: rightBtn)
     }
     
     override func viewDidLayoutSubviews() {
@@ -45,6 +52,7 @@ class CatalogVC: BaseViewController {
         mainTableView.reloadData()
     }
     
+    // 测试打印FontName
     func testPrintFontNames() {
         for fontfamilyName in UIFont.familyNames {
             CQLog(fontfamilyName)
@@ -53,6 +61,14 @@ class CatalogVC: BaseViewController {
                 CQLog(fontName)
             }
         }
+    }
+    
+    @objc private func pushFileBrowser() {
+        let classType = NSClassFromString(KPROJECT_NAME+"JXFileBrowserController") as! UIViewController.Type
+        let viewController = classType.init().cq.then {
+            $0.title = "沙盒目录"
+        }
+        navigationController?.pushViewController(viewController, animated: true)
     }
 }
 
@@ -68,7 +84,7 @@ extension CatalogVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return tableView.cq.dequeueReusableCell(UITableViewCell.self, for: indexPath).cq.then {
+        tableView.cq.dequeueReusableCell(UITableViewCell.self, for: indexPath).cq.then {
             $0.textLabel?.text = dataList[indexPath.row]["title"]
         }
     }
