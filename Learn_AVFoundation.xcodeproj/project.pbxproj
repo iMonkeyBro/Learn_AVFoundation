@@ -34,7 +34,11 @@
 		905C3E5F285715F2005C83AF /* L_Capture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 905C3E5E285715F2005C83AF /* L_Capture.swift */; };
 		905C3E612857165E005C83AF /* L_AVAssetReaderWriter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 905C3E602857165E005C83AF /* L_AVAssetReaderWriter.swift */; };
 		905C3E64285739B1005C83AF /* L_Waveform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 905C3E63285739B1005C83AF /* L_Waveform.swift */; };
-		905C3E6628573CF8005C83AF /* SamepleDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 905C3E6528573CF8005C83AF /* SamepleDataProvider.swift */; };
+		905C3E6628573CF8005C83AF /* SampleDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 905C3E6528573CF8005C83AF /* SampleDataProvider.swift */; };
+		905C3E6828583544005C83AF /* SampleDataFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 905C3E6728583544005C83AF /* SampleDataFilter.swift */; };
+		905C3E732859824B005C83AF /* THSampleDataProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 905C3E702859824B005C83AF /* THSampleDataProvider.m */; };
+		905C3E742859824B005C83AF /* THSampleDataFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 905C3E722859824B005C83AF /* THSampleDataFilter.m */; };
+		905C3E76285983C5005C83AF /* WaveformView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 905C3E75285983C5005C83AF /* WaveformView.swift */; };
 		90760C5027EB1E4C001050C0 /* 02 Demo ID3v2.2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 90760C4A27EB1E4C001050C0 /* 02 Demo ID3v2.2.mp3 */; };
 		90760C5127EB1E4C001050C0 /* 04 Demo ID3v2.4.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 90760C4B27EB1E4C001050C0 /* 04 Demo ID3v2.4.mp3 */; };
 		90760C5227EB1E4C001050C0 /* 03 Demo ID3v2.3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 90760C4C27EB1E4C001050C0 /* 03 Demo ID3v2.3.mp3 */; };
@@ -112,7 +116,13 @@
 		905C3E5E285715F2005C83AF /* L_Capture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = L_Capture.swift; sourceTree = "<group>"; };
 		905C3E602857165E005C83AF /* L_AVAssetReaderWriter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = L_AVAssetReaderWriter.swift; sourceTree = "<group>"; };
 		905C3E63285739B1005C83AF /* L_Waveform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = L_Waveform.swift; sourceTree = "<group>"; };
-		905C3E6528573CF8005C83AF /* SamepleDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SamepleDataProvider.swift; sourceTree = "<group>"; };
+		905C3E6528573CF8005C83AF /* SampleDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleDataProvider.swift; sourceTree = "<group>"; };
+		905C3E6728583544005C83AF /* SampleDataFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleDataFilter.swift; sourceTree = "<group>"; };
+		905C3E6F2859824A005C83AF /* THSampleDataProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THSampleDataProvider.h; sourceTree = "<group>"; };
+		905C3E702859824B005C83AF /* THSampleDataProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THSampleDataProvider.m; sourceTree = "<group>"; };
+		905C3E712859824B005C83AF /* THSampleDataFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THSampleDataFilter.h; sourceTree = "<group>"; };
+		905C3E722859824B005C83AF /* THSampleDataFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THSampleDataFilter.m; sourceTree = "<group>"; };
+		905C3E75285983C5005C83AF /* WaveformView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaveformView.swift; sourceTree = "<group>"; };
 		90760C4A27EB1E4C001050C0 /* 02 Demo ID3v2.2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "02 Demo ID3v2.2.mp3"; sourceTree = "<group>"; };
 		90760C4B27EB1E4C001050C0 /* 04 Demo ID3v2.4.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "04 Demo ID3v2.4.mp3"; sourceTree = "<group>"; };
 		90760C4C27EB1E4C001050C0 /* 03 Demo ID3v2.3.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "03 Demo ID3v2.3.mp3"; sourceTree = "<group>"; };
@@ -286,7 +296,13 @@
 			isa = PBXGroup;
 			children = (
 				905C3E63285739B1005C83AF /* L_Waveform.swift */,
-				905C3E6528573CF8005C83AF /* SamepleDataProvider.swift */,
+				905C3E712859824B005C83AF /* THSampleDataFilter.h */,
+				905C3E722859824B005C83AF /* THSampleDataFilter.m */,
+				905C3E6F2859824A005C83AF /* THSampleDataProvider.h */,
+				905C3E702859824B005C83AF /* THSampleDataProvider.m */,
+				905C3E6528573CF8005C83AF /* SampleDataProvider.swift */,
+				905C3E6728583544005C83AF /* SampleDataFilter.swift */,
+				905C3E75285983C5005C83AF /* WaveformView.swift */,
 			);
 			path = L_Waveform;
 			sourceTree = "<group>";
@@ -588,7 +604,9 @@
 				902923F427D396CD004E7D13 /* Asyncs.swift in Sources */,
 				90760C6227EB23CC001050C0 /* NSFileManager+DirectoryLocations.m in Sources */,
 				9DF46B6427D129D2007369CF /* CatalogVC.swift in Sources */,
+				905C3E6828583544005C83AF /* SampleDataFilter.swift in Sources */,
 				902DF17C27CF424500A78688 /* AppDelegate.swift in Sources */,
+				905C3E732859824B005C83AF /* THSampleDataProvider.m in Sources */,
 				9DF46B6227D1294E007369CF /* BaseNavController.swift in Sources */,
 				90D547012850A8810053ADEF /* L_AVKit.swift in Sources */,
 				902923E827D359D9004E7D13 /* JXDatabaseConnector.swift in Sources */,
@@ -596,7 +614,7 @@
 				902C9D9027D8D2640060AB4C /* L_AVAsset.swift in Sources */,
 				905C3E5F285715F2005C83AF /* L_Capture.swift in Sources */,
 				9DF46B7327D12EEB007369CF /* UIImageExtension.swift in Sources */,
-				905C3E6628573CF8005C83AF /* SamepleDataProvider.swift in Sources */,
+				905C3E6628573CF8005C83AF /* SampleDataProvider.swift in Sources */,
 				905C3E64285739B1005C83AF /* L_Waveform.swift in Sources */,
 				9DF46B7927D1324E007369CF /* L_AVSpeechSynthesizer.swift in Sources */,
 				902923E927D359D9004E7D13 /* ExcelView.swift in Sources */,
@@ -618,8 +636,10 @@
 				90B86B9E281A950A009E4220 /* CQPlayer.swift in Sources */,
 				9DF46B7427D12EEB007369CF /* StringExtension.swift in Sources */,
 				905C3E612857165E005C83AF /* L_AVAssetReaderWriter.swift in Sources */,
+				905C3E76285983C5005C83AF /* WaveformView.swift in Sources */,
 				9DF46B7127D12EEB007369CF /* AnyObjectExtension.swift in Sources */,
 				902923ED27D359D9004E7D13 /* JXFilePreviewViewController.swift in Sources */,
+				905C3E742859824B005C83AF /* THSampleDataFilter.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

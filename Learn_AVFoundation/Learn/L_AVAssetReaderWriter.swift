@@ -54,6 +54,7 @@ class L_AVAssetReaderWriter: BaseViewController {
             var buffIndex = 1
             // 如果可以写入更多的数据，继续写，如果不可以或者下一个buffer为空(或者有一个写入失败)，则结束写 跳出循环
             while writerInput.isReadyForMoreMediaData && !complete {
+                // copy一帧
                 let samepleBuffer = trackOutput.copyNextSampleBuffer()
                 if samepleBuffer != nil {
                     print("写入数据中...\(buffIndex)")

@@ -4,3 +4,5 @@
 
 #import "AVMetadataItem+CQ.h"
 #import "NSFileManager+DirectoryLocations.h"
+#import "THSampleDataFilter.h"
+#import "THSampleDataProvider.h"
