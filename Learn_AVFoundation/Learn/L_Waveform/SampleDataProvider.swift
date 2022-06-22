@@ -11,11 +11,11 @@ class SampleDataProvider {
     /**
      从音频资源加载样本数据
      */
-    static func loadAudioSamples(from asset: AVAsset, completion:(@escaping (_ data: NSData?)->Void)) {
+    static func loadAudioSamples(from asset: AVAsset, completion:(@escaping (_ data: Data?)->Void)) {
         // 对资源所需的键异步载入，保证后续访问tracks操作不会遇到问题
         asset.loadValuesAsynchronously(forKeys: ["tracks"]) {
             let status: AVKeyValueStatus = asset.statusOfValue(forKey: "tracks", error: nil)
-            var sampleData: NSData? = nil
+            var sampleData: Data? = nil
             if status == .loaded {
                 sampleData = SampleDataProvider.readAudioSamples(from: asset)
             }
@@ -28,7 +28,7 @@ class SampleDataProvider {
     /**
      从音频的资源轨道读取样本
      */
-    private static func readAudioSamples(from asset: AVAsset) -> NSData? {
+    private static func readAudioSamples(from asset: AVAsset) -> Data? {
         let tryAssetReader: AVAssetReader? = try? AVAssetReader(asset: asset)
         guard let assetReader: AVAssetReader = tryAssetReader else {
             print("Asset Error!!!")
@@ -66,7 +66,7 @@ class SampleDataProvider {
             }
         }
         if assetReader.status == .completed {
-            return sampleData
+            return sampleData as Data
         } else {
             print("Failed to read audio samples from asset")
             return nil

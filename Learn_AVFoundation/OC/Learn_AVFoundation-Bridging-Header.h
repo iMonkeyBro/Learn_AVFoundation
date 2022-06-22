@@ -6,3 +6,4 @@
 #import "NSFileManager+DirectoryLocations.h"
 #import "THSampleDataFilter.h"
 #import "THSampleDataProvider.h"
+#import "THWaveformView.h"

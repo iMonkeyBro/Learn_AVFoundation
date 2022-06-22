@@ -54,7 +54,7 @@
         SInt16 sampleBin[binSize];
         
         for (NSUInteger j = 0; j < binSize; j++) {                          // 2
-			sampleBin[j] = CFSwapInt16LittleToHost(bytes[i + j]);
+            sampleBin[j] = CFSwapInt16LittleToHost(bytes[i + j]);
         }
         
         SInt16 value = [self maxValueInArray:sampleBin ofSize:binSize];     // 3

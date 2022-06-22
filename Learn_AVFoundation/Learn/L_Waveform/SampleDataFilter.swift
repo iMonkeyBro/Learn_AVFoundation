@@ -7,6 +7,7 @@
 
 import Foundation
 
+/// 没写完不能用
 class SampleDataFilter {
     
     private let sampleData: NSData
@@ -20,20 +21,23 @@ class SampleDataFilter {
         var filteredSamples: [Any] = []
         let sampleCount: UInt = UInt(sampleData.length/16)
         let binSize = sampleCount/UInt(size.width)
-        let bytes: [Int] = sampleData.bytes
+        var bytes: UnsafeRawPointer = UnsafeRawPointer(sampleData.bytes)
         var maxSample: Int = 0
-        for i in stride(from: 0, to: sampleCount, by: UInt.Stride(binSize)) {
-            var sampleBin: [Int] = Array(repeating: 0, count: binSize)
+        for i in stride(from: 0, to: sampleCount, by: UInt16.Stride(binSize)) {
+//            var sampleBin: [Int] = []
+            var sampleBin: [Int] = Array(repeating: 0, count: Int(binSize))
             
             for j in 0..<binSize {
-                sampleBin[j] = CFSwapInt16LittleToHost(bytes[i+j])
+                let v: Int = Int(CFSwapInt16LittleToHost(bytes.))
+//                sampleBin.append(v)
+                sampleBin[Int(j)] = v
             }
-            
         }
         
         return filteredSamples
          */
         []
+         
     }
     
     private func maxValue(in array:[Int]) -> Int {

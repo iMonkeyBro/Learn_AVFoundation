@@ -23,13 +23,13 @@
 //  THE SOFTWARE.
 //
 
-#import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
-@interface THSampleDataFilter : NSObject
+@class AVAsset;
 
-- (id)initWithData:(NSData *)sampleData;
+@interface THWaveformView : UIView
 
-- (NSArray<NSNumber *> *)filteredSamplesForSize:(CGSize)size;
+@property (strong, nonatomic) AVAsset *asset;
+@property (strong, nonatomic) UIColor *waveColor;
 
 @end

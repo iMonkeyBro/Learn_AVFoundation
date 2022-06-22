@@ -47,6 +47,7 @@
 		90760C5527EB1E4C001050C0 /* 01 Demo AAC.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 90760C4F27EB1E4C001050C0 /* 01 Demo AAC.m4a */; };
 		90760C6227EB23CC001050C0 /* NSFileManager+DirectoryLocations.m in Sources */ = {isa = PBXBuildFile; fileRef = 90760C6127EB23CC001050C0 /* NSFileManager+DirectoryLocations.m */; };
 		90760C6A27EB4066001050C0 /* AVMetadataItem+CQ.m in Sources */ = {isa = PBXBuildFile; fileRef = 90760C6927EB4066001050C0 /* AVMetadataItem+CQ.m */; };
+		90AFD50A28631587008198A4 /* THWaveformView.m in Sources */ = {isa = PBXBuildFile; fileRef = 90AFD50828631587008198A4 /* THWaveformView.m */; };
 		90B86B9E281A950A009E4220 /* CQPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90B86B9D281A9509009E4220 /* CQPlayer.swift */; };
 		90D547012850A8810053ADEF /* L_AVKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90D547002850A8810053ADEF /* L_AVKit.swift */; };
 		9D49D91C281AE7BD009C4BE2 /* hubblecast2.m4v in Resources */ = {isa = PBXBuildFile; fileRef = 9D49D91B281AE7BD009C4BE2 /* hubblecast2.m4v */; };
@@ -134,6 +135,8 @@
 		90760C6127EB23CC001050C0 /* NSFileManager+DirectoryLocations.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSFileManager+DirectoryLocations.m"; sourceTree = "<group>"; };
 		90760C6827EB4066001050C0 /* AVMetadataItem+CQ.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AVMetadataItem+CQ.h"; sourceTree = "<group>"; };
 		90760C6927EB4066001050C0 /* AVMetadataItem+CQ.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "AVMetadataItem+CQ.m"; sourceTree = "<group>"; };
+		90AFD50828631587008198A4 /* THWaveformView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THWaveformView.m; sourceTree = "<group>"; };
+		90AFD50928631587008198A4 /* THWaveformView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THWaveformView.h; sourceTree = "<group>"; };
 		90B86B9D281A9509009E4220 /* CQPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CQPlayer.swift; sourceTree = "<group>"; };
 		90D547002850A8810053ADEF /* L_AVKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = L_AVKit.swift; sourceTree = "<group>"; };
 		9D49D91B281AE7BD009C4BE2 /* hubblecast2.m4v */ = {isa = PBXFileReference; lastKnownFileType = file; path = hubblecast2.m4v; sourceTree = "<group>"; };
@@ -300,6 +303,8 @@
 				905C3E722859824B005C83AF /* THSampleDataFilter.m */,
 				905C3E6F2859824A005C83AF /* THSampleDataProvider.h */,
 				905C3E702859824B005C83AF /* THSampleDataProvider.m */,
+				90AFD50928631587008198A4 /* THWaveformView.h */,
+				90AFD50828631587008198A4 /* THWaveformView.m */,
 				905C3E6528573CF8005C83AF /* SampleDataProvider.swift */,
 				905C3E6728583544005C83AF /* SampleDataFilter.swift */,
 				905C3E75285983C5005C83AF /* WaveformView.swift */,
@@ -634,6 +639,7 @@
 				902923EC27D359D9004E7D13 /* JXTextPreviewViewController.swift in Sources */,
 				9DF46B6F27D12EEB007369CF /* UIColorExtension.swift in Sources */,
 				90B86B9E281A950A009E4220 /* CQPlayer.swift in Sources */,
+				90AFD50A28631587008198A4 /* THWaveformView.m in Sources */,
 				9DF46B7427D12EEB007369CF /* StringExtension.swift in Sources */,
 				905C3E612857165E005C83AF /* L_AVAssetReaderWriter.swift in Sources */,
 				905C3E76285983C5005C83AF /* WaveformView.swift in Sources */,
