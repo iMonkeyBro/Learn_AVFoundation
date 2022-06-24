@@ -29,7 +29,7 @@ class CatalogVC: BaseViewController {
                                                 ["title": "AVAsset(AVAsset学习)", "vc": "L_AVAsset"],
                                                 ["title": "AVPlayer(AVPlayer学习)", "vc": "L_AVPlayer"],
                                                 ["title": "AVKit(AVKit学习)", "vc": "L_AVKit"],
-                                                ["title": "ACFoundation捕捉", "vc": "L_Capture"],
+                                                ["title": "AVFoundation捕捉", "vc": "L_Capture"],
                                                 ["title": "AVAssetReader/Writer(读取和写入资源)", "vc": "L_AVAssetReaderWriter"],
                                                 ["title": "学习音频波形图", "vc": "L_Waveform"],
                                                 ["title": "--", "vc": "BaseViewController"],

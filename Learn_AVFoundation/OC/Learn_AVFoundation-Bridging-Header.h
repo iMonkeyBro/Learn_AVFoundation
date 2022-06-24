@@ -7,3 +7,12 @@
 #import "THSampleDataFilter.h"
 #import "THSampleDataProvider.h"
 #import "THWaveformView.h"
+#import "NSFileManager+CQ.h"
+#import "CQCaptureManager.h"
+#import "CQCapturePreviewView.h"
+#import "CQCameraOperateView.h"
+#import "CQCameraShutterButton.h"
+#import "CQCameraStatusView.h"
+#import <Masonry/Masonry.h>
+#import "CQScreenTool.h"
+#import "CQAuthorizationTool.h"

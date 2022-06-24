@@ -224,8 +224,16 @@ struct R: Rswift.Validatable {
     fileprivate init() {}
   }
 
-  /// This `R.image` struct is generated, and contains static references to 6 images.
+  /// This `R.image` struct is generated, and contains static references to 10 images.
   struct image {
+    /// Image `faceLayer`.
+    static let faceLayer = Rswift.ImageResource(bundle: R.hostingBundle, name: "faceLayer")
+    /// Image `icon_flash`.
+    static let icon_flash = Rswift.ImageResource(bundle: R.hostingBundle, name: "icon_flash")
+    /// Image `icon_photo`.
+    static let icon_photo = Rswift.ImageResource(bundle: R.hostingBundle, name: "icon_photo")
+    /// Image `icon_switchCamera`.
+    static let icon_switchCamera = Rswift.ImageResource(bundle: R.hostingBundle, name: "icon_switchCamera")
     /// Image `looper_bass`.
     static let looper_bass = Rswift.ImageResource(bundle: R.hostingBundle, name: "looper_bass")
     /// Image `looper_drum`.
@@ -238,6 +246,34 @@ struct R: Rswift.Validatable {
     static let voiceMemo_play = Rswift.ImageResource(bundle: R.hostingBundle, name: "voiceMemo_play")
     /// Image `voiceMemo_stop`.
     static let voiceMemo_stop = Rswift.ImageResource(bundle: R.hostingBundle, name: "voiceMemo_stop")
+
+    #if os(iOS) || os(tvOS)
+    /// `UIImage(named: "faceLayer", bundle: ..., traitCollection: ...)`
+    static func faceLayer(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.faceLayer, compatibleWith: traitCollection)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UIImage(named: "icon_flash", bundle: ..., traitCollection: ...)`
+    static func icon_flash(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.icon_flash, compatibleWith: traitCollection)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UIImage(named: "icon_photo", bundle: ..., traitCollection: ...)`
+    static func icon_photo(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.icon_photo, compatibleWith: traitCollection)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UIImage(named: "icon_switchCamera", bundle: ..., traitCollection: ...)`
+    static func icon_switchCamera(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.icon_switchCamera, compatibleWith: traitCollection)
+    }
+    #endif
 
     #if os(iOS) || os(tvOS)
     /// `UIImage(named: "looper_bass", bundle: ..., traitCollection: ...)`

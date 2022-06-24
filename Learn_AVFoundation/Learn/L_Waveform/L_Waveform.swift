@@ -9,7 +9,7 @@ import UIKit
 
 class L_Waveform: BaseViewController {
 
-    private var waveformView: WaveformView!
+    private var waveformView: THWaveformView!
     private var asset: AVAsset!
     
     override func viewDidLoad() {
@@ -17,10 +17,10 @@ class L_Waveform: BaseViewController {
         let fileUrl: URL = Bundle.main.url(forResource: "kenengfou", withExtension: "mp3")!
         asset = AVAsset(url: fileUrl)
         
-        test()
-        
-        return
-        waveformView = WaveformView(frame: CGRect(x: 10, y: 100, width: 286, height: 80))
+//        test()
+
+        asset = AVAsset(url: fileUrl)
+        waveformView = THWaveformView(frame: CGRect(x: 10, y: 100, width: 286, height: 80))
         waveformView.waveColor = .red
         waveformView.backgroundColor = .green
         waveformView.asset = asset

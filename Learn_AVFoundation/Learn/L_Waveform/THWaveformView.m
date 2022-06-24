@@ -98,7 +98,7 @@ static const CGFloat THHeightScaling = 0.85;
 }
 
 - (void)drawRect:(CGRect)rect {
-    
+    if (!self.filter) return;
     CGContextRef context = UIGraphicsGetCurrentContext();
 
 	CGContextScaleCTM(context, THWidthScaling, THHeightScaling);            // 1

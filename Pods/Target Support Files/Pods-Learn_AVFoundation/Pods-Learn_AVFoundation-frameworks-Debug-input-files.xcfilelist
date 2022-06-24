@@ -1,4 +1,5 @@
 ${PODS_ROOT}/Target Support Files/Pods-Learn_AVFoundation/Pods-Learn_AVFoundation-frameworks.sh
+${BUILT_PRODUCTS_DIR}/Masonry/Masonry.framework
 ${BUILT_PRODUCTS_DIR}/R.swift.Library/Rswift.framework
 ${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework
 ${BUILT_PRODUCTS_DIR}/Then/Then.framework
