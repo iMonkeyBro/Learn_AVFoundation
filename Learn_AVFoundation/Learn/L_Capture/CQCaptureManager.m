@@ -19,6 +19,8 @@ dispatch_async(dispatch_get_main_queue(), block);\
 }
 
 static const NSString *CameraAdjustingExposureContext;
+static const NSString *RampingVideoZoomContext;
+static const NSString *VideoZoomFactorContext;
 
 /**
  AVCaptureFileOutputRecordingDelegate 视频文件录制
@@ -627,6 +629,16 @@ static const NSString *CameraAdjustingExposureContext;
     return [[self getActiveCamera] torchMode];
 }
 
+- (BOOL)isSupportZoom {
+    return [self getActiveCamera].activeFormat.videoMaxZoomFactor > 1.0f;
+}
+
+- (CGFloat)maxZoomFactor {
+    // 4.0随意写的，默认不能超过4，也可以不用设置
+//    return MIN([self getActiveCamera].activeFormat.videoMaxZoomFactor, 4.0f);
+    return [self getActiveCamera].activeFormat.videoMaxZoomFactor;
+}
+
 #pragma mark - Setter
 - (void)setFlashMode:(AVCaptureFlashMode)flashMode {
     AVCaptureDevice *device = [self getActiveCamera];
@@ -742,6 +754,55 @@ static const NSString *CameraAdjustingExposureContext;
     return self.cameraCount > 1;
 }
 
+#pragma mark - 镜头缩放
+- (void)configZoomValue:(CGFloat)zoomValue {
+    if (![self getActiveCamera].isRampingVideoZoom) {
+        NSError *error;
+        if ([[self getActiveCamera] lockForConfiguration:&error]) {
+            CGFloat zoomFactor = pow(self.maxZoomFactor, zoomValue);
+            [self getActiveCamera].videoZoomFactor = zoomFactor;
+            [[self getActiveCamera] unlockForConfiguration];
+        } else {
+            if (self.delegate && [self.delegate respondsToSelector:@selector(zoomCameraFailed)]) {
+                [_delegate zoomCameraFailed];
+            }
+        }
+    }
+}
+
+// 自增自减 自增1.0f 自减0.0f
+- (void)rampToZoomValue:(CGFloat)zoomValue {
+    if (![self getActiveCamera].isRampingVideoZoom) {
+        NSError *error;
+        if ([[self getActiveCamera] lockForConfiguration:&error]) {
+            CGFloat zoomFactor = pow(self.maxZoomFactor, zoomValue);
+            [[self getActiveCamera] rampToVideoZoomFactor:zoomFactor withRate:1.0f];
+            [[self getActiveCamera] unlockForConfiguration];
+        } else {
+            if (self.delegate && [self.delegate respondsToSelector:@selector(zoomCameraFailed)]) {
+                [_delegate zoomCameraFailed];
+            }
+        }
+    }
+}
+
+- (void)cancelZoom {
+    NSError *error;
+    if ([[self getActiveCamera] lockForConfiguration:&error]) {
+        [[self getActiveCamera] cancelVideoZoomRamp];
+        [[self getActiveCamera] unlockForConfiguration];
+    } else {
+        if (self.delegate && [self.delegate respondsToSelector:@selector(zoomCameraFailed)]) {
+            [_delegate zoomCameraFailed];
+        }
+    }
+}
+
+- (void)addZoomKVO {
+    [[self getActiveCamera] addObserver:self forKeyPath:@"videoZoomFactor" options:0 context:&VideoZoomFactorContext];
+    [[self getActiveCamera] addObserver:self forKeyPath:@"rampingVideoZoom" options:0 context:&RampingVideoZoomContext];
+}
+
 
 #pragma mark - Public Func 对焦&曝光
 
@@ -805,33 +866,6 @@ static const NSString *CameraAdjustingExposureContext;
     }
 }
 
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context {
-    if (context == &CameraAdjustingExposureContext) {
-        //获取device
-        AVCaptureDevice *device = (AVCaptureDevice *)object;
-        // 设备不再调整曝光等级，说明自动调节曝光结束，并且支持设置为AVCaptureExposureModeLocked
-        // TODO: -测试监听次数
-        if(!device.isAdjustingExposure && [device isExposureModeSupported:AVCaptureExposureModeLocked] && device.isExposurePointOfInterestSupported) {
-            // 使用一次监听，立即移除通知
-            [object removeObserver:self forKeyPath:@"adjustingExposure" context:&CameraAdjustingExposureContext];
-            dispatch_async(dispatch_get_main_queue(), ^{
-                NSError *error;
-                if ([device lockForConfiguration:&error]) {
-                    // 锁定曝光
-                    device.exposureMode = AVCaptureExposureModeLocked;
-                    [device unlockForConfiguration];
-                } else {
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        if (self.delegate && [self.delegate respondsToSelector:@selector(deviceConfigurationFailedWithError:)]) {
-                            [self.delegate deviceConfigurationFailedWithError:error];
-                        }
-                    });
-                }
-            });
-        }
-    }
-}
-
 // 重置对焦和曝光
 - (void)resetFocusAndExposureModes {
     AVCaptureDevice *device = [self getActiveCamera];
@@ -861,6 +895,59 @@ static const NSString *CameraAdjustingExposureContext;
                 [self.delegate deviceConfigurationFailedWithError:error];
             }
         });
+    }
+}
+
+#pragma mark - KVO
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context {
+    if (context == &CameraAdjustingExposureContext) {
+        //获取device
+        AVCaptureDevice *device = (AVCaptureDevice *)object;
+        // 设备不再调整曝光等级，说明自动调节曝光结束，并且支持设置为AVCaptureExposureModeLocked
+        // TODO: 测试监听次数
+        if(!device.isAdjustingExposure && [device isExposureModeSupported:AVCaptureExposureModeLocked] && device.isExposurePointOfInterestSupported) {
+            // 使用一次监听，立即移除通知
+            [object removeObserver:self forKeyPath:@"adjustingExposure" context:&CameraAdjustingExposureContext];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                NSError *error;
+                if ([device lockForConfiguration:&error]) {
+                    // 锁定曝光
+                    device.exposureMode = AVCaptureExposureModeLocked;
+                    [device unlockForConfiguration];
+                } else {
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        if (self.delegate && [self.delegate respondsToSelector:@selector(deviceConfigurationFailedWithError:)]) {
+                            [self.delegate deviceConfigurationFailedWithError:error];
+                        }
+                    });
+                }
+            });
+        }
+    }
+    
+    else if (context == &RampingVideoZoomContext) {
+        // 缩放开始和缩放结束会调用到这里
+        [self zoomDelegateCallBack];
+    }
+    
+    else if (context == &VideoZoomFactorContext) {
+        // 并且有正在运行的缩放动作
+        if ([self getActiveCamera].isRampingVideoZoom) {
+            [self zoomDelegateCallBack];
+        }
+    }
+    
+    else {
+        [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
+    }
+}
+
+- (void)zoomDelegateCallBack {
+    CGFloat curZoomFactor = [self getActiveCamera].videoZoomFactor;
+    CGFloat maxZoomFactor = [self maxZoomFactor];
+    CGFloat value = log(curZoomFactor) / log(maxZoomFactor);
+    if (self.delegate && [self.delegate respondsToSelector:@selector(zoomCameraSuccess:)]) {
+        [self.delegate zoomCameraSuccess:value];
     }
 }
 

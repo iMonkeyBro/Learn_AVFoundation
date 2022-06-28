@@ -14,6 +14,7 @@ class L_Capture: BaseViewController {
     private var previewView: CQCapturePreviewView!
     private let statusView: CQCameraStatusView = CQCameraStatusView()
     private let operateView: CQCameraOperateView = CQCameraOperateView()
+    private let zoomView: CQCameraZoomView = CQCameraZoomView()
     private var cameraMode: CQCameraMode = .photo
     private var isStartFace: Bool = false
     private var timer: DispatchSourceTimer?
@@ -44,6 +45,7 @@ class L_Capture: BaseViewController {
         view.addSubview(previewView)
         view.addSubview(statusView)
         view.addSubview(operateView)
+        view.addSubview(zoomView)
         previewView.snp.makeConstraints { make in
             make.bottom.left.right.equalTo(view)
             make.top.equalTo(view.snp.top).offset(CQScreenTool.safeAreaTop()+64)
@@ -56,6 +58,11 @@ class L_Capture: BaseViewController {
         operateView.snp.makeConstraints { make in
             make.bottom.left.right.equalTo(view)
             make.height.equalTo(85+CQScreenTool.safeAreaBottom())
+        }
+        zoomView.snp.makeConstraints { make in
+            make.left.right.equalTo(view)
+            make.height.equalTo(45)
+            make.top.equalTo(statusView.snp.bottom)
         }
     }
     
@@ -112,7 +119,7 @@ class L_Capture: BaseViewController {
         }
         
         operateView.coverBtnCallbackBlock = { [weak self] in
-            guard let `self` = self else { return }
+            guard self != nil else { return }
             let deviceVersion: Float = Float(UIDevice.current.systemVersion) ?? 0
             if deviceVersion < 10 {
                 UIApplication.shared.openURL(URL(string: "PHOTOS://")!)
@@ -140,11 +147,26 @@ class L_Capture: BaseViewController {
                 self.previewView.faceMetadataObjects = []
             }
         }
+        
+        zoomView.sliderChangeCallbackBlock = { [weak self] sliderValue in
+            guard let `self` = self else { return }
+            self.captureManager.configZoomValue(sliderValue)
+        }
+        
+        zoomView.addBtnCallbackBlock = { [weak self] in
+            guard let `self` = self else { return }
+            self.captureManager.ramp(toZoomValue: 1.0)
+        }
+        
+        zoomView.subtractBtnCallbackBlock = { [weak self] in
+            guard let `self` = self else { return }
+            self.captureManager.ramp(toZoomValue: 0.0)
+        }
     }
     
+    /// 开始录制，处理时间显示
     private func startListeningRecording() {
-        return
-        timer = DispatchSource.makeTimerSource(flags: DispatchSource.TimerFlags(rawValue: 3), queue: DispatchQueue.global())
+        timer = DispatchSource.makeTimerSource(flags: DispatchSource.TimerFlags(rawValue: 3), queue: DispatchQueue.main)
         timer?.schedule(deadline: .now(), repeating: .microseconds(250))
         timer?.setEventHandler {
             self.statusView.time = self.captureManager.movieFileRecordedDuration()
@@ -152,6 +174,7 @@ class L_Capture: BaseViewController {
         timer?.resume()
     }
     
+    /// 结束录制
     private func stopListeningRecording() {
         timer?.cancel()
         self.statusView.time = .zero
@@ -203,7 +226,7 @@ extension L_Capture: CQCaptureManagerDelegate {
     }
     
     func mediaCaptureMovieFileFailedWithError(_ error: Error) {
-        
+        CQLog("捕捉视频失败")
     }
     
     func assetLibraryWriteMovieFileSuccess(withCover coverImage: UIImage) {
@@ -225,6 +248,15 @@ extension L_Capture: CQCaptureManagerDelegate {
             }
         }
         previewView.faceMetadataObjects = faceObjs
+    }
+    
+    func zoomCameraFailed() {
+        print("zoomCameraFailed")
+    }
+    
+    func zoomCameraSuccess(_ zoomValue: CGFloat) {
+        print("zoomValue\(zoomValue)")
+//        zoomView.changeSliderValue(zoomValue)
     }
 }
 

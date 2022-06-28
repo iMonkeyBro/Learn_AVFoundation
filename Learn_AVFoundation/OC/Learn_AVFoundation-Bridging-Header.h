@@ -13,6 +13,7 @@
 #import "CQCameraOperateView.h"
 #import "CQCameraShutterButton.h"
 #import "CQCameraStatusView.h"
+#import "CQCameraZoomView.h"
 #import <Masonry/Masonry.h>
 #import "CQScreenTool.h"
 #import "CQAuthorizationTool.h"

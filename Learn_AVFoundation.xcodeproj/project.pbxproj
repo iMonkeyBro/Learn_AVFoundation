@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		901525D4286AF5AE008EF88D /* CQCameraZoomView.m in Sources */ = {isa = PBXBuildFile; fileRef = 901525D3286AF5AE008EF88D /* CQCameraZoomView.m */; };
 		9017F58E281441F50090345A /* L_AVPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9017F58D281441F40090345A /* L_AVPlayer.swift */; };
 		902388BF27FDC94200C9F922 /* kenengfou.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 902388BE27FDC94200C9F922 /* kenengfou.mp3 */; };
 		902388CB27FF212400C9F922 /* L_AVAudioPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 902388CA27FF212400C9F922 /* L_AVAudioPlayer.swift */; };
@@ -95,6 +96,8 @@
 /* Begin PBXFileReference section */
 		1D69C9C80505E1D6EEB1F05F /* Pods-Learn_AVFoundation.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Learn_AVFoundation.release.xcconfig"; path = "Target Support Files/Pods-Learn_AVFoundation/Pods-Learn_AVFoundation.release.xcconfig"; sourceTree = "<group>"; };
 		6B0C4E64625B48003FA9414D /* Pods-Learn_AVFoundation.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Learn_AVFoundation.debug.xcconfig"; path = "Target Support Files/Pods-Learn_AVFoundation/Pods-Learn_AVFoundation.debug.xcconfig"; sourceTree = "<group>"; };
+		901525D2286AF5AE008EF88D /* CQCameraZoomView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CQCameraZoomView.h; sourceTree = "<group>"; };
+		901525D3286AF5AE008EF88D /* CQCameraZoomView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CQCameraZoomView.m; sourceTree = "<group>"; };
 		9017F58D281441F40090345A /* L_AVPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = L_AVPlayer.swift; sourceTree = "<group>"; };
 		902388BE27FDC94200C9F922 /* kenengfou.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = kenengfou.mp3; sourceTree = "<group>"; };
 		902388CA27FF212400C9F922 /* L_AVAudioPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = L_AVAudioPlayer.swift; sourceTree = "<group>"; };
@@ -372,6 +375,8 @@
 				90AFD51A28656369008198A4 /* CQCameraShutterButton.m */,
 				90AFD51728656369008198A4 /* CQCameraStatusView.h */,
 				90AFD51928656369008198A4 /* CQCameraStatusView.m */,
+				901525D2286AF5AE008EF88D /* CQCameraZoomView.h */,
+				901525D3286AF5AE008EF88D /* CQCameraZoomView.m */,
 				905C3E5E285715F2005C83AF /* L_Capture.swift */,
 			);
 			path = L_Capture;
@@ -667,6 +672,7 @@
 				902DF17C27CF424500A78688 /* AppDelegate.swift in Sources */,
 				905C3E732859824B005C83AF /* THSampleDataProvider.m in Sources */,
 				9DF46B6227D1294E007369CF /* BaseNavController.swift in Sources */,
+				901525D4286AF5AE008EF88D /* CQCameraZoomView.m in Sources */,
 				90AFD520286593EB008198A4 /* UIButton+CQExtension.m in Sources */,
 				90D547012850A8810053ADEF /* L_AVKit.swift in Sources */,
 				902923E827D359D9004E7D13 /* JXDatabaseConnector.swift in Sources */,

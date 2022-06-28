@@ -99,6 +99,18 @@ NS_ASSUME_NONNULL_BEGIN
 #pragma mark - 元数据捕捉回调
 - (void)mediaCaptureMetadataSuccessWithMetadataObjects:(NSArray<__kindof AVMetadataObject *> *)metadataObjects;
 
+#pragma mark - 镜头缩放
+/**
+ 缩放镜头失败
+ @param zoomValue 当前缩放值
+ */
+- (void)zoomCameraSuccess:(CGFloat)zoomValue;
+
+/**
+ 缩放镜头失败
+ */
+- (void)zoomCameraFailed;
+
 @end
 
 #pragma mark - CQCaptureManager
@@ -122,6 +134,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) AVCaptureFlashMode flashMode; ///< 闪光灯模式,0关 1开 2自动，仅按下快门时有效
 @property (nonatomic, assign, readonly) BOOL isSupportTapFocus;  ///< 相机是否支持点击聚焦，例如一些设备的前置是不支持的
 @property (nonatomic, assign, readonly) BOOL isSupportTapExpose; ///< 相机是否支持点击曝光
+@property (nonatomic, assign, readonly) BOOL isSupportZoom; ///< 相机是否支持缩放
+@property (nonatomic, assign, readonly) CGFloat maxZoomFactor; ///< 最大缩放系数
 
 #pragma mark - Func 会话
 /**
@@ -273,6 +287,16 @@ NS_ASSUME_NONNULL_BEGIN
  重置对焦和曝光,将对焦点和曝光点设为中心，并将对焦和曝光模式设为自动
  */
 - (void)resetFocusAndExposureModes;
+
+#pragma mark - Func 镜头缩放
+/// 配置缩放系数
+- (void)configZoomValue:(CGFloat)zoomValue;
+
+/// 1.0f自增，0.0f自减
+- (void)rampToZoomValue:(CGFloat)zoomValue;
+
+/// 取消缩放
+- (void)cancelZoom;
 
 @end
 

@@ -122,6 +122,8 @@
     if (!_timeLabel) {
         _timeLabel = [[UILabel alloc] init];
         _timeLabel.textColor = UIColor.whiteColor;
+        _timeLabel.text = @"00:00";
+        _timeLabel.hidden = YES;
     }
     return _timeLabel;
 }
