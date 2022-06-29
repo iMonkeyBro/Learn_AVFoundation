@@ -17,6 +17,7 @@ class L_Capture: BaseViewController {
     private let zoomView: CQCameraZoomView = CQCameraZoomView()
     private var cameraMode: CQCameraMode = .photo
     private var isStartFace: Bool = false
+    private var isStartCode: Bool = false
     private var timer: DispatchSourceTimer?
 
     override func viewDidLoad() {
@@ -102,6 +103,7 @@ class L_Capture: BaseViewController {
             self.captureManager.switchCamera()
         }
         
+        // 快门按钮
         operateView.shutterBtnCallbackBlock = { [weak self] in
             guard let `self` = self else { return }
             if self.cameraMode == .photo {
@@ -118,6 +120,7 @@ class L_Capture: BaseViewController {
             }
         }
         
+        // 封面相册按钮
         operateView.coverBtnCallbackBlock = { [weak self] in
             guard self != nil else { return }
             let deviceVersion: Float = Float(UIDevice.current.systemVersion) ?? 0
@@ -128,6 +131,7 @@ class L_Capture: BaseViewController {
             }
         }
         
+        // 更换相机模式
         operateView.changeModeCallbackBlock = { [weak self] mode in
             guard let `self` = self else { return }
             self.cameraMode = mode
@@ -137,11 +141,24 @@ class L_Capture: BaseViewController {
             }
         }
         
-        operateView.changeFaceCallbackBlock = { [weak self] isFace in
+        // 人脸识别开关
+        operateView.faceSwitchCallbackBlock = { [weak self] isFace in
             guard let `self` = self else { return }
             self.isStartFace = isFace
             if isFace {
                 self.captureManager.configMetadataOutput(withType: [.face])
+            } else {
+                self.captureManager.removeMetadataOutput()
+                self.previewView.faceMetadataObjects = []
+            }
+        }
+        
+        // 条码识别开关
+        operateView.codeSwitchCallbackBlock = { [weak self] isCode in
+            guard let `self` = self else { return }
+            self.isStartCode = isCode
+            if isCode {
+                self.captureManager.configMetadataOutput(withType: [.qr, .aztec])
             } else {
                 self.captureManager.removeMetadataOutput()
                 self.previewView.faceMetadataObjects = []
@@ -153,14 +170,24 @@ class L_Capture: BaseViewController {
             self.captureManager.configZoomValue(sliderValue)
         }
         
-        zoomView.addBtnCallbackBlock = { [weak self] in
+        zoomView.addBtnTouchDownCallbackBlock = { [weak self] in
             guard let `self` = self else { return }
             self.captureManager.ramp(toZoomValue: 1.0)
         }
         
-        zoomView.subtractBtnCallbackBlock = { [weak self] in
+        zoomView.addBtnTouchUpCallbackBlock = { [weak self] in
+            guard let `self` = self else { return }
+            self.captureManager.cancelZoom()
+        }
+        
+        zoomView.subtractBtnTouchDownCallbackBlock = { [weak self] in
             guard let `self` = self else { return }
             self.captureManager.ramp(toZoomValue: 0.0)
+        }
+        
+        zoomView.subtractBtnTouchUpCallbackBlock = { [weak self] in
+            guard let `self` = self else { return }
+            self.captureManager.cancelZoom()
         }
     }
     
@@ -241,13 +268,24 @@ extension L_Capture: CQCaptureManagerDelegate {
     }
     
     func mediaCaptureMetadataSuccess(with metadataObjects: [AVMetadataObject]) {
-        var faceObjs: [AVMetadataFaceObject] = []
-        for metadataObj in metadataObjects {
-            if let faceObj: AVMetadataFaceObject = metadataObj as? AVMetadataFaceObject {
-                faceObjs.append(faceObj)
+        if (isStartFace == true) {
+            var faceObjs: [AVMetadataFaceObject] = []
+            for metadataObj in metadataObjects {
+                if let faceObj: AVMetadataFaceObject = metadataObj as? AVMetadataFaceObject {
+                    faceObjs.append(faceObj)
+                }
+            }
+            previewView.faceMetadataObjects = faceObjs
+        }
+        if (isStartCode == true) {
+            var codeObjs: [AVMetadataMachineReadableCodeObject] = []
+            for metadataObj in metadataObjects {
+                if let codeObj: AVMetadataMachineReadableCodeObject = metadataObj as? AVMetadataMachineReadableCodeObject {
+                    codeObjs.append(codeObj)
+                    print("codeObj-\(codeObj.stringValue ?? "")")
+                }
             }
         }
-        previewView.faceMetadataObjects = faceObjs
     }
     
     func zoomCameraFailed() {
@@ -255,8 +293,8 @@ extension L_Capture: CQCaptureManagerDelegate {
     }
     
     func zoomCameraSuccess(_ zoomValue: CGFloat) {
-        print("zoomValue\(zoomValue)")
-//        zoomView.changeSliderValue(zoomValue)
+//        print("zoomValue\(zoomValue)")
+        zoomView.slider.value  = Float(zoomValue)
     }
 }
 

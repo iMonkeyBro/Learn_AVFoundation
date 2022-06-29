@@ -635,7 +635,7 @@ static const NSString *VideoZoomFactorContext;
 
 - (CGFloat)maxZoomFactor {
     // 4.0随意写的，默认不能超过4，也可以不用设置
-//    return MIN([self getActiveCamera].activeFormat.videoMaxZoomFactor, 4.0f);
+    return MIN([self getActiveCamera].activeFormat.videoMaxZoomFactor, 4.0f);
     return [self getActiveCamera].activeFormat.videoMaxZoomFactor;
 }
 
@@ -687,6 +687,12 @@ static const NSString *VideoZoomFactorContext;
 /// 获取当前活跃的摄像头
 - (AVCaptureDevice *)getActiveCamera {
     return self.videoDeviceInput.device;
+}
+
+- (void)setVideoDeviceInput:(AVCaptureDeviceInput *)videoDeviceInput {
+    [self removeZoomKVO];
+    _videoDeviceInput = videoDeviceInput;
+    [self addZoomKVO];
 }
 
 /// 获取未激活的摄像头
@@ -756,32 +762,30 @@ static const NSString *VideoZoomFactorContext;
 
 #pragma mark - 镜头缩放
 - (void)configZoomValue:(CGFloat)zoomValue {
-    if (![self getActiveCamera].isRampingVideoZoom) {
-        NSError *error;
-        if ([[self getActiveCamera] lockForConfiguration:&error]) {
-            CGFloat zoomFactor = pow(self.maxZoomFactor, zoomValue);
-            [self getActiveCamera].videoZoomFactor = zoomFactor;
-            [[self getActiveCamera] unlockForConfiguration];
-        } else {
-            if (self.delegate && [self.delegate respondsToSelector:@selector(zoomCameraFailed)]) {
-                [_delegate zoomCameraFailed];
-            }
+    if ([self getActiveCamera].isRampingVideoZoom) return;
+    NSError *error;
+    if ([[self getActiveCamera] lockForConfiguration:&error]) {
+        CGFloat zoomFactor = pow(self.maxZoomFactor, zoomValue);
+        [self getActiveCamera].videoZoomFactor = zoomFactor;
+        [[self getActiveCamera] unlockForConfiguration];
+    } else {
+        if (self.delegate && [self.delegate respondsToSelector:@selector(zoomCameraFailed)]) {
+            [_delegate zoomCameraFailed];
         }
     }
 }
 
 // 自增自减 自增1.0f 自减0.0f
 - (void)rampToZoomValue:(CGFloat)zoomValue {
-    if (![self getActiveCamera].isRampingVideoZoom) {
-        NSError *error;
-        if ([[self getActiveCamera] lockForConfiguration:&error]) {
-            CGFloat zoomFactor = pow(self.maxZoomFactor, zoomValue);
-            [[self getActiveCamera] rampToVideoZoomFactor:zoomFactor withRate:1.0f];
-            [[self getActiveCamera] unlockForConfiguration];
-        } else {
-            if (self.delegate && [self.delegate respondsToSelector:@selector(zoomCameraFailed)]) {
-                [_delegate zoomCameraFailed];
-            }
+    if ([self getActiveCamera].isRampingVideoZoom) return;
+    CGFloat zoomFactor = pow(self.maxZoomFactor, zoomValue);
+    NSError *error;
+    if ([[self getActiveCamera] lockForConfiguration:&error]) {
+        [[self getActiveCamera] rampToVideoZoomFactor:zoomFactor withRate:1.0f];
+        [[self getActiveCamera] unlockForConfiguration];
+    } else {
+        if (self.delegate && [self.delegate respondsToSelector:@selector(zoomCameraFailed)]) {
+            [_delegate zoomCameraFailed];
         }
     }
 }
@@ -801,6 +805,20 @@ static const NSString *VideoZoomFactorContext;
 - (void)addZoomKVO {
     [[self getActiveCamera] addObserver:self forKeyPath:@"videoZoomFactor" options:0 context:&VideoZoomFactorContext];
     [[self getActiveCamera] addObserver:self forKeyPath:@"rampingVideoZoom" options:0 context:&RampingVideoZoomContext];
+    if (self.delegate && [self.delegate respondsToSelector:@selector(zoomCameraSuccess:)]) {
+        [self.delegate zoomCameraSuccess:0];
+    }
+}
+
+- (void)removeZoomKVO {
+    @try {
+        [[self getActiveCamera] removeObserver:self forKeyPath:@"videoZoomFactor" context:&VideoZoomFactorContext];
+        [[self getActiveCamera] removeObserver:self forKeyPath:@"rampingVideoZoom" context:&VideoZoomFactorContext];
+    } @catch (NSException *exception) {
+        
+    } @finally {
+        
+    }
 }
 
 

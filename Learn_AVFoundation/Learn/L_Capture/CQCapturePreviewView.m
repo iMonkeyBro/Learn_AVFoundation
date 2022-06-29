@@ -17,7 +17,7 @@
 @property (nonatomic, strong) UITapGestureRecognizer *doubleDoubleTapRecognizer;  ///< 双指双击手势
 
 /******人脸识别框*****/
-@property(nonatomic, strong) CALayer *overlayLayer;  ///< 承载人脸识别layer
+@property(nonatomic, strong) CALayer *faceOverlayLayer;  ///< 承载人脸识别layer
 @property(nonatomic, strong) NSMutableDictionary<NSNumber *, CALayer *> *faceLayers;  ///< 人脸识别layer集合，key是faceID
 
 @end
@@ -127,7 +127,7 @@
     [self.singleTapRecognizer requireGestureRecognizerToFail:self.doubleTapRecognizer];
     [self addSubview:self.focusBoxView];
     [self addSubview:self.exposureBoxView];
-    [self.layer addSublayer:self.overlayLayer];
+    [self.layer addSublayer:self.faceOverlayLayer];
 }
 
 #pragma mark - override
@@ -158,6 +158,7 @@
     self.doubleTapRecognizer.enabled = isExposeEnabled;
 }
 
+// 人脸识别
 - (void)setFaceMetadataObjects:(NSArray<AVMetadataFaceObject *> *)faceMetadataObjects {
     _faceMetadataObjects = faceMetadataObjects;
     NSArray *transformedFaces = [self transformedMetadataObjects:faceMetadataObjects];
@@ -174,16 +175,16 @@
             faceLayer.borderWidth = 5.0f;
             faceLayer.borderColor = [UIColor redColor].CGColor;
 //            faceLayer.contents = (id)[UIImage imageNamed:@"faceLayer.jpeg"].CGImage;
-            [self.overlayLayer addSublayer:faceLayer];
+            [self.faceOverlayLayer addSublayer:faceLayer];
             self.faceLayers[faceID] = faceLayer;
         }
         // 图层的大小 = 人脸的大小
         faceLayer.frame = faceObj.bounds;
-        // 设置图层的transform属性 CATransform3DIdentity 先创建一个3D单元矩阵
+        // 设置图层的transform属性 CATransform3DIdentity 这样就可以重新设置之前应用过的变换
         faceLayer.transform = CATransform3DIdentity;
-        // 判断人脸对象是否具有有效的倾斜旋转。围绕Z轴，例人脸向肩膀转动
+        // 判断人脸对象是否具有有效的倾斜角。围绕Z轴，例人脸向肩膀转动
         if (faceObj.hasRollAngle) {
-            // 度数转弧度，拿到矩阵
+            // rollAngle的单位是度，34度数转弧度，拿到矩阵
             CATransform3D t = [self transformForRollAngle:faceObj.rollAngle];
             // 矩阵相乘
             faceLayer.transform = CATransform3DConcat(faceLayer.transform, t);
@@ -262,14 +263,14 @@
     return _faceLayers;
 }
 
-- (CALayer *)overlayLayer {
-    if (!_overlayLayer) {
-        _overlayLayer = [CALayer layer];
-        _overlayLayer.frame = self.bounds;
+- (CALayer *)faceOverlayLayer {
+    if (!_faceOverlayLayer) {
+        _faceOverlayLayer = [CALayer layer];
+        _faceOverlayLayer.frame = self.bounds;
         // 设置投影方式
-        _overlayLayer.sublayerTransform = [self transform3DMakePerspective:1000];
+        _faceOverlayLayer.sublayerTransform = [self transform3DMakePerspective:1000];
     }
-    return _overlayLayer;
+    return _faceOverlayLayer;
 }
 
 #pragma mark - 人脸识别layer相关函数

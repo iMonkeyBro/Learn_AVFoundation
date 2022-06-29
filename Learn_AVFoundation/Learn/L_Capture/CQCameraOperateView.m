@@ -14,7 +14,10 @@
 @property (nonatomic, strong) UIButton *modeButton;  ///< 模式按键
 @property (nonatomic, assign) CQCameraMode cameraMode;  ///< 相机模式
 @property (nonatomic, strong) UIButton *faceButton;  ///< 人脸识别开关按键
-@property (nonatomic, assign) BOOL isStartFace;  ///< 相机模式
+@property (nonatomic, assign) BOOL isStartFace;  ///< 是否开启人脸识别
+
+@property (nonatomic, strong) UIButton *codeButton;  ///< 条码识别开关按键
+@property (nonatomic, assign) BOOL isStartCode;  ///< 是否开启条码识别
 
 @end
 
@@ -52,7 +55,13 @@
 }
 
 - (void)faceBtnAction {
+    self.isStartCode = NO;
     self.isStartFace = !self.isStartFace;
+}
+
+- (void)codeBtnAction {
+    self.isStartFace = NO;
+    self.isStartCode = !self.isStartCode;
 }
 
 #pragma mark - Setter
@@ -72,11 +81,23 @@
     if (_isStartFace != isStartFace) {
         _isStartFace = isStartFace;
         if (isStartFace == YES) {
-            [self.faceButton setTitle:@"人脸识别已开启" forState:UIControlStateNormal];
+            [self.faceButton setTitle:@"Face-ON" forState:UIControlStateNormal];
         } else {
-            [self.faceButton setTitle:@"人脸识别已关闭" forState:UIControlStateNormal];
+            [self.faceButton setTitle:@"Face-OFF" forState:UIControlStateNormal];
         }
-        !self.changeFaceCallbackBlock ?: self.changeFaceCallbackBlock(isStartFace);
+        !self.faceSwitchCallbackBlock ?: self.faceSwitchCallbackBlock(isStartFace);
+    }
+}
+
+- (void)setIsStartCode:(BOOL)isStartCode {
+    if (_isStartCode != isStartCode) {
+        _isStartCode = isStartCode;
+        if (isStartCode == YES) {
+            [self.codeButton setTitle:@"Code-ON" forState:UIControlStateNormal];
+        } else {
+            [self.codeButton setTitle:@"Code-OFF" forState:UIControlStateNormal];
+        }
+        !self.codeSwitchCallbackBlock ?: self.codeSwitchCallbackBlock(isStartCode);
     }
 }
 
@@ -88,6 +109,7 @@
     [self addSubview:self.coverBtn];
     [self addSubview:self.modeButton];
     [self addSubview:self.faceButton];
+    [self addSubview:self.codeButton];
     [self.shutterBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.centerX.equalTo(self);
         make.size.mas_equalTo(CGSizeMake(68, 68));
@@ -103,6 +125,10 @@
     }];
     [self.faceButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.mas_equalTo(-10);
+        make.centerY.mas_equalTo(self);
+    }];
+    [self.codeButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(self.coverBtn.mas_right).offset(2);
         make.centerY.mas_equalTo(self);
     }];
 }
@@ -139,10 +165,20 @@
     if (!_faceButton) {
         _faceButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [_faceButton setTitleColor:UIColor.whiteColor forState:UIControlStateNormal];
-        [_faceButton setTitle:@"人脸识别已关闭" forState:UIControlStateNormal];
+        [_faceButton setTitle:@"Face-OFF" forState:UIControlStateNormal];
         [_faceButton addTarget:self action:@selector(faceBtnAction) forControlEvents:UIControlEventTouchUpInside];
     }
     return _faceButton;
+}
+
+- (UIButton *)codeButton {
+    if (!_codeButton) {
+        _codeButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [_codeButton setTitleColor:UIColor.whiteColor forState:UIControlStateNormal];
+        [_codeButton setTitle:@"Code-OFF" forState:UIControlStateNormal];
+        [_codeButton addTarget:self action:@selector(codeBtnAction) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _codeButton;
 }
 
 @end

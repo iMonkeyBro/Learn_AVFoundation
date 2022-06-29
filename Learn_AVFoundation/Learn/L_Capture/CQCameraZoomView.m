@@ -12,7 +12,6 @@
 @property (nonatomic, strong) UIButton *addBtn;  ///< 加按钮
 @property (nonatomic, strong) UIButton *subtractBtn;  ///< 减按钮
 @property (nonatomic, strong) UISlider *slider;  ///< 减按钮
-@property (nonatomic, assign) BOOL isSliderCallback;  ///< 是否回调slider
 
 @end
 
@@ -21,31 +20,31 @@
 - (instancetype)init {
     self = [super init];
     if (self) {
-        self.isSliderCallback = YES;
         [self configUI];
         
     }
     return self;
 }
 
-- (void)addBtnAction {
-    !self.addBtnCallbackBlock ? : self.addBtnCallbackBlock();
+- (void)addBtnTouchDownAction {
+    !self.addBtnTouchDownCallbackBlock ? : self.addBtnTouchDownCallbackBlock();
 }
 
-- (void)subtractBtnAction {
-    !self.subtractBtnCallbackBlock ? : self.subtractBtnCallbackBlock();
+- (void)addBtnTouchUpAction {
+    !self.addBtnTouchUpCallbackBlock ? : self.addBtnTouchUpCallbackBlock();
+}
+
+- (void)subtractBtnTouchDownAction {
+    !self.subtractBtnTouchDownCallbackBlock ? : self.subtractBtnTouchDownCallbackBlock();
+}
+- (void)subtractBtnTouchUpAction {
+    !self.subtractBtnTouchUpCallbackBlock ? : self.subtractBtnTouchUpCallbackBlock();
 }
 
 - (void)sliderChangeAction:(UISlider *)sender {
-    if (!self.isSliderCallback) return;
     !self.sliderChangeCallbackBlock ? : self.sliderChangeCallbackBlock(sender.value);
 }
 
-- (void)changeSliderValue:(CGFloat)value {
-    self.isSliderCallback = NO;
-    self.slider.value = value;
-    self.isSliderCallback = YES;
-}
 
 - (void)configUI {
     // 调整self.layer.backgroundColor的透明度会使子视图透明度都改变
@@ -78,7 +77,8 @@
         [_addBtn setTitle:@"+" forState:UIControlStateNormal];
         [_addBtn setTitleColor:UIColor.blackColor forState:UIControlStateNormal];
         _addBtn.titleLabel.font = [UIFont systemFontOfSize:25];
-        [_addBtn addTarget:self action:@selector(addBtnAction) forControlEvents:UIControlEventTouchUpInside];
+        [_addBtn addTarget:self action:@selector(addBtnTouchDownAction) forControlEvents:UIControlEventTouchDown];
+        [_addBtn addTarget:self action:@selector(addBtnTouchUpAction) forControlEvents:UIControlEventTouchUpInside|UIControlEventTouchUpOutside];
     }
     return _addBtn;
 }
@@ -89,7 +89,8 @@
         [_subtractBtn setTitle:@"-" forState:UIControlStateNormal];
         [_subtractBtn setTitleColor:UIColor.blackColor forState:UIControlStateNormal];
         _subtractBtn.titleLabel.font = [UIFont systemFontOfSize:25];
-        [_subtractBtn addTarget:self action:@selector(subtractBtnAction) forControlEvents:UIControlEventTouchUpInside];
+        [_subtractBtn addTarget:self action:@selector(subtractBtnTouchDownAction) forControlEvents:UIControlEventTouchDown];
+        [_subtractBtn addTarget:self action:@selector(subtractBtnTouchUpAction) forControlEvents:UIControlEventTouchUpInside|UIControlEventTouchUpOutside];
     }
     return _subtractBtn;
 }
