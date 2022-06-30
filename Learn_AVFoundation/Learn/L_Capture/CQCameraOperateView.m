@@ -19,6 +19,8 @@
 @property (nonatomic, strong) UIButton *codeButton;  ///< 条码识别开关按键
 @property (nonatomic, assign) BOOL isStartCode;  ///< 是否开启条码识别
 
+@property (nonatomic, strong) UIButton *fpsButton;  ///< 帧率按钮
+
 @end
 
 @implementation CQCameraOperateView
@@ -62,6 +64,10 @@
 - (void)codeBtnAction {
     self.isStartFace = NO;
     self.isStartCode = !self.isStartCode;
+}
+
+- (void)fpsBtnAction {
+    !self.fpsBtnCallbackBlock ?: self.fpsBtnCallbackBlock();
 }
 
 #pragma mark - Setter
@@ -110,6 +116,7 @@
     [self addSubview:self.modeButton];
     [self addSubview:self.faceButton];
     [self addSubview:self.codeButton];
+    [self addSubview:self.fpsButton];
     [self.shutterBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.centerX.equalTo(self);
         make.size.mas_equalTo(CGSizeMake(68, 68));
@@ -130,6 +137,10 @@
     [self.codeButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(self.coverBtn.mas_right).offset(2);
         make.centerY.mas_equalTo(self);
+    }];
+    [self.fpsButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(self.coverBtn.mas_right).offset(2);
+        make.top.mas_equalTo(5);
     }];
 }
 
@@ -157,6 +168,7 @@
         [_modeButton setTitleColor:UIColor.whiteColor forState:UIControlStateNormal];
         [_modeButton setTitle:@"photo" forState:UIControlStateNormal];
         [_modeButton addTarget:self action:@selector(modeBtnAction) forControlEvents:UIControlEventTouchUpInside];
+        _modeButton.titleLabel.font = [UIFont systemFontOfSize:14];
     }
     return _modeButton;
 }
@@ -167,6 +179,7 @@
         [_faceButton setTitleColor:UIColor.whiteColor forState:UIControlStateNormal];
         [_faceButton setTitle:@"Face-OFF" forState:UIControlStateNormal];
         [_faceButton addTarget:self action:@selector(faceBtnAction) forControlEvents:UIControlEventTouchUpInside];
+        _faceButton.titleLabel.font = [UIFont systemFontOfSize:14];
     }
     return _faceButton;
 }
@@ -177,8 +190,20 @@
         [_codeButton setTitleColor:UIColor.whiteColor forState:UIControlStateNormal];
         [_codeButton setTitle:@"Code-OFF" forState:UIControlStateNormal];
         [_codeButton addTarget:self action:@selector(codeBtnAction) forControlEvents:UIControlEventTouchUpInside];
+        _codeButton.titleLabel.font = [UIFont systemFontOfSize:14];
     }
     return _codeButton;
+}
+
+- (UIButton *)fpsButton {
+    if (!_fpsButton) {
+        _fpsButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [_fpsButton setTitleColor:UIColor.whiteColor forState:UIControlStateNormal];
+        [_fpsButton setTitle:@"FPS-OFF" forState:UIControlStateNormal];
+        [_fpsButton addTarget:self action:@selector(fpsBtnAction) forControlEvents:UIControlEventTouchUpInside];
+        _fpsButton.titleLabel.font = [UIFont systemFontOfSize:14];
+    }
+    return _fpsButton;
 }
 
 @end

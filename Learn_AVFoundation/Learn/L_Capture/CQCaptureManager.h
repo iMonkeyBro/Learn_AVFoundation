@@ -136,6 +136,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign, readonly) BOOL isSupportTapExpose; ///< 相机是否支持点击曝光
 @property (nonatomic, assign, readonly) BOOL isSupportZoom; ///< 相机是否支持缩放
 @property (nonatomic, assign, readonly) CGFloat maxZoomFactor; ///< 最大缩放系数
+@property (nonatomic, readonly) BOOL isSupportsHighFrameRateCapture;  ///< 是否支持高帧率捕获
 
 #pragma mark - Func 会话
 /**
@@ -297,6 +298,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// 取消缩放
 - (void)cancelZoom;
+
+#pragma mark - Func 高帧率模式
+/// 开启高帧率捕获
+- (BOOL)enableHighFrameRateCapture;
 
 @end
 

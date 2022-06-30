@@ -10,6 +10,7 @@
 #import <UIKit/UIKit.h>
 #import <AssetsLibrary/AssetsLibrary.h>
 #import "NSFileManager+CQ.h"
+#import "AVCaptureDevice+Rate.h"
 
 #define kasync_main_safe(block)\
 if ([NSThread isMainThread]) {\
@@ -84,7 +85,8 @@ static const NSString *VideoZoomFactorContext;
     if ([self.captureSession canSetSessionPreset:sessionPreset])  {
         self.captureSession.sessionPreset = sessionPreset;
     } else {
-        self.captureSession.sessionPreset = AVCaptureSessionPresetMedium;
+        self.captureSession.sessionPreset = AVCaptureSessionPreset3840x2160;
+//        self.captureSession.sessionPreset = AVCaptureSessionPresetMedium;
     }
     [self.captureSession commitConfiguration];
     self.isConfigSessionPreset = YES;
@@ -759,6 +761,13 @@ static const NSString *VideoZoomFactorContext;
 - (BOOL)canSwitchCamera {
     return self.cameraCount > 1;
 }
+
+#pragma mark - 高帧率录制
+- (BOOL)enableHighFrameRateCapture {
+    NSError *error;
+    return [[self getActiveCamera] enableMaxFrameRateCapture:&error];
+}
+
 
 #pragma mark - 镜头缩放
 - (void)configZoomValue:(CGFloat)zoomValue {

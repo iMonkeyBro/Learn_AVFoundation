@@ -30,6 +30,8 @@ typedef NS_ENUM(NSUInteger, CQCameraMode) {
 @property (nonatomic, copy) void(^codeSwitchCallbackBlock)(BOOL isStartCode);  ///< 条码识别开关回调
 @property (nonatomic, assign, readonly) BOOL isStartCode;  ///< 是否开启条码识别
 
+@property (nonatomic, copy) void(^fpsBtnCallbackBlock)(void);  ///< fps按钮回调
+
 @end
 
 NS_ASSUME_NONNULL_END

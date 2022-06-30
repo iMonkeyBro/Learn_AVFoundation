@@ -68,7 +68,7 @@ class L_Capture: BaseViewController {
     }
     
     private func configCaptureSession() {
-        captureManager.configSessionPreset(AVCaptureSession.Preset.hd1920x1080)
+        captureManager.configSessionPreset(AVCaptureSession.Preset.hd4K3840x2160)
         do {
             try captureManager.configVideoInput()
             captureManager.configStillImageOutput()
@@ -165,6 +165,11 @@ class L_Capture: BaseViewController {
             }
         }
         
+        operateView.fpsBtnCallbackBlock = { [weak self] in
+            guard let `self` = self else { return }
+            self.captureManager.enableHighFrameRateCapture()
+        }
+        
         zoomView.sliderChangeCallbackBlock = { [weak self] sliderValue in
             guard let `self` = self else { return }
             self.captureManager.configZoomValue(sliderValue)
@@ -189,6 +194,8 @@ class L_Capture: BaseViewController {
             guard let `self` = self else { return }
             self.captureManager.cancelZoom()
         }
+        
+        
     }
     
     /// 开始录制，处理时间显示
