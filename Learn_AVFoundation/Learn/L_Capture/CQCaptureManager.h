@@ -127,7 +127,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) AVCaptureSessionPreset videoSessionPreset;  ///< 捕获视频的分辨率
 
 #pragma mark - Property Device Support
-@property (nonatomic, assign, readonly) NSUInteger cameraCount;  ///< 摄像头数量
+@property (nonatomic, assign, readonly) NSUInteger backCameraCount;  ///< 后置摄像头数量
+@property (nonatomic, assign, readonly) NSUInteger frontCameraCount;  ///< 前置摄像头数量
 @property (nonatomic, assign, readonly) BOOL isHasTorch; ///< 相机是否有手电筒
 @property (nonatomic, assign, readonly) BOOL isHasFlash; ///< 相机是否有闪光灯
 @property (nonatomic, assign) AVCaptureTorchMode torchMode; ///< 手电筒模式,0关 1开，立即生效

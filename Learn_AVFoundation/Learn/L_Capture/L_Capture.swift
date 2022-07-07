@@ -68,7 +68,7 @@ class L_Capture: BaseViewController {
     }
     
     private func configCaptureSession() {
-        captureManager.configSessionPreset(AVCaptureSession.Preset.hd4K3840x2160)
+        captureManager.configSessionPreset(AVCaptureSession.Preset.iFrame1280x720)
         do {
             try captureManager.configVideoInput()
             captureManager.configStillImageOutput()

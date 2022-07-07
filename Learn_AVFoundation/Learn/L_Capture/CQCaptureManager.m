@@ -68,25 +68,42 @@ static const NSString *VideoZoomFactorContext;
 /// 销毁会话
 - (void)destroyCaptureSession {
     if (self.captureSession) {
-        if (self.audioDeviceInput) [self.captureSession removeInput:self.audioDeviceInput];
-        if (self.videoDeviceInput) [self.captureSession removeInput:self.videoDeviceInput];
-        if (self.stillImageOutput) [self.captureSession removeOutput:self.stillImageOutput];
-        if (self.movieFileOutput) [self.captureSession removeOutput:self.movieFileOutput];
-        if (self.videoDataOutput) [self.captureSession removeOutput:self.videoDataOutput];
-        if (self.audioDataOutput) [self.captureSession removeOutput:self.audioDataOutput];
+        if (self.audioDeviceInput && [self.captureSession.inputs containsObject:self.audioDeviceInput]) {
+            [self.captureSession removeInput:self.audioDeviceInput];
+            self.audioDeviceInput = nil;
+        }
+        if (self.videoDeviceInput && [self.captureSession.inputs containsObject:self.videoDeviceInput]) {
+            [self.captureSession removeInput:self.videoDeviceInput];
+            self.videoDeviceInput = nil;
+        }
+        if (self.stillImageOutput && [self.captureSession.outputs containsObject:self.stillImageOutput]) {
+            [self.captureSession removeOutput:self.stillImageOutput];
+            self.stillImageOutput = nil;
+        }
+        if (self.movieFileOutput && [self.captureSession.outputs containsObject:self.movieFileOutput]) {
+            [self.captureSession removeOutput:self.movieFileOutput];
+            self.movieFileOutput = nil;
+        }
+        if (self.videoDataOutput && [self.captureSession.outputs containsObject:self.videoDataOutput]) {
+            [self.captureSession removeOutput:self.videoDataOutput];
+            self.videoDataOutput = nil;
+        }
+        if (self.audioDataOutput && [self.captureSession.outputs containsObject:self.videoDataOutput]) {
+            [self.captureSession removeOutput:self.audioDataOutput];
+            self.audioDataOutput = nil;
+        }
     }
     self.captureSession = nil;
 }
 
 #pragma mark - Public Func 参数配置
-/// 配置捕捉会话的分辨率
+/// 配置捕捉会话的分辨率,如果无法配置，则配置AVCaptureSessionPresetHigh
 - (void)configSessionPreset:(AVCaptureSessionPreset)sessionPreset {
     [self.captureSession beginConfiguration];
     if ([self.captureSession canSetSessionPreset:sessionPreset])  {
         self.captureSession.sessionPreset = sessionPreset;
     } else {
-        self.captureSession.sessionPreset = AVCaptureSessionPreset3840x2160;
-//        self.captureSession.sessionPreset = AVCaptureSessionPresetMedium;
+        self.captureSession.sessionPreset = AVCaptureSessionPresetHigh;
     }
     [self.captureSession commitConfiguration];
     self.isConfigSessionPreset = YES;
@@ -118,6 +135,7 @@ static const NSString *VideoZoomFactorContext;
     // 添加视频捕捉设备
     // 拿到默认视频捕捉设备 iOS默认后置摄像头
     AVCaptureDevice *videoDevice = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
+    videoDevice = [self getCameraWithPosition:AVCaptureDevicePositionBack];
     // 将捕捉设备转化为AVCaptureDeviceInput
     // 注意：会话不能直接使用AVCaptureDevice，必须将AVCaptureDevice封装成AVCaptureDeviceInput对象
     AVCaptureDeviceInput *videoInput = [AVCaptureDeviceInput deviceInputWithDevice:videoDevice error:error];
@@ -138,6 +156,7 @@ static const NSString *VideoZoomFactorContext;
 /// 移除视频输入设备
 - (void)removeVideoDeviceInput {
     if (self.videoDeviceInput) [self.captureSession removeInput:self.videoDeviceInput];
+    self.videoDeviceInput = nil;
 }
 
 /// 配置静态图片输出
@@ -603,8 +622,12 @@ static const NSString *VideoZoomFactorContext;
  获取当前活跃的设备，简单二次封装
  */
 
-- (NSUInteger)cameraCount {
-    return [[AVCaptureDevice devicesWithMediaType:AVMediaTypeVideo] count];
+- (NSUInteger)backCameraCount {
+    return [AVCaptureDeviceDiscoverySession discoverySessionWithDeviceTypes:@[AVCaptureDeviceTypeBuiltInWideAngleCamera, AVCaptureDeviceTypeBuiltInTelephotoCamera, AVCaptureDeviceTypeBuiltInUltraWideCamera] mediaType:AVMediaTypeVideo position:AVCaptureDevicePositionBack].devices.count;
+}
+
+- (NSUInteger)frontCameraCount {
+    return [AVCaptureDeviceDiscoverySession discoverySessionWithDeviceTypes:@[AVCaptureDeviceTypeBuiltInWideAngleCamera, AVCaptureDeviceTypeBuiltInTelephotoCamera, AVCaptureDeviceTypeBuiltInUltraWideCamera] mediaType:AVMediaTypeVideo position:AVCaptureDevicePositionFront].devices.count;
 }
 
 - (BOOL)isHasFlash {
@@ -637,7 +660,10 @@ static const NSString *VideoZoomFactorContext;
 
 - (CGFloat)maxZoomFactor {
     // 4.0随意写的，默认不能超过4，也可以不用设置
-    return MIN([self getActiveCamera].activeFormat.videoMaxZoomFactor, 4.0f);
+//    return MIN([self getActiveCamera].activeFormat.videoMaxZoomFactor, 20.0f);
+    // 两个值一样，和分辨率有关
+    CGFloat videoMaxZoomFactor = [self getActiveCamera].activeFormat.videoMaxZoomFactor;
+    CGFloat videoMaxZoomFactor2 = [self getActiveCamera].maxAvailableVideoZoomFactor;
     return [self getActiveCamera].activeFormat.videoMaxZoomFactor;
 }
 
@@ -677,6 +703,43 @@ static const NSString *VideoZoomFactorContext;
 #pragma mark - Public Func 镜头切换
 /// 根据position拿到摄像头
 - (AVCaptureDevice *)getCameraWithPosition:(AVCaptureDevicePosition)position {
+    /**
+     AVCaptureDeviceTypeBuiltInWideAngleCamera 广角(默认设备，28mm左右焦段)
+
+     AVCaptureDeviceTypeBuiltInTelephotoCamera 长焦(默认设备的2x或3x,只能使用AVCaptureDeviceDiscoverySession获取)
+
+     AVCaptureDeviceTypeBuiltInUltraWideCamera 超广角(默认设备的0.5x，只能使用AVCaptureDeviceDiscoverySession获取)
+
+     AVCaptureDeviceTypeBuiltInDualCamera (一个广角一个长焦(iPhone7P,iPhoneX)，可以自动切换摄像头,只能使用AVCaptureDeviceDiscoverySession获取)
+
+     AVCaptureDeviceTypeBuiltInDualWideCamera (一个超广一个广角(iPhone12 iPhone13)，可以自动切换摄像头,只能使用AVCaptureDeviceDiscoverySession获取)
+
+     AVCaptureDeviceTypeBuiltInTripleCamera (超广，广角，长焦三摄像头，iPhone11ProMax iPhone12ProMax iPhone13ProMax，可以自动切换摄像头,只能使用AVCaptureDeviceDiscoverySession获取)
+
+     AVCaptureDeviceTypeBuiltInTrueDepthCamera (红外和摄像头， iPhone12ProMax iPhone13ProMax )
+     */
+    NSArray *deviceTypes;
+    if (position == AVCaptureDevicePositionBack) {
+        deviceTypes = @[AVCaptureDeviceTypeBuiltInDualCamera,
+                        AVCaptureDeviceTypeBuiltInDualWideCamera,
+                        AVCaptureDeviceTypeBuiltInTripleCamera, ];
+    } else {
+        deviceTypes = @[AVCaptureDeviceTypeBuiltInWideAngleCamera];
+    }
+    AVCaptureDeviceDiscoverySession *deviceSession = [AVCaptureDeviceDiscoverySession discoverySessionWithDeviceTypes:deviceTypes mediaType:AVMediaTypeVideo position:position];
+    NSArray<AVCaptureDevice *> *devices = deviceSession.devices;
+    if (devices.count) return devices.firstObject;
+    if (position == AVCaptureDevicePositionBack) {
+        // 非多摄手机
+        deviceTypes = @[AVCaptureDeviceTypeBuiltInWideAngleCamera];
+        AVCaptureDeviceDiscoverySession *deviceSession = [AVCaptureDeviceDiscoverySession discoverySessionWithDeviceTypes:deviceTypes mediaType:AVMediaTypeVideo position:position];
+        NSArray<AVCaptureDevice *> *devices = deviceSession.devices;
+        if (devices.count) return devices.firstObject;
+    }
+    return nil;
+    
+    /*
+    // 过时了，多摄手机只能拿到主摄，无法拿到副摄像头
     NSArray<AVCaptureDevice *> *devices = [AVCaptureDevice devicesWithMediaType:AVMediaTypeVideo];
     for (AVCaptureDevice *device in devices) {
         if (device.position == position) {
@@ -684,6 +747,7 @@ static const NSString *VideoZoomFactorContext;
         }
     }
     return nil;
+     */
 }
 
 /// 获取当前活跃的摄像头
@@ -692,16 +756,16 @@ static const NSString *VideoZoomFactorContext;
 }
 
 - (void)setVideoDeviceInput:(AVCaptureDeviceInput *)videoDeviceInput {
-    [self removeZoomKVO];
+//    [self removeZoomKVO];
     _videoDeviceInput = videoDeviceInput;
-    [self addZoomKVO];
+//    if (videoDeviceInput) [self addZoomKVO];
 }
 
-/// 获取未激活的摄像头
-- (AVCaptureDevice *)getInactiveCamera {
+/// 获取反方向的摄像头
+- (AVCaptureDevice *)getReverseCamera {
     // 通过查找当前激活摄像头的反向摄像头获得，如果设备只有1个摄像头，则返回nil
     AVCaptureDevice *device = nil;
-    if (self.cameraCount > 1) {
+    if (self.canSwitchCamera) {
         if ([self getActiveCamera].position == AVCaptureDevicePositionBack) {
             device = [self getCameraWithPosition:AVCaptureDevicePositionFront];
         } else {
@@ -714,9 +778,8 @@ static const NSString *VideoZoomFactorContext;
 // 切换摄像头
 - (BOOL)switchCamera {
     if (![self canSwitchCamera]) return NO;
-    
     // 获取当前设备的反向设备
-    AVCaptureDevice *inactiveCamera = [self getInactiveCamera];
+    AVCaptureDevice *inactiveCamera = [self getReverseCamera];
     // 将输入设备封装成AVCaptureDeviceInput
     NSError *error;
     AVCaptureDeviceInput *newVideoInput = [AVCaptureDeviceInput deviceInputWithDevice:inactiveCamera error:&error];
@@ -759,7 +822,7 @@ static const NSString *VideoZoomFactorContext;
 
 // 是否能切换摄像头
 - (BOOL)canSwitchCamera {
-    return self.cameraCount > 1;
+    return self.backCameraCount>0 && self.frontCameraCount>0;
 }
 
 #pragma mark - 高帧率录制
@@ -774,6 +837,7 @@ static const NSString *VideoZoomFactorContext;
     if ([self getActiveCamera].isRampingVideoZoom) return;
     NSError *error;
     if ([[self getActiveCamera] lockForConfiguration:&error]) {
+        [self addZoomKVO];
         CGFloat zoomFactor = pow(self.maxZoomFactor, zoomValue);
         [self getActiveCamera].videoZoomFactor = zoomFactor;
         [[self getActiveCamera] unlockForConfiguration];
@@ -790,6 +854,7 @@ static const NSString *VideoZoomFactorContext;
     CGFloat zoomFactor = pow(self.maxZoomFactor, zoomValue);
     NSError *error;
     if ([[self getActiveCamera] lockForConfiguration:&error]) {
+        [self addZoomKVO];
         [[self getActiveCamera] rampToVideoZoomFactor:zoomFactor withRate:1.0f];
         [[self getActiveCamera] unlockForConfiguration];
     } else {
@@ -812,17 +877,25 @@ static const NSString *VideoZoomFactorContext;
 }
 
 - (void)addZoomKVO {
-    [[self getActiveCamera] addObserver:self forKeyPath:@"videoZoomFactor" options:0 context:&VideoZoomFactorContext];
-    [[self getActiveCamera] addObserver:self forKeyPath:@"rampingVideoZoom" options:0 context:&RampingVideoZoomContext];
-    if (self.delegate && [self.delegate respondsToSelector:@selector(zoomCameraSuccess:)]) {
-        [self.delegate zoomCameraSuccess:0];
+    @try {
+        [[self videoDeviceInput].device addObserver:self forKeyPath:@"videoZoomFactor" options:0 context:&VideoZoomFactorContext];
+        [[self videoDeviceInput].device addObserver:self forKeyPath:@"rampingVideoZoom" options:0 context:&RampingVideoZoomContext];
+        if (self.delegate && [self.delegate respondsToSelector:@selector(zoomCameraSuccess:)]) {
+            [self.delegate zoomCameraSuccess:0];
+        }
+    } @catch (NSException *exception) {
+        
+    } @finally {
+        
     }
+    
 }
 
+// TODO: - 添加监听问题
 - (void)removeZoomKVO {
     @try {
-        [[self getActiveCamera] removeObserver:self forKeyPath:@"videoZoomFactor" context:&VideoZoomFactorContext];
-        [[self getActiveCamera] removeObserver:self forKeyPath:@"rampingVideoZoom" context:&VideoZoomFactorContext];
+        [[self videoDeviceInput].device removeObserver:self forKeyPath:@"videoZoomFactor" context:&VideoZoomFactorContext];
+        [[self videoDeviceInput].device removeObserver:self forKeyPath:@"rampingVideoZoom" context:&VideoZoomFactorContext];
     } @catch (NSException *exception) {
         
     } @finally {
