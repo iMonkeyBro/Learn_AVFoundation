@@ -129,7 +129,7 @@ static const NSString *VideoZoomFactorContext;
     }
 }
 
-#pragma mark - Func 视频输入输出配置
+#pragma mark - Func 视频输入配置
 /// 配置视频输入
 - (BOOL)configVideoInput:(NSError * _Nullable *)error {
     // 添加视频捕捉设备
@@ -159,6 +159,7 @@ static const NSString *VideoZoomFactorContext;
     self.videoDeviceInput = nil;
 }
 
+#pragma mark - Func 静态图片输出配置
 /// 配置静态图片输出
 - (void)configStillImageOutput {
     // AVCaptureStillImageOutput 从摄像头捕捉静态图片
@@ -178,6 +179,7 @@ static const NSString *VideoZoomFactorContext;
     if (self.stillImageOutput) [self.captureSession removeOutput:self.stillImageOutput];
 }
 
+#pragma mark - Func 电影文件输出配置
 /// 配置电影文件输出
 - (void)configMovieFileOutput {
     // AVCaptureMovieFileOutput，将QuickTime视频录制到文件系统
@@ -194,6 +196,7 @@ static const NSString *VideoZoomFactorContext;
     if (self.movieFileOutput) [self.captureSession removeOutput:self.movieFileOutput];
 }
 
+#pragma mark - Func 视频数据输出配置
 /// 配置视频数据输出
 - (void)configVideoDataOutput {
     // 视频Buffer输出
@@ -215,7 +218,7 @@ static const NSString *VideoZoomFactorContext;
     if (self.videoDataOutput) [self.captureSession removeOutput:self.videoDataOutput];
 }
 
-#pragma mark - Func 音频输入输出配置
+#pragma mark - Func 音频输入配置
 /// 配置音频输入
 - (BOOL)configAudioInput:(NSError * _Nullable *)error {
     // 添加音频捕捉设备 ，如果只是拍摄静态图片，可以不用设置
@@ -237,6 +240,7 @@ static const NSString *VideoZoomFactorContext;
     if (self.audioDeviceInput) [self.captureSession removeInput:self.audioDeviceInput];
 }
 
+#pragma mark - Func 音频数据输出配置
 /// 配置音频数据输出
 - (BOOL)configAudioDataOutput {
     self.audioDataOutput = [[AVCaptureAudioDataOutput alloc] init];
@@ -400,8 +404,8 @@ static const NSString *VideoZoomFactorContext;
     }];
 }
 
-#pragma mark - 视频文件捕捉
-#pragma mark Public Func 视频文件捕捉
+#pragma mark - 电影文件捕捉
+#pragma mark Public Func 电影文件捕捉
 // 开始录制电影文件
 - (void)startRecordingMovieFile {
     if (!self.isConfigSessionPreset) [self configSessionPreset:AVCaptureSessionPresetMedium];
@@ -577,7 +581,7 @@ static const NSString *VideoZoomFactorContext;
         BOOL configResult = [self configVideoInput:&configError];
         if (!configResult) return;
     }
-    if (!self.movieFileOutput) [self configMovieFileOutput];
+    if (!self.videoDataOutput) [self configVideoDataOutput];
     [self startSessionSync];
 }
 
@@ -602,7 +606,10 @@ static const NSString *VideoZoomFactorContext;
 }
 
 #pragma mark AVCaptureVideo/AudioDataOutputSampleBufferDelegate
--(void)captureOutput:(AVCaptureOutput *)captureOutput didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer fromConnection:(AVCaptureConnection *)connection{
+/**
+ 每当有一个新的视频帧写入时该方法就会被调用，数据会基于视频数据输出的videoSettings属性进行解码或重新编码
+ */
+-(void)captureOutput:(AVCaptureOutput *)captureOutput didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer fromConnection:(AVCaptureConnection *)connection {
     // 注意，视频/音频通过AV采集，都会走这里，需要对音频/视频做区分
     // 直接判断output 是videoDataOutput/Audio
     if ([captureOutput isKindOfClass:AVCaptureVideoDataOutput.class]) {
@@ -615,6 +622,13 @@ static const NSString *VideoZoomFactorContext;
             [_delegate captureAudioSampleBuffer:sampleBuffer];
         }
     }
+}
+
+/**
+ 每当一个迟到的视频帧被丢弃时调用该方法，通常是因为在didOutputSampleBuffer调用中消耗了太多的处理时间就会调用该方法，应尽量提高处理效率，否则将收不到缓存数据
+ */
+- (void)captureOutput:(AVCaptureOutput *)output didDropSampleBuffer:(CMSampleBufferRef)sampleBuffer fromConnection:(AVCaptureConnection *)connection {
+    
 }
 
 #pragma mark - Getter

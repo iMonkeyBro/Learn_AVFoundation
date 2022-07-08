@@ -61,6 +61,9 @@
 		90AFD526286598C0008198A4 /* CQAuthorizationTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 90AFD525286598C0008198A4 /* CQAuthorizationTool.m */; };
 		90B86B9E281A950A009E4220 /* CQPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90B86B9D281A9509009E4220 /* CQPlayer.swift */; };
 		90D547012850A8810053ADEF /* L_AVKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90D547002850A8810053ADEF /* L_AVKit.swift */; };
+		90E9F1192878222100E9FC41 /* L_CubeCamera.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90E9F1182878222000E9FC41 /* L_CubeCamera.swift */; };
+		90E9F11C2878239900E9FC41 /* CQCubeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 90E9F11B2878239900E9FC41 /* CQCubeView.m */; };
+		90E9F11F2878342100E9FC41 /* CQShaderProgram.m in Sources */ = {isa = PBXBuildFile; fileRef = 90E9F11E2878342100E9FC41 /* CQShaderProgram.m */; };
 		9D49D91C281AE7BD009C4BE2 /* hubblecast2.m4v in Resources */ = {isa = PBXBuildFile; fileRef = 9D49D91B281AE7BD009C4BE2 /* hubblecast2.m4v */; };
 		9DF46B6027D12938007369CF /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DF46B5F27D12938007369CF /* BaseViewController.swift */; };
 		9DF46B6227D1294E007369CF /* BaseNavController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DF46B6127D1294E007369CF /* BaseNavController.swift */; };
@@ -172,6 +175,11 @@
 		90AFD525286598C0008198A4 /* CQAuthorizationTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CQAuthorizationTool.m; sourceTree = "<group>"; };
 		90B86B9D281A9509009E4220 /* CQPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CQPlayer.swift; sourceTree = "<group>"; };
 		90D547002850A8810053ADEF /* L_AVKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = L_AVKit.swift; sourceTree = "<group>"; };
+		90E9F1182878222000E9FC41 /* L_CubeCamera.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = L_CubeCamera.swift; sourceTree = "<group>"; };
+		90E9F11A2878239900E9FC41 /* CQCubeView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CQCubeView.h; sourceTree = "<group>"; };
+		90E9F11B2878239900E9FC41 /* CQCubeView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CQCubeView.m; sourceTree = "<group>"; };
+		90E9F11D2878342100E9FC41 /* CQShaderProgram.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CQShaderProgram.h; sourceTree = "<group>"; };
+		90E9F11E2878342100E9FC41 /* CQShaderProgram.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CQShaderProgram.m; sourceTree = "<group>"; };
 		9D49D91B281AE7BD009C4BE2 /* hubblecast2.m4v */ = {isa = PBXFileReference; lastKnownFileType = file; path = hubblecast2.m4v; sourceTree = "<group>"; };
 		9DF46B5F27D12938007369CF /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		9DF46B6127D1294E007369CF /* BaseNavController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseNavController.swift; sourceTree = "<group>"; };
@@ -387,6 +395,18 @@
 			path = L_Capture;
 			sourceTree = "<group>";
 		};
+		90E9F117287821EE00E9FC41 /* L_CubeCamera */ = {
+			isa = PBXGroup;
+			children = (
+				90E9F1182878222000E9FC41 /* L_CubeCamera.swift */,
+				90E9F11A2878239900E9FC41 /* CQCubeView.h */,
+				90E9F11B2878239900E9FC41 /* CQCubeView.m */,
+				90E9F11D2878342100E9FC41 /* CQShaderProgram.h */,
+				90E9F11E2878342100E9FC41 /* CQShaderProgram.m */,
+			);
+			path = L_CubeCamera;
+			sourceTree = "<group>";
+		};
 		9DF46B5C27D1290A007369CF /* UI */ = {
 			isa = PBXGroup;
 			children = (
@@ -448,6 +468,7 @@
 				90B86B9D281A9509009E4220 /* CQPlayer.swift */,
 				90D547002850A8810053ADEF /* L_AVKit.swift */,
 				90AFD50B28656280008198A4 /* L_Capture */,
+				90E9F117287821EE00E9FC41 /* L_CubeCamera */,
 				905C3E602857165E005C83AF /* L_AVAssetReaderWriter.swift */,
 				905C3E622857398E005C83AF /* L_Waveform */,
 			);
@@ -680,6 +701,7 @@
 				9DF46B6227D1294E007369CF /* BaseNavController.swift in Sources */,
 				901525D4286AF5AE008EF88D /* CQCameraZoomView.m in Sources */,
 				90AFD520286593EB008198A4 /* UIButton+CQExtension.m in Sources */,
+				90E9F11F2878342100E9FC41 /* CQShaderProgram.m in Sources */,
 				90D547012850A8810053ADEF /* L_AVKit.swift in Sources */,
 				902923E827D359D9004E7D13 /* JXDatabaseConnector.swift in Sources */,
 				9DF46B7527D12EEB007369CF /* UITableViewExtension.swift in Sources */,
@@ -694,6 +716,7 @@
 				9DF46B6627D12D9C007369CF /* Common.swift in Sources */,
 				902923EB27D359D9004E7D13 /* JXFileBrowserController.swift in Sources */,
 				90760C6A27EB4066001050C0 /* AVMetadataItem+CQ.m in Sources */,
+				90E9F11C2878239900E9FC41 /* CQCubeView.m in Sources */,
 				90AFD51C2865636A008198A4 /* CQCameraStatusView.m in Sources */,
 				9DF46B7227D12EEB007369CF /* UICollectionViewExtension.swift in Sources */,
 				9DF46B6027D12938007369CF /* BaseViewController.swift in Sources */,
@@ -701,6 +724,7 @@
 				90AFD52328659802008198A4 /* CQScreenTool.m in Sources */,
 				902923EA27D359D9004E7D13 /* JXTableListViewController.swift in Sources */,
 				90AFD510286562A3008198A4 /* CQCapturePreviewView.m in Sources */,
+				90E9F1192878222100E9FC41 /* L_CubeCamera.swift in Sources */,
 				902923EE27D359D9004E7D13 /* JXTableContentViewController.swift in Sources */,
 				9DF46B7027D12EEB007369CF /* CQBaseExtension.swift in Sources */,
 				902923DE27D3589F004E7D13 /* L_VoiceMemo.swift in Sources */,
