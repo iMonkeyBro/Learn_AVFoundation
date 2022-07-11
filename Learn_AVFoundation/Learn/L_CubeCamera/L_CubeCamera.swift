@@ -9,15 +9,16 @@ import UIKit
 
 class L_CubeCamera: BaseViewController {
 
-    private lazy var cubeView: CQCubeView = CQCubeView()
+    private lazy var cubeViewController: CQCubeViewController = CQCubeViewController()
     private let captureManager: CQCaptureManager = CQCaptureManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        cubeView.view.frame = view.bounds
-        view.addSubview(cubeView.view)
-        addChild(cubeView)
+        cubeViewController.view.frame = view.bounds
+        view.addSubview(cubeViewController.view)
+        addChild(cubeViewController)
         captureManager.delegate = self
+        captureManager.configSessionPreset(.vga640x480)
         captureManager.startCaptureMuteVideoData()
     }
     
@@ -31,6 +32,9 @@ extension L_CubeCamera: CQCaptureManagerDelegate {
 //        if pixelBuffer != nil {
 //            cubeView.pixelBuffer = pixelBuffer!
 //        }
-        cubeView.sampleBuffer = sampleBuffer
+        Asyncs.asyncMain { [weak self] in
+            self?.cubeViewController.sampleBuffer = sampleBuffer
+        }
+        
     }
 }

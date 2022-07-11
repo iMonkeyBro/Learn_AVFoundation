@@ -14,7 +14,7 @@
 #import "CQCameraShutterButton.h"
 #import "CQCameraStatusView.h"
 #import "CQCameraZoomView.h"
-#import "CQCubeView.h"
+#import "CQCubeViewController.h"
 #import <Masonry/Masonry.h>
 #import "CQScreenTool.h"
 #import "CQAuthorizationTool.h"

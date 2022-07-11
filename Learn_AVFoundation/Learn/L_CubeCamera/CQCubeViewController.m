@@ -5,7 +5,7 @@
 //  Created by 刘超群 on 2022/7/8.
 //
 
-#import "CQCubeView.h"
+#import "CQCubeViewController.h"
 #import <GLKit/GLKit.h>
 #import <OpenGLES/ES2/gl.h>
 #import <OpenGLES/ES2/glext.h>
@@ -21,7 +21,7 @@ enum {
 };
 GLint uniforms[NUM_UNIFORMS];
 
-@interface CQCubeView ()
+@interface CQCubeViewController ()
 @property (nonatomic, strong) EAGLContext *context;
 @property (nonatomic) CVOpenGLESTextureCacheRef textureCache;
 @property (nonatomic) CVOpenGLESTextureRef cameraTexture;
@@ -30,7 +30,7 @@ GLint uniforms[NUM_UNIFORMS];
 
 @end
 
-@implementation CQCubeView
+@implementation CQCubeViewController
 {
     GLKMatrix4 _mvpMatrix;
     float _rotation;
@@ -52,7 +52,7 @@ GLint uniforms[NUM_UNIFORMS];
         view.drawableDepthFormat = GLKViewDrawableDepthFormat24;
         CVReturn err = CVOpenGLESTextureCacheCreate(kCFAllocatorDefault,
                                                     NULL,
-                                                    _context,
+                                                    self.context,
                                                     NULL,
                                                     &_textureCache);
         if (err != kCVReturnSuccess) {
@@ -65,10 +65,10 @@ GLint uniforms[NUM_UNIFORMS];
 }
 
 - (void)setPixelBuffer:(CVPixelBufferRef)pixelBuffer {
-    if(_pixelBuffer) {
-        CVPixelBufferRelease(_pixelBuffer);
-    }
-    _pixelBuffer = CVPixelBufferRetain(pixelBuffer);
+//    if(_pixelBuffer) {
+//        CVPixelBufferRelease(_pixelBuffer);
+//    }
+//    _pixelBuffer = CVPixelBufferRetain(pixelBuffer);
 //    [self displayPixelBuffer];
 }
 
@@ -78,7 +78,7 @@ GLint uniforms[NUM_UNIFORMS];
 //    }
 //    _sampleBuffer = CFRetain(sampleBuffer);
     _sampleBuffer = sampleBuffer;
-//    [self displaySampleBuffer];
+    [self displaySampleBuffer];
 }
 
 - (void)displaySampleBuffer {
@@ -87,7 +87,7 @@ GLint uniforms[NUM_UNIFORMS];
 
     CMFormatDescriptionRef formatDescription = CMSampleBufferGetFormatDescription(_sampleBuffer);
     CMVideoDimensions dimensions = CMVideoFormatDescriptionGetDimensions(formatDescription);
-
+    // 注意： 捕捉是YUV这里也要是YUV，同理捕捉是RGB，这里也要是RGB，否则创建_cameraTexture报错
     err = CVOpenGLESTextureCacheCreateTextureFromImage(kCFAllocatorDefault,
                                                        _textureCache,
                                                        pixelBuffer,
@@ -100,11 +100,9 @@ GLint uniforms[NUM_UNIFORMS];
                                                        GL_UNSIGNED_BYTE,
                                                        0,
                                                        &_cameraTexture);
-
     if (!err) {
         GLenum target = CVOpenGLESTextureGetTarget(_cameraTexture);
         GLuint name = CVOpenGLESTextureGetName(_cameraTexture);
-        // TODO: s
         [self textureCreatedWithTarget:target name:name];
     } else {
         NSLog(@"Error at CVOpenGLESTextureCacheCreateTextureFromImage %d", err);

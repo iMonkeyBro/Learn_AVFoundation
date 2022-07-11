@@ -10,9 +10,9 @@
 #import <GLKit/GLKit.h>
 NS_ASSUME_NONNULL_BEGIN
 
-@interface CQCubeView : GLKViewController
+@interface CQCubeViewController : GLKViewController
 
-@property (nonatomic, assign) CVPixelBufferRef pixelBuffer;  ///< 需要渲染的buffer
+//@property (nonatomic, assign) CVPixelBufferRef pixelBuffer;  ///< 需要渲染的buffer
 
 @property (nonatomic, assign) CMSampleBufferRef sampleBuffer; 
 

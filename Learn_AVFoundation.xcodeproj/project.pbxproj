@@ -62,8 +62,10 @@
 		90B86B9E281A950A009E4220 /* CQPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90B86B9D281A9509009E4220 /* CQPlayer.swift */; };
 		90D547012850A8810053ADEF /* L_AVKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90D547002850A8810053ADEF /* L_AVKit.swift */; };
 		90E9F1192878222100E9FC41 /* L_CubeCamera.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90E9F1182878222000E9FC41 /* L_CubeCamera.swift */; };
-		90E9F11C2878239900E9FC41 /* CQCubeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 90E9F11B2878239900E9FC41 /* CQCubeView.m */; };
+		90E9F11C2878239900E9FC41 /* CQCubeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 90E9F11B2878239900E9FC41 /* CQCubeViewController.m */; };
 		90E9F11F2878342100E9FC41 /* CQShaderProgram.m in Sources */ = {isa = PBXBuildFile; fileRef = 90E9F11E2878342100E9FC41 /* CQShaderProgram.m */; };
+		90E9F122287C0A9100E9FC41 /* Shader.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 90E9F120287C0A9100E9FC41 /* Shader.fsh */; };
+		90E9F123287C0A9100E9FC41 /* Shader.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 90E9F121287C0A9100E9FC41 /* Shader.vsh */; };
 		9D49D91C281AE7BD009C4BE2 /* hubblecast2.m4v in Resources */ = {isa = PBXBuildFile; fileRef = 9D49D91B281AE7BD009C4BE2 /* hubblecast2.m4v */; };
 		9DF46B6027D12938007369CF /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DF46B5F27D12938007369CF /* BaseViewController.swift */; };
 		9DF46B6227D1294E007369CF /* BaseNavController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DF46B6127D1294E007369CF /* BaseNavController.swift */; };
@@ -176,10 +178,12 @@
 		90B86B9D281A9509009E4220 /* CQPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CQPlayer.swift; sourceTree = "<group>"; };
 		90D547002850A8810053ADEF /* L_AVKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = L_AVKit.swift; sourceTree = "<group>"; };
 		90E9F1182878222000E9FC41 /* L_CubeCamera.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = L_CubeCamera.swift; sourceTree = "<group>"; };
-		90E9F11A2878239900E9FC41 /* CQCubeView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CQCubeView.h; sourceTree = "<group>"; };
-		90E9F11B2878239900E9FC41 /* CQCubeView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CQCubeView.m; sourceTree = "<group>"; };
+		90E9F11A2878239900E9FC41 /* CQCubeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CQCubeViewController.h; sourceTree = "<group>"; };
+		90E9F11B2878239900E9FC41 /* CQCubeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CQCubeViewController.m; sourceTree = "<group>"; };
 		90E9F11D2878342100E9FC41 /* CQShaderProgram.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CQShaderProgram.h; sourceTree = "<group>"; };
 		90E9F11E2878342100E9FC41 /* CQShaderProgram.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CQShaderProgram.m; sourceTree = "<group>"; };
+		90E9F120287C0A9100E9FC41 /* Shader.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = Shader.fsh; sourceTree = "<group>"; };
+		90E9F121287C0A9100E9FC41 /* Shader.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = Shader.vsh; sourceTree = "<group>"; };
 		9D49D91B281AE7BD009C4BE2 /* hubblecast2.m4v */ = {isa = PBXFileReference; lastKnownFileType = file; path = hubblecast2.m4v; sourceTree = "<group>"; };
 		9DF46B5F27D12938007369CF /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		9DF46B6127D1294E007369CF /* BaseNavController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseNavController.swift; sourceTree = "<group>"; };
@@ -398,9 +402,11 @@
 		90E9F117287821EE00E9FC41 /* L_CubeCamera */ = {
 			isa = PBXGroup;
 			children = (
+				90E9F120287C0A9100E9FC41 /* Shader.fsh */,
+				90E9F121287C0A9100E9FC41 /* Shader.vsh */,
 				90E9F1182878222000E9FC41 /* L_CubeCamera.swift */,
-				90E9F11A2878239900E9FC41 /* CQCubeView.h */,
-				90E9F11B2878239900E9FC41 /* CQCubeView.m */,
+				90E9F11A2878239900E9FC41 /* CQCubeViewController.h */,
+				90E9F11B2878239900E9FC41 /* CQCubeViewController.m */,
 				90E9F11D2878342100E9FC41 /* CQShaderProgram.h */,
 				90E9F11E2878342100E9FC41 /* CQShaderProgram.m */,
 			);
@@ -604,7 +610,9 @@
 				90760C5327EB1E4C001050C0 /* Hubblecast.mov in Resources */,
 				902388BF27FDC94200C9F922 /* kenengfou.mp3 in Resources */,
 				902923D927D2528C004E7D13 /* bass.caf in Resources */,
+				90E9F122287C0A9100E9FC41 /* Shader.fsh in Resources */,
 				902DF18527CF424700A78688 /* Assets.xcassets in Resources */,
+				90E9F123287C0A9100E9FC41 /* Shader.vsh in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -716,7 +724,7 @@
 				9DF46B6627D12D9C007369CF /* Common.swift in Sources */,
 				902923EB27D359D9004E7D13 /* JXFileBrowserController.swift in Sources */,
 				90760C6A27EB4066001050C0 /* AVMetadataItem+CQ.m in Sources */,
-				90E9F11C2878239900E9FC41 /* CQCubeView.m in Sources */,
+				90E9F11C2878239900E9FC41 /* CQCubeViewController.m in Sources */,
 				90AFD51C2865636A008198A4 /* CQCameraStatusView.m in Sources */,
 				9DF46B7227D12EEB007369CF /* UICollectionViewExtension.swift in Sources */,
 				9DF46B6027D12938007369CF /* BaseViewController.swift in Sources */,

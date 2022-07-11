@@ -203,9 +203,11 @@ static const NSString *VideoZoomFactorContext;
     self.videoDataOutput = [[AVCaptureVideoDataOutput alloc] init];
     [self.videoDataOutput setSampleBufferDelegate:self queue:self.captureQueue];
     [self.videoDataOutput setAlwaysDiscardsLateVideoFrames:YES];
-    //kCVPixelBufferPixelFormatTypeKey它指定像素的输出格式，这个参数直接影响到生成图像的成功与否
+    //kCVPixelBufferPixelFormatTypeKey它指定像素的输出格式，这个参数直接影响输出的buffer到生成图像的成功与否，需要与外界指定相应的格式
    // kCVPixelFormatType_420YpCbCr8BiPlanarFullRange  YUV420格式.
-    [self.videoDataOutput setVideoSettings:@{(__bridge NSString *)kCVPixelBufferPixelFormatTypeKey: @(kCVPixelFormatType_420YpCbCr8BiPlanarFullRange)}];
+    self.videoDataOutput.videoSettings = @{(__bridge NSString *)kCVPixelBufferPixelFormatTypeKey: @(kCVPixelFormatType_420YpCbCr8BiPlanarFullRange)};
+    // CUBE Demo 用这个设置
+    self.videoDataOutput.videoSettings = @{(__bridge NSString *)kCVPixelBufferPixelFormatTypeKey:@(kCVPixelFormatType_32BGRA)};
     [self.captureSession beginConfiguration];
     if ([self.captureSession canAddOutput:self.videoDataOutput]) {
         [self.captureSession addOutput:self.videoDataOutput];
