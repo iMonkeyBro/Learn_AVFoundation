@@ -101,10 +101,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 #pragma mark - 镜头缩放
 /**
- 缩放镜头失败
- @param zoomValue 当前缩放值
+ 缩放镜头成功
+ @param zoomValue 当前缩放值(非匀速比例)
  */
-- (void)zoomCameraSuccess:(CGFloat)zoomValue;
+- (void)zoomCameraSuccess:(CGFloat)zoomScaleValue;
 
 /**
  缩放镜头失败
@@ -136,6 +136,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign, readonly) BOOL isSupportTapFocus;  ///< 相机是否支持点击聚焦，例如一些设备的前置是不支持的
 @property (nonatomic, assign, readonly) BOOL isSupportTapExpose; ///< 相机是否支持点击曝光
 @property (nonatomic, assign, readonly) BOOL isSupportZoom; ///< 相机是否支持缩放
+@property (nonatomic, assign, readonly) CGFloat minZoomFactor; ///< 最小缩放系数
 @property (nonatomic, assign, readonly) CGFloat maxZoomFactor; ///< 最大缩放系数
 @property (nonatomic, readonly) BOOL isSupportsHighFrameRateCapture;  ///< 是否支持高帧率捕获
 
@@ -291,11 +292,14 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)resetFocusAndExposureModes;
 
 #pragma mark - Func 镜头缩放
-/// 配置缩放系数
-- (void)configZoomValue:(CGFloat)zoomValue;
+/**
+ 配置缩放系数， zoomValue 范围0.0-1.0
+ 将根据pow(maxZoom,zoomValue)缩放，苹果原生相机并不是匀速，而是使用最大值的次冥方式，越到后面越快
+ */
+- (void)configZoomScaleValue:(CGFloat)zoomScaleValue;
 
-/// 1.0f自增，0.0f自减
-- (void)rampToZoomValue:(CGFloat)zoomValue;
+/// 自增自减缩放 1.0f自增，0.0f自减
+- (void)rampToZoom:(CGFloat)rampValue;
 
 /// 取消缩放
 - (void)cancelZoom;

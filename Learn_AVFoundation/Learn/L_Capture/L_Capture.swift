@@ -31,6 +31,7 @@ class L_Capture: BaseViewController {
                         self.configUI()
                         self.bindUIEvent()
                         self.configCaptureSession()
+                        self.captureManager.minZoomFactor;
                     }
                 }
             }
@@ -172,12 +173,12 @@ class L_Capture: BaseViewController {
         
         zoomView.sliderChangeCallbackBlock = { [weak self] sliderValue in
             guard let `self` = self else { return }
-            self.captureManager.configZoomValue(sliderValue)
+            self.captureManager.configZoomScaleValue(sliderValue)
         }
         
         zoomView.addBtnTouchDownCallbackBlock = { [weak self] in
             guard let `self` = self else { return }
-            self.captureManager.ramp(toZoomValue: 1.0)
+            self.captureManager.ramp(toZoom: 1.0)
         }
         
         zoomView.addBtnTouchUpCallbackBlock = { [weak self] in
@@ -187,7 +188,7 @@ class L_Capture: BaseViewController {
         
         zoomView.subtractBtnTouchDownCallbackBlock = { [weak self] in
             guard let `self` = self else { return }
-            self.captureManager.ramp(toZoomValue: 0.0)
+            self.captureManager.ramp(toZoom: 0.0)
         }
         
         zoomView.subtractBtnTouchUpCallbackBlock = { [weak self] in
@@ -299,9 +300,9 @@ extension L_Capture: CQCaptureManagerDelegate {
         print("zoomCameraFailed")
     }
     
-    func zoomCameraSuccess(_ zoomValue: CGFloat) {
-//        print("zoomValue\(zoomValue)")
-        zoomView.slider.value  = Float(zoomValue)
+    func zoomCameraSuccess(_ zoomScaleValue: CGFloat) {
+        print("zoomValue\(zoomScaleValue)")
+        zoomView.slider.value = Float(zoomScaleValue)
     }
 }
 

@@ -68,6 +68,7 @@ static const NSString *VideoZoomFactorContext;
 /// 销毁会话
 - (void)destroyCaptureSession {
     if (self.captureSession) {
+        [self removeZoomKVO];
         if (self.audioDeviceInput && [self.captureSession.inputs containsObject:self.audioDeviceInput]) {
             [self.captureSession removeInput:self.audioDeviceInput];
             self.audioDeviceInput = nil;
@@ -134,8 +135,8 @@ static const NSString *VideoZoomFactorContext;
 - (BOOL)configVideoInput:(NSError * _Nullable *)error {
     // 添加视频捕捉设备
     // 拿到默认视频捕捉设备 iOS默认后置摄像头
-    AVCaptureDevice *videoDevice = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
-    videoDevice = [self getCameraWithPosition:AVCaptureDevicePositionBack];
+//    AVCaptureDevice *videoDevice = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
+    AVCaptureDevice *videoDevice = [self getCameraWithPosition:AVCaptureDevicePositionBack];
     // 将捕捉设备转化为AVCaptureDeviceInput
     // 注意：会话不能直接使用AVCaptureDevice，必须将AVCaptureDevice封装成AVCaptureDeviceInput对象
     AVCaptureDeviceInput *videoInput = [AVCaptureDeviceInput deviceInputWithDevice:videoDevice error:error];
@@ -674,13 +675,23 @@ static const NSString *VideoZoomFactorContext;
     return [self getActiveCamera].activeFormat.videoMaxZoomFactor > 1.0f;
 }
 
+- (CGFloat)minZoomFactor {
+    if (@available(iOS 11.0, *)) {
+        return 1.0;
+    } else {
+        return [self getActiveCamera].minAvailableVideoZoomFactor;
+    }
+}
+
 - (CGFloat)maxZoomFactor {
     // 4.0随意写的，默认不能超过4，也可以不用设置
 //    return MIN([self getActiveCamera].activeFormat.videoMaxZoomFactor, 20.0f);
     // 两个值一样，和分辨率有关
-    CGFloat videoMaxZoomFactor = [self getActiveCamera].activeFormat.videoMaxZoomFactor;
-    CGFloat videoMaxZoomFactor2 = [self getActiveCamera].maxAvailableVideoZoomFactor;
-    return [self getActiveCamera].activeFormat.videoMaxZoomFactor;
+    if (@available(iOS 11.0, *)) {
+        return [self getActiveCamera].maxAvailableVideoZoomFactor;
+    } else {
+        return [self getActiveCamera].activeFormat.videoMaxZoomFactor;
+    }
 }
 
 #pragma mark - Setter
@@ -743,14 +754,13 @@ static const NSString *VideoZoomFactorContext;
         deviceTypes = @[AVCaptureDeviceTypeBuiltInWideAngleCamera];
     }
     AVCaptureDeviceDiscoverySession *deviceSession = [AVCaptureDeviceDiscoverySession discoverySessionWithDeviceTypes:deviceTypes mediaType:AVMediaTypeVideo position:position];
-    NSArray<AVCaptureDevice *> *devices = deviceSession.devices;
-    if (devices.count) return devices.firstObject;
+    if (deviceSession.devices.count) return deviceSession.devices.firstObject;
+    
     if (position == AVCaptureDevicePositionBack) {
         // 非多摄手机
         deviceTypes = @[AVCaptureDeviceTypeBuiltInWideAngleCamera];
         AVCaptureDeviceDiscoverySession *deviceSession = [AVCaptureDeviceDiscoverySession discoverySessionWithDeviceTypes:deviceTypes mediaType:AVMediaTypeVideo position:position];
-        NSArray<AVCaptureDevice *> *devices = deviceSession.devices;
-        if (devices.count) return devices.firstObject;
+        if (deviceSession.devices.count) return deviceSession.devices.firstObject;
     }
     return nil;
     
@@ -772,9 +782,9 @@ static const NSString *VideoZoomFactorContext;
 }
 
 - (void)setVideoDeviceInput:(AVCaptureDeviceInput *)videoDeviceInput {
-//    [self removeZoomKVO];
+    [self removeZoomKVO];
     _videoDeviceInput = videoDeviceInput;
-//    if (videoDeviceInput) [self addZoomKVO];
+    if (videoDeviceInput) [self addZoomKVO];
 }
 
 /// 获取反方向的摄像头
@@ -849,12 +859,15 @@ static const NSString *VideoZoomFactorContext;
 
 
 #pragma mark - 镜头缩放
-- (void)configZoomValue:(CGFloat)zoomValue {
-    if ([self getActiveCamera].isRampingVideoZoom) return;
+// 镜头缩放，直接调整videoZoomFactor  zoomValue范围0-1
+- (void)configZoomScaleValue:(CGFloat)zoomScaleValue {
+    if ([self getActiveCamera].isRampingVideoZoom) {
+        [self cancelZoom];
+    };
     NSError *error;
     if ([[self getActiveCamera] lockForConfiguration:&error]) {
-        [self addZoomKVO];
-        CGFloat zoomFactor = pow(self.maxZoomFactor, zoomValue);
+        // maxZoomFactor的zoomValue次冥达到缩放效果慢慢增大的效果
+        CGFloat zoomFactor = pow(self.maxZoomFactor, zoomScaleValue);
         [self getActiveCamera].videoZoomFactor = zoomFactor;
         [[self getActiveCamera] unlockForConfiguration];
     } else {
@@ -865,12 +878,13 @@ static const NSString *VideoZoomFactorContext;
 }
 
 // 自增自减 自增1.0f 自减0.0f
-- (void)rampToZoomValue:(CGFloat)zoomValue {
-    if ([self getActiveCamera].isRampingVideoZoom) return;
-    CGFloat zoomFactor = pow(self.maxZoomFactor, zoomValue);
+- (void)rampToZoom:(CGFloat)rampValue {
+    if ([self getActiveCamera].isRampingVideoZoom) {
+        [self cancelZoom];
+    };
+    CGFloat zoomFactor = pow(self.maxZoomFactor, rampValue);
     NSError *error;
     if ([[self getActiveCamera] lockForConfiguration:&error]) {
-        [self addZoomKVO];
         [[self getActiveCamera] rampToVideoZoomFactor:zoomFactor withRate:1.0f];
         [[self getActiveCamera] unlockForConfiguration];
     } else {
@@ -892,13 +906,14 @@ static const NSString *VideoZoomFactorContext;
     }
 }
 
+/// 添加缩放监听
 - (void)addZoomKVO {
     @try {
-        [[self videoDeviceInput].device addObserver:self forKeyPath:@"videoZoomFactor" options:0 context:&VideoZoomFactorContext];
-        [[self videoDeviceInput].device addObserver:self forKeyPath:@"rampingVideoZoom" options:0 context:&RampingVideoZoomContext];
-        if (self.delegate && [self.delegate respondsToSelector:@selector(zoomCameraSuccess:)]) {
-            [self.delegate zoomCameraSuccess:0];
-        }
+//        self.videoDeviceInput.device.videoZoomFactor;
+//        self.videoDeviceInput.device.rampingVideoZoom;
+        [[self videoDeviceInput].device addObserver:self forKeyPath:@"videoZoomFactor" options:NSKeyValueObservingOptionNew context:&VideoZoomFactorContext];
+        [[self videoDeviceInput].device addObserver:self forKeyPath:@"rampingVideoZoom" options:NSKeyValueObservingOptionNew context:&RampingVideoZoomContext];
+        [self zoomDelegateCallBack];
     } @catch (NSException *exception) {
         
     } @finally {
@@ -907,11 +922,11 @@ static const NSString *VideoZoomFactorContext;
     
 }
 
-// TODO: - 添加监听问题
+/// 移除缩放监听
 - (void)removeZoomKVO {
     @try {
         [[self videoDeviceInput].device removeObserver:self forKeyPath:@"videoZoomFactor" context:&VideoZoomFactorContext];
-        [[self videoDeviceInput].device removeObserver:self forKeyPath:@"rampingVideoZoom" context:&VideoZoomFactorContext];
+        [[self videoDeviceInput].device removeObserver:self forKeyPath:@"rampingVideoZoom" context:&RampingVideoZoomContext];
     } @catch (NSException *exception) {
         
     } @finally {
@@ -1042,13 +1057,17 @@ static const NSString *VideoZoomFactorContext;
     }
     
     else if (context == &RampingVideoZoomContext) {
-        // 缩放开始和缩放结束会调用到这里
+        // rampToVideoZoomFactor函数缩放开始和缩放结束会调用到这里
         [self zoomDelegateCallBack];
     }
     
     else if (context == &VideoZoomFactorContext) {
         // 并且有正在运行的缩放动作
         if ([self getActiveCamera].isRampingVideoZoom) {
+            // rampToVideoZoomFactor函数缩放中会调用到这里
+            [self zoomDelegateCallBack];
+        } else {
+            // 直接设置videoZoomFactor值会调用到这里
             [self zoomDelegateCallBack];
         }
     }

@@ -130,7 +130,7 @@ struct R: Rswift.Validatable {
     fileprivate init() {}
   }
 
-  /// This `R.file` struct is generated, and contains static references to 11 files.
+  /// This `R.file` struct is generated, and contains static references to 13 files.
   struct file {
     /// Resource file `01 Demo AAC.m4a`.
     static let demoAACM4a = Rswift.FileResource(bundle: R.hostingBundle, name: "01 Demo AAC", pathExtension: "m4a")
@@ -144,6 +144,10 @@ struct R: Rswift.Validatable {
     static let charlieTheUnicornM4v = Rswift.FileResource(bundle: R.hostingBundle, name: "Charlie The Unicorn", pathExtension: "m4v")
     /// Resource file `Hubblecast.mov`.
     static let hubblecastMov = Rswift.FileResource(bundle: R.hostingBundle, name: "Hubblecast", pathExtension: "mov")
+    /// Resource file `Shader.fsh`.
+    static let shaderFsh = Rswift.FileResource(bundle: R.hostingBundle, name: "Shader", pathExtension: "fsh")
+    /// Resource file `Shader.vsh`.
+    static let shaderVsh = Rswift.FileResource(bundle: R.hostingBundle, name: "Shader", pathExtension: "vsh")
     /// Resource file `bass.caf`.
     static let bassCaf = Rswift.FileResource(bundle: R.hostingBundle, name: "bass", pathExtension: "caf")
     /// Resource file `drums.caf`.
@@ -188,6 +192,18 @@ struct R: Rswift.Validatable {
     /// `bundle.url(forResource: "Hubblecast", withExtension: "mov")`
     static func hubblecastMov(_: Void = ()) -> Foundation.URL? {
       let fileResource = R.file.hubblecastMov
+      return fileResource.bundle.url(forResource: fileResource)
+    }
+
+    /// `bundle.url(forResource: "Shader", withExtension: "fsh")`
+    static func shaderFsh(_: Void = ()) -> Foundation.URL? {
+      let fileResource = R.file.shaderFsh
+      return fileResource.bundle.url(forResource: fileResource)
+    }
+
+    /// `bundle.url(forResource: "Shader", withExtension: "vsh")`
+    static func shaderVsh(_: Void = ()) -> Foundation.URL? {
+      let fileResource = R.file.shaderVsh
       return fileResource.bundle.url(forResource: fileResource)
     }
 
