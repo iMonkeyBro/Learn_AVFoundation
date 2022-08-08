@@ -15,6 +15,8 @@ class L_Capture: BaseViewController {
     private let statusView: CQCameraStatusView = CQCameraStatusView()
     private let operateView: CQCameraOperateView = CQCameraOperateView()
     private let zoomView: CQCameraZoomView = CQCameraZoomView()
+    /// 缩放模式0线性缩放，1匀速缩放
+    private var zoomMode: UInt = 0
     private var cameraMode: CQCameraMode = .photo
     private var isStartFace: Bool = false
     private var isStartCode: Bool = false
@@ -166,14 +168,32 @@ class L_Capture: BaseViewController {
             }
         }
         
+        // 高速拍摄
         operateView.fpsBtnCallbackBlock = { [weak self] in
             guard let `self` = self else { return }
             self.captureManager.enableHighFrameRateCapture()
         }
         
+        // 缩放
+        zoomView.modeValueChangeCallbackBlock = { [weak self] modeValue in
+            self?.zoomMode = modeValue
+        }
+        
         zoomView.sliderChangeCallbackBlock = { [weak self] sliderValue in
             guard let `self` = self else { return }
-            self.captureManager.configZoomScaleValue(sliderValue)
+            print("sliderValue\(sliderValue)")
+            if (self.zoomMode == 0) {
+                // 线性缩放
+                self.captureManager.configZoomScaleValue(sliderValue)
+                
+            }
+            if (self.zoomMode == 1) {
+                // 匀速缩放
+                let maxZoom = self.captureManager.maxZoomFactor
+                let minZoom = self.captureManager.minZoomFactor
+                let currentZoom =  sliderValue*(maxZoom-minZoom)+minZoom
+                self.captureManager.configZoomFactor(currentZoom)
+            }
         }
         
         zoomView.addBtnTouchDownCallbackBlock = { [weak self] in
@@ -195,8 +215,6 @@ class L_Capture: BaseViewController {
             guard let `self` = self else { return }
             self.captureManager.cancelZoom()
         }
-        
-        
     }
     
     /// 开始录制，处理时间显示
@@ -300,9 +318,28 @@ extension L_Capture: CQCaptureManagerDelegate {
         print("zoomCameraFailed")
     }
     
-    func zoomCameraSuccess(_ zoomScaleValue: CGFloat) {
-        print("zoomValue\(zoomScaleValue)")
-        zoomView.slider.value = Float(zoomScaleValue)
+    func zoomCameraSuccess(withZoomScaleValue zoomScaleValue: CGFloat) {
+//        print("zoomScaleValue\(zoomScaleValue)")
+        if (zoomMode == 0) {
+            // 线性
+            zoomView.slider.value = Float(zoomScaleValue)
+            let valueStr = String(format:"%.2f", arguments:[zoomScaleValue])
+            zoomView.sliderLabel.text = valueStr;
+        }
+    }
+    
+    func zoomCameraSuccess(withCurrentZoomFactor currentZoomFactor: CGFloat) {
+        print("currentZoomFactor\(currentZoomFactor)")
+        if (zoomMode == 1) {
+            // 匀速
+            let maxZoom = self.captureManager.maxZoomFactor
+            let minZoom = self.captureManager.minZoomFactor
+            let sliderValue = (currentZoomFactor-minZoom)/(maxZoom-minZoom)
+            let valueStr = String(format:"%.2f", arguments:[sliderValue])
+            zoomView.slider.value = Float(sliderValue);
+            zoomView.sliderLabel.text = valueStr
+        }
+        self.zoomView.zoomLabel.text = String(format:"%.2f", arguments:[currentZoomFactor])
     }
 }
 

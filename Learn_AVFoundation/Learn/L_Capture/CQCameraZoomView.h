@@ -17,7 +17,11 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) void(^subtractBtnTouchDownCallbackBlock)(void);  ///< 减按钮回调
 @property (nonatomic, copy) void(^subtractBtnTouchUpCallbackBlock)(void);  ///< 减按钮回调
 @property (nonatomic, copy) void(^sliderChangeCallbackBlock)(CGFloat value);  ///< slider更改回调
-@property (nonatomic, strong, readonly) UISlider *slider;  ///< 减按钮
+@property (nonatomic, copy) void(^modeValueChangeCallbackBlock)(NSUInteger modeValue);  ///< 模式更改回调
+
+@property (nonatomic, strong, readonly) UISlider *slider;  ///< 滑轨
+@property (nonatomic, strong, readonly) UILabel *sliderLabel;  ///< slider比例显示
+@property (nonatomic, strong, readonly) UILabel *zoomLabel;  ///< 缩放显示
 
 @end
 

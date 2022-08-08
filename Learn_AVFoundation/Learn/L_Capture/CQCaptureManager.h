@@ -102,7 +102,19 @@ NS_ASSUME_NONNULL_BEGIN
 #pragma mark - 镜头缩放
 /**
  缩放镜头成功
- @param zoomValue 当前缩放值(非匀速比例)
+ @param currentZoomFactor 当前的实际缩放值
+ */
+- (void)zoomCameraSuccessWithCurrentZoomFactor:(CGFloat)currentZoomFactor;
+
+/**
+ 缩放镜头成功
+ @param zoomScaleValue 当前缩放比例值(非匀速比例，范围0.0-1.0)，例如总范围1-16，现在是8，zoomScaleValue并不是0.5
+ */
+- (void)zoomCameraSuccessWithZoomScaleValue:(CGFloat)zoomScaleValue;
+
+/**
+ 缩放镜头成功
+ @param zoomScaleValue 当前缩放比例值(非匀速比例)
  */
 - (void)zoomCameraSuccess:(CGFloat)zoomScaleValue;
 
@@ -293,8 +305,15 @@ NS_ASSUME_NONNULL_BEGIN
 
 #pragma mark - Func 镜头缩放
 /**
- 配置缩放系数， zoomValue 范围0.0-1.0
- 将根据pow(maxZoom,zoomValue)缩放，苹果原生相机并不是匀速，而是使用最大值的次冥方式，越到后面越快
+ 配置缩放系数
+ @param zoomFactor 实际的锁防止，范围1.0-maxValue 超出范围将无效果
+ */
+- (void)configZoomFactor:(CGFloat)zoomFactor;
+
+/**
+ 配置缩放比例系数
+ @param zoomScaleValue 范围0.0-1.0 将根据pow(maxZoom,zoomValue)缩放，苹果原生相机并不是匀速，而是使用最大值的次冥方式，越到后面越快
+ 例如范围1-16，传0.5，并不是8
  */
 - (void)configZoomScaleValue:(CGFloat)zoomScaleValue;
 

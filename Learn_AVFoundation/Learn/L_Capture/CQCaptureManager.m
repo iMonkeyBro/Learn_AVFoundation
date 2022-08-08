@@ -859,6 +859,22 @@ static const NSString *VideoZoomFactorContext;
 
 
 #pragma mark - 镜头缩放
+- (void)configZoomFactor:(CGFloat)zoomFactor {
+    if (zoomFactor < self.minZoomFactor || zoomFactor > self.maxZoomFactor) return;
+    if ([self getActiveCamera].isRampingVideoZoom) {
+        [self cancelZoom];
+    };
+    NSError *error;
+    if ([[self getActiveCamera] lockForConfiguration:&error]) {
+        [self getActiveCamera].videoZoomFactor = zoomFactor;
+        [[self getActiveCamera] unlockForConfiguration];
+    } else {
+        if (self.delegate && [self.delegate respondsToSelector:@selector(zoomCameraFailed)]) {
+            [_delegate zoomCameraFailed];
+        }
+    }
+}
+
 // 镜头缩放，直接调整videoZoomFactor  zoomValue范围0-1
 - (void)configZoomScaleValue:(CGFloat)zoomScaleValue {
     if ([self getActiveCamera].isRampingVideoZoom) {
@@ -1080,9 +1096,12 @@ static const NSString *VideoZoomFactorContext;
 - (void)zoomDelegateCallBack {
     CGFloat curZoomFactor = [self getActiveCamera].videoZoomFactor;
     CGFloat maxZoomFactor = [self maxZoomFactor];
-    CGFloat value = log(curZoomFactor) / log(maxZoomFactor);
-    if (self.delegate && [self.delegate respondsToSelector:@selector(zoomCameraSuccess:)]) {
-        [self.delegate zoomCameraSuccess:value];
+    CGFloat scaleValue = log(curZoomFactor) / log(maxZoomFactor);
+    if (self.delegate && [self.delegate respondsToSelector:@selector(zoomCameraSuccessWithZoomScaleValue:)]) {
+        [self.delegate zoomCameraSuccessWithZoomScaleValue:scaleValue];
+    }
+    if (self.delegate && [self.delegate respondsToSelector:@selector(zoomCameraSuccessWithCurrentZoomFactor:)]) {
+        [self.delegate zoomCameraSuccessWithCurrentZoomFactor:curZoomFactor];
     }
 }
 
