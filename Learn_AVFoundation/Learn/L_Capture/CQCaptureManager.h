@@ -306,7 +306,7 @@ NS_ASSUME_NONNULL_BEGIN
 #pragma mark - Func 镜头缩放
 /**
  配置缩放系数
- @param zoomFactor 实际的锁防止，范围1.0-maxValue 超出范围将无效果
+ @param zoomFactor 实际的缩放值，范围1.0-maxValue 超出范围将无效果
  */
 - (void)configZoomFactor:(CGFloat)zoomFactor;
 

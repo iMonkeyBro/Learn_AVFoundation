@@ -7,7 +7,7 @@
 
 import Foundation
 
-/// 没写完不能用
+/// 缩减数据，没写完不能用
 class SampleDataFilter {
     
     private let sampleData: NSData

@@ -12,6 +12,7 @@ fileprivate struct Metric {
     static let heightScaling: CGFloat = 0.85
 }
 
+/// 渲染
 class WaveformView: UIView {
     /// 绘制资源
     var asset: AVAsset? {
@@ -22,7 +23,7 @@ class WaveformView: UIView {
                 self.loadingView.stopAnimating()
                 
                 // 调用该函数会调用drawRect
-//                self.setNeedsDisplay()
+                self.setNeedsDisplay()
             }
             
         }
@@ -35,7 +36,7 @@ class WaveformView: UIView {
             setNeedsDisplay()
         }
     }
-    private var filter: THSampleDataFilter!
+    private var filter: THSampleDataFilter?
     private lazy var loadingView: UIActivityIndicatorView = {
         let loading: UIActivityIndicatorView = UIActivityIndicatorView(style: .whiteLarge)
         loading.center = CGPoint(x: bounds.width/2, y: bounds.height/2)
@@ -45,9 +46,6 @@ class WaveformView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupView()
-        Asyncs.asyncDelayMain(seconds: 3) {
-            let filteredSamples = self.filter.filteredSamples(for: self.bounds.size)
-        }
     }
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -65,15 +63,15 @@ class WaveformView: UIView {
         guard filter != nil else { return }
         
         let contenxt: CGContext = UIGraphicsGetCurrentContext()!
-        // 1.我们希望在试图内呈现这个波形，所以首先基于自定的高宽常量来缩放图像上下文
-        // 人后计算xy偏移量，转换上下文，在缩放上下文中适当调整偏移
+        // 1.我们希望在视图内呈现这个波形，所以首先基于自定的高宽常量来缩放图像上下文
+        // 然后计算xy偏移量，转换上下文，在缩放上下文中适当调整偏移
         contenxt.scaleBy(x: Metric.widthScaling, y: Metric.heightScaling)
         let xOffset: CGFloat = (1-Metric.widthScaling)*bounds.width
         let yOffset: CGFloat = (1-Metric.heightScaling)*bounds.height
         contenxt.translateBy(x: xOffset/2, y: yOffset/2)
         
         // 2.根据视图尺寸获取筛选样本，
-        let filteredSamples = filter.filteredSamples(for: bounds.size)
+        let filteredSamples = try? filter?.filteredSamples(for: bounds.size)
         guard let `filteredSamples` = filteredSamples else { return }
         
         let midY = rect.midY

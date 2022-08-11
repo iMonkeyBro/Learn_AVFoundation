@@ -7,6 +7,7 @@
 
 import Foundation
 
+/// 读取数据
 class SampleDataProvider {
     /**
      从音频资源加载样本数据

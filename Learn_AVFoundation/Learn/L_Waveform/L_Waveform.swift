@@ -18,7 +18,7 @@ class L_Waveform: BaseViewController {
         asset = AVAsset(url: fileUrl)
         
 //        test()
-
+        
         asset = AVAsset(url: fileUrl)
         waveformView = THWaveformView(frame: CGRect(x: 10, y: 100, width: 286, height: 80))
         waveformView.waveColor = .red
@@ -26,12 +26,16 @@ class L_Waveform: BaseViewController {
         waveformView.asset = asset
         
         view.addSubview(waveformView)
+        
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         waveformView.frame = CGRect(x: 10, y: 100, width: waveformView.frame.width-10, height: waveformView.frame.height-10)
     }
     
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        waveformView.frame = CGRect(x: 10, y: 100, width: waveformView.frame.width+10, height: waveformView.frame.height+10)
+    }
     
     private func test() {
         THSampleDataProvider.loadAudioSamples(from: asset) { data in

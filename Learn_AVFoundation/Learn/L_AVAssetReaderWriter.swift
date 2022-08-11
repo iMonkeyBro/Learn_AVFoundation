@@ -20,11 +20,14 @@ class L_AVAssetReaderWriter: BaseViewController {
         let videoUrl: URL = Bundle.main.url(forResource: "hubblecast2", withExtension: "m4v")!
         let asset: AVAsset = AVAsset(url: videoUrl)
         let track: AVAssetTrack = asset.tracks(withMediaType: .video).first!
+        // 创建AVAssetReader，传递读取AVAsset实例
         assetReader = try! AVAssetReader(asset: asset)
         let readerOutSettings: [String : Any] = [kCVPixelBufferPixelFormatTypeKey as String: kCVPixelFormatType_32BGRA]
+        // 创建AVAssetReaderTrackOutput从资源的视频轨道读取样本，将视频帧解压缩为BGRA格式
         let trackOutput: AVAssetReaderTrackOutput = AVAssetReaderTrackOutput(track: track, outputSettings: readerOutSettings)
         // AVAssetReader添加AVAssetReaderTrackOutput
         guard assetReader.canAdd(trackOutput) else { return }
+        // 添加输出到读取器、开始读取
         assetReader.add(trackOutput)
         assetReader.startReading()
         
@@ -33,6 +36,7 @@ class L_AVAssetReaderWriter: BaseViewController {
         let outputUrl: URL = URL(fileURLWithPath: outputPath)
         try? FileManager.default.removeItem(at: outputUrl)
         assetWriter = try! AVAssetWriter(outputURL: outputUrl, fileType: .mp4)
+        // 720p h264
         let writeOutputSettings: [String: Any] = [AVVideoCodecKey: AVVideoCodecType.h264,
                                                AVVideoWidthKey: 1280,
                                               AVVideoHeightKey: 720,
