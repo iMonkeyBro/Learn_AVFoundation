@@ -20,6 +20,9 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)didTapResetFocusAndExposure;
 @end
 
+/**
+ 二次封装AVCaptureVideoPreviewLayer
+ */
 @interface CQCapturePreviewView : UIView
 
 @property (nonatomic, weak) id<CQCapturePreviewViewDelegate> delegate;

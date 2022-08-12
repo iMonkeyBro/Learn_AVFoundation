@@ -33,7 +33,7 @@ class CatalogVC: BaseViewController {
                                                 ["title": "Cube相机", "vc": "L_CubeCamera"],
                                                 ["title": "AVAssetReader/Writer(读取和写入资源)", "vc": "L_AVAssetReaderWriter"],
                                                 ["title": "学习音频波形图", "vc": "L_Waveform"],
-                                                ["title": "--", "vc": "BaseViewController"],
+                                                ["title": "相机(AVAssetWrite写入)", "vc": "L_CameraWrite"],
                                                 ["title": "--", "vc": "BaseViewController"],
                                                 ["title": "--", "vc": "BaseViewController"],
                                                 ["title": "--", "vc": "BaseViewController"],]
