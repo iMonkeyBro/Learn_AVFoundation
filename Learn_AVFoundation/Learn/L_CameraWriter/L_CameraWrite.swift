@@ -17,10 +17,13 @@ class L_CameraWrite: BaseViewController {
 
         captureManager.delegate = self
         captureManager.configSessionPreset(.medium)
-        captureManager.startCaptureMuteVideoData()
         
         preview = ImageBufferPreview(frame: view.bounds, context: ContextManager.shared.eaglContext)
         view.addSubview(preview)
+        
+        captureManager.startCaptureMuteVideoData()
+        
+        let temp: NSString = ""
         
     }
     
@@ -31,8 +34,8 @@ extension L_CameraWrite: CQCaptureManagerDelegate {
     func captureVideoSampleBuffer(_ sampleBuffer: CMSampleBuffer) {
         let imageBuffer: CVPixelBuffer? = CMSampleBufferGetImageBuffer(sampleBuffer)
         if imageBuffer != nil {
-            _ = CIImage(cvPixelBuffer: imageBuffer!, options: nil)
-            
+            let image = CIImage(cvPixelBuffer: imageBuffer!, options: nil)
+            preview.image = image
         }
     }
     

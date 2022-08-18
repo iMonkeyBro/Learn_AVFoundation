@@ -18,3 +18,4 @@
 #import <Masonry/Masonry.h>
 #import "CQScreenTool.h"
 #import "CQAuthorizationTool.h"
+#import "NSString+CQ.h"

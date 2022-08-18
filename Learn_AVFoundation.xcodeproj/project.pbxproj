@@ -63,6 +63,8 @@
 		90D3CA4028A4FE3C00F7E240 /* L_CameraWrite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90D3CA3F28A4FE3C00F7E240 /* L_CameraWrite.swift */; };
 		90D3CA4328A505C500F7E240 /* ImageBufferPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90D3CA4228A505C500F7E240 /* ImageBufferPreview.swift */; };
 		90D3CA4528A6567700F7E240 /* ContextManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90D3CA4428A6567700F7E240 /* ContextManager.swift */; };
+		90D3CA4E28AE418600F7E240 /* PhotoFilters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90D3CA4D28AE418600F7E240 /* PhotoFilters.swift */; };
+		90D3CA5128AE430E00F7E240 /* NSString+CQ.m in Sources */ = {isa = PBXBuildFile; fileRef = 90D3CA5028AE430E00F7E240 /* NSString+CQ.m */; };
 		90D547012850A8810053ADEF /* L_AVKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90D547002850A8810053ADEF /* L_AVKit.swift */; };
 		90E9F1192878222100E9FC41 /* L_CubeCamera.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90E9F1182878222000E9FC41 /* L_CubeCamera.swift */; };
 		90E9F11C2878239900E9FC41 /* CQCubeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 90E9F11B2878239900E9FC41 /* CQCubeViewController.m */; };
@@ -182,6 +184,9 @@
 		90D3CA3F28A4FE3C00F7E240 /* L_CameraWrite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = L_CameraWrite.swift; sourceTree = "<group>"; };
 		90D3CA4228A505C500F7E240 /* ImageBufferPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageBufferPreview.swift; sourceTree = "<group>"; };
 		90D3CA4428A6567700F7E240 /* ContextManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContextManager.swift; sourceTree = "<group>"; };
+		90D3CA4D28AE418600F7E240 /* PhotoFilters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoFilters.swift; sourceTree = "<group>"; };
+		90D3CA4F28AE430E00F7E240 /* NSString+CQ.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSString+CQ.h"; sourceTree = "<group>"; };
+		90D3CA5028AE430E00F7E240 /* NSString+CQ.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSString+CQ.m"; sourceTree = "<group>"; };
 		90D547002850A8810053ADEF /* L_AVKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = L_AVKit.swift; sourceTree = "<group>"; };
 		90E9F1182878222000E9FC41 /* L_CubeCamera.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = L_CubeCamera.swift; sourceTree = "<group>"; };
 		90E9F11A2878239900E9FC41 /* CQCubeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CQCubeViewController.h; sourceTree = "<group>"; };
@@ -379,6 +384,8 @@
 				90AFD52128659801008198A4 /* CQScreenTool.m */,
 				90AFD524286598C0008198A4 /* CQAuthorizationTool.h */,
 				90AFD525286598C0008198A4 /* CQAuthorizationTool.m */,
+				90D3CA4F28AE430E00F7E240 /* NSString+CQ.h */,
+				90D3CA5028AE430E00F7E240 /* NSString+CQ.m */,
 			);
 			path = OC;
 			sourceTree = "<group>";
@@ -411,6 +418,7 @@
 				90D3CA3F28A4FE3C00F7E240 /* L_CameraWrite.swift */,
 				90D3CA4228A505C500F7E240 /* ImageBufferPreview.swift */,
 				90D3CA4428A6567700F7E240 /* ContextManager.swift */,
+				90D3CA4D28AE418600F7E240 /* PhotoFilters.swift */,
 			);
 			path = L_CameraWriter;
 			sourceTree = "<group>";
@@ -733,6 +741,7 @@
 				90D3CA4528A6567700F7E240 /* ContextManager.swift in Sources */,
 				9DF46B7527D12EEB007369CF /* UITableViewExtension.swift in Sources */,
 				902C9D9027D8D2640060AB4C /* L_AVAsset.swift in Sources */,
+				90D3CA5128AE430E00F7E240 /* NSString+CQ.m in Sources */,
 				905C3E5F285715F2005C83AF /* L_Capture.swift in Sources */,
 				90AFD5142865630B008198A4 /* NSFileManager+CQ.m in Sources */,
 				9DF46B7327D12EEB007369CF /* UIImageExtension.swift in Sources */,
@@ -757,6 +766,7 @@
 				9DF46B7027D12EEB007369CF /* CQBaseExtension.swift in Sources */,
 				902923DE27D3589F004E7D13 /* L_VoiceMemo.swift in Sources */,
 				9017F58E281441F50090345A /* L_AVPlayer.swift in Sources */,
+				90D3CA4E28AE418600F7E240 /* PhotoFilters.swift in Sources */,
 				90AFD51D2865636A008198A4 /* CQCameraShutterButton.m in Sources */,
 				902388CB27FF212400C9F922 /* L_AVAudioPlayer.swift in Sources */,
 				90AFD51B2865636A008198A4 /* CQCameraOperateView.m in Sources */,

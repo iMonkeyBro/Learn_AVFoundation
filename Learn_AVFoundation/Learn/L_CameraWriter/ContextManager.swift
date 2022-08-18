@@ -7,6 +7,7 @@
 
 import Foundation
 
+/// 上下文管理
 final class ContextManager {
     
     let eaglContext: EAGLContext

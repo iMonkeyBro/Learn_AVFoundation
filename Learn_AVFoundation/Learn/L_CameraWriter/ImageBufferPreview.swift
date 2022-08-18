@@ -42,6 +42,7 @@ func transform(for deviceOrientation: UIDeviceOrientation) -> CGAffineTransform 
     return result
 }
 
+/// 展示CIImage
 class ImageBufferPreview: GLKView {
     
     var image: CIImage?{
@@ -53,6 +54,7 @@ class ImageBufferPreview: GLKView {
                 let cropRect: CGRect = centerCropImageRect(sourceRect: oldValue!.extent, previewRect: drawbleBounds)
                 coreImageContext?.draw(filteredImage, in: drawbleBounds, from: cropRect)
             }
+            self.display()
         }
     }
     
