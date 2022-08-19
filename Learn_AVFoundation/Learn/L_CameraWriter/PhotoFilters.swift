@@ -8,33 +8,21 @@
 import Foundation
 
 final class PhotoFilters {
-    
-    private let filterNames: [String] = ["CIPhotoEffectChrome",
-                                         "CIPhotoEffectFade",
-                                         "CIPhotoEffectInstant",
-                                         "CIPhotoEffectMono",
-                                         "CIPhotoEffectNoir",
-                                         "CIPhotoEffectProcess",
-                                         "CIPhotoEffectTonal",
-                                         "CIPhotoEffectTransfer"]
-    let filterDisplayNames: [String] = ["CIPhotoEffectChrome",
-                                         "CIPhotoEffectFade",
-                                         "CIPhotoEffectInstant",
-                                         "CIPhotoEffectMono",
-                                         "CIPhotoEffectNoir",
-                                         "CIPhotoEffectProcess",
-                                         "CIPhotoEffectTonal",
-                                         "CIPhotoEffectTransfer"]
-    
-    
+    static let filters: [CIFilter] = [CIFilter(name: "CIPhotoEffectChrome")!,
+                                      CIFilter(name: "CIPhotoEffectFade")!,
+                                      CIFilter(name: "CIPhotoEffectInstant")!,
+                                      CIFilter(name: "CIPhotoEffectMono")!,
+                                      CIFilter(name: "CIPhotoEffectNoir")!,
+                                      CIFilter(name: "CIPhotoEffectProcess")!,
+                                      CIFilter(name: "CIPhotoEffectTonal")!,
+                                      CIFilter(name: "CIPhotoEffectTransfer")!]
 }
 
 extension CIFilter {
     var displayName: String {
         get {
             let tempName: NSString = self.name as NSString
-            tempName.strings(byAppendingPaths: [""])
-            return ""
+            return tempName.matchingRegex("CIPhotoEffect(.*)", capture: 1)
         }
     }
 }

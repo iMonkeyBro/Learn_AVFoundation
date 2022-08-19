@@ -14,16 +14,20 @@ class L_CameraWrite: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        captureManager.delegate = self
-        captureManager.configSessionPreset(.medium)
+        do {
+            try captureManager.configVideoInput()
+            captureManager.configVideoDataOutput()
+            captureManager.configSessionPreset(.medium)
+        } catch let error {
+            print("Error-\(error.localizedDescription)")
+        }
         
+        captureManager.delegate = self
         preview = ImageBufferPreview(frame: view.bounds, context: ContextManager.shared.eaglContext)
         view.addSubview(preview)
         
         captureManager.startCaptureMuteVideoData()
         
-        let temp: NSString = ""
         
     }
     

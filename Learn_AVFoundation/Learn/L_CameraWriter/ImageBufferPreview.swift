@@ -48,6 +48,7 @@ class ImageBufferPreview: GLKView {
     var image: CIImage?{
         didSet {
             bindDrawable()
+            filter = PhotoFilters.filters.first!
             filter?.setValue(oldValue, forKey: kCIInputImageKey)
             let filteredImage = filter?.outputImage
             if let `filteredImage` = filteredImage {
@@ -55,6 +56,7 @@ class ImageBufferPreview: GLKView {
                 coreImageContext?.draw(filteredImage, in: drawbleBounds, from: cropRect)
             }
             self.display()
+            filter?.setValue(nil, forKey: kCIInputImageKey)
         }
     }
     
