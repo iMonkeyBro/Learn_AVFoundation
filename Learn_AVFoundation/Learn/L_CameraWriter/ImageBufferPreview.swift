@@ -42,7 +42,9 @@ func transform(for deviceOrientation: UIDeviceOrientation) -> CGAffineTransform 
     return result
 }
 
-/// 展示CIImage
+/**
+ 使用GLKView 达到预览的效果
+ */
 class ImageBufferPreview: GLKView {
     
     var image: CIImage?{

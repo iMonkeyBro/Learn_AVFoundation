@@ -24,6 +24,7 @@ class L_CameraWrite: BaseViewController {
         
         captureManager.delegate = self
         preview = ImageBufferPreview(frame: view.bounds, context: ContextManager.shared.eaglContext)
+        preview.coreImageContext = ContextManager.shared.ciContext
         view.addSubview(preview)
         
         captureManager.startCaptureMuteVideoData()
