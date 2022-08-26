@@ -86,6 +86,10 @@ class ImageBufferPreview: GLKView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
     @objc private func filterChanged(_ notification: NSNotification) {
         filter = notification.object as? CIFilter
     }

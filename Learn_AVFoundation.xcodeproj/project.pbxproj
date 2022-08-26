@@ -65,6 +65,7 @@
 		90D3CA4528A6567700F7E240 /* ContextManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90D3CA4428A6567700F7E240 /* ContextManager.swift */; };
 		90D3CA4E28AE418600F7E240 /* PhotoFilters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90D3CA4D28AE418600F7E240 /* PhotoFilters.swift */; };
 		90D3CA5128AE430E00F7E240 /* NSString+CQ.m in Sources */ = {isa = PBXBuildFile; fileRef = 90D3CA5028AE430E00F7E240 /* NSString+CQ.m */; };
+		90D3CAB328B71EA300F7E240 /* MovieWriter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90D3CAB228B71EA300F7E240 /* MovieWriter.swift */; };
 		90D547012850A8810053ADEF /* L_AVKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90D547002850A8810053ADEF /* L_AVKit.swift */; };
 		90E9F1192878222100E9FC41 /* L_CubeCamera.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90E9F1182878222000E9FC41 /* L_CubeCamera.swift */; };
 		90E9F11C2878239900E9FC41 /* CQCubeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 90E9F11B2878239900E9FC41 /* CQCubeViewController.m */; };
@@ -187,6 +188,7 @@
 		90D3CA4D28AE418600F7E240 /* PhotoFilters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoFilters.swift; sourceTree = "<group>"; };
 		90D3CA4F28AE430E00F7E240 /* NSString+CQ.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSString+CQ.h"; sourceTree = "<group>"; };
 		90D3CA5028AE430E00F7E240 /* NSString+CQ.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSString+CQ.m"; sourceTree = "<group>"; };
+		90D3CAB228B71EA300F7E240 /* MovieWriter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieWriter.swift; sourceTree = "<group>"; };
 		90D547002850A8810053ADEF /* L_AVKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = L_AVKit.swift; sourceTree = "<group>"; };
 		90E9F1182878222000E9FC41 /* L_CubeCamera.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = L_CubeCamera.swift; sourceTree = "<group>"; };
 		90E9F11A2878239900E9FC41 /* CQCubeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CQCubeViewController.h; sourceTree = "<group>"; };
@@ -419,6 +421,7 @@
 				90D3CA4228A505C500F7E240 /* ImageBufferPreview.swift */,
 				90D3CA4428A6567700F7E240 /* ContextManager.swift */,
 				90D3CA4D28AE418600F7E240 /* PhotoFilters.swift */,
+				90D3CAB228B71EA300F7E240 /* MovieWriter.swift */,
 			);
 			path = L_CameraWriter;
 			sourceTree = "<group>";
@@ -760,6 +763,7 @@
 				902923F227D3695D004E7D13 /* R.generated.swift in Sources */,
 				90AFD52328659802008198A4 /* CQScreenTool.m in Sources */,
 				902923EA27D359D9004E7D13 /* JXTableListViewController.swift in Sources */,
+				90D3CAB328B71EA300F7E240 /* MovieWriter.swift in Sources */,
 				90AFD510286562A3008198A4 /* CQCapturePreviewView.m in Sources */,
 				90E9F1192878222100E9FC41 /* L_CubeCamera.swift in Sources */,
 				902923EE27D359D9004E7D13 /* JXTableContentViewController.swift in Sources */,
