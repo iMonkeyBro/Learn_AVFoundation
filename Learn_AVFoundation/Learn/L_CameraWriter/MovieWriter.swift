@@ -21,26 +21,58 @@ extension MovieWriterDelegate {
 final class MovieWriter {
     
     var delegate: MovieWriterDelegate?
+    var isWriting: Bool = false
     
-    private let videoSettings: [String: String]
-    private let audioSettings: [String: String]
+    private let videoSettings: [String: Any]?
+    private let audioSettings: [String: Any]?
     private let dispatchQueue: DispatchQueue
     
     private var assetWriterInputPixelBufferAdaptor: AVAssetWriterInputPixelBufferAdaptor!
     private var assetWriter: AVAssetWriter!
     private var assetWriterVideoInput: AVAssetWriterInput!
     private var assetWriterAudioInput: AVAssetWriterInput!
+    
     private let ciContext: CIContext = ContextManager.shared.ciContext
     private let colorSpace: CGColorSpace = CGColorSpaceCreateDeviceRGB()
+    
     private var activeFilter: CIFilter = PhotoFilters.filters.first!
-    private var firstSample: Bool = false
+    private var firstSample: Bool = true
     
-    
-    init(videoSettings: [String: String], audioSettings: [String: String], dispatchQueue: DispatchQueue) {
+    init(videoSettings: [String: Any]?, audioSettings: [String: Any]?, dispatchQueue: DispatchQueue) {
         self.videoSettings = videoSettings
         self.audioSettings = audioSettings
         self.dispatchQueue = dispatchQueue
-        
+
+        NotificationCenter.default.addObserver(self, selector: #selector(filterChanged), name: FilterSelectionChangedNotification, object: nil)
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
+    @objc private func filterChanged(_ notification: NSNotification) {
+        activeFilter = (notification.object as? CIFilter)!
+    }
+    
+    private func outputURL() -> URL {
+        let filePath = NSTemporaryDirectory() + "AVAssetWriter_movie.mov"
+        let filerUrl = URL(fileURLWithPath: filePath)
+        if FileManager.default.fileExists(atPath: filePath) {
+            try? FileManager.default.removeItem(atPath: filePath)
+        }
+        return filerUrl
+    }
+}
+
+// MARK: - Public Func
+extension MovieWriter {
+    func startWriting() {
+        dispatchQueue.async {
+            self._startWriting()
+        }
+    }
+    
+    private func _startWriting() {
         // assetWriter
         do {
             assetWriter = try AVAssetWriter(url: self.outputURL(), fileType: .mov)
@@ -52,9 +84,15 @@ final class MovieWriter {
         assetWriterVideoInput = AVAssetWriterInput(mediaType: .video, outputSettings: videoSettings)
         assetWriterVideoInput.expectsMediaDataInRealTime = true
         assetWriterVideoInput.transform = transform(for: UIDevice.current.orientation)
-        let attributes: [String: Any] = [kCVPixelBufferPixelFormatTypeKey as String: kCVPixelFormatType_32RGBA,
-                                                     kCVPixelBufferWidthKey as String: videoSettings[AVVideoWidthKey],
-                                                    kCVPixelBufferHeightKey as String: videoSettings[AVVideoHeightKey], kCVPixelFormatOpenGLESCompatibility as String: kCFBooleanTrue]
+        var attributes: [String: Any] = [kCVPixelBufferPixelFormatTypeKey as String: kCVPixelFormatType_32RGBA,
+                                           kCVPixelFormatOpenGLESCompatibility as String: kCFBooleanTrue]
+        if let videoWidthKey = videoSettings?[AVVideoWidthKey] {
+            attributes[kCVPixelBufferWidthKey as String] = videoWidthKey
+        }
+        if let videoHeightKey = videoSettings?[AVVideoHeightKey] {
+            attributes[kCVPixelBufferHeightKey as String] = videoHeightKey
+        }
+        
         assetWriterInputPixelBufferAdaptor = AVAssetWriterInputPixelBufferAdaptor(assetWriterInput: assetWriterVideoInput, sourcePixelBufferAttributes: attributes)
         if (assetWriter.canAdd(assetWriterVideoInput) == true) {
             assetWriter.add(assetWriterVideoInput)
@@ -70,36 +108,18 @@ final class MovieWriter {
         } else {
             print("Unable to add audio input.")
         }
+        isWriting = true
         firstSample = true
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(filterChanged), name: FilterSelectionChangedNotification, object: nil)
-    }
-    
-    deinit {
-        NotificationCenter.default.removeObserver(self)
-    }
-    
-    @objc private func filterChanged(_ notification: NSNotification) {
-        activeFilter = (notification.object as? CIFilter)!
-    }
-    
-    private func outputURL() -> URL {
-        let filePath = NSTemporaryDirectory() + "movie.mov"
-        let filerUrl = URL(fileURLWithPath: filePath)
-        if FileManager.default.fileExists(atPath: filePath) {
-            try? FileManager.default.removeItem(atPath: filePath)
-        }
-        return filerUrl
-    }
-}
-
-// MARK: - Public Func
-extension MovieWriter {
-    func startWriting() {
-        
     }
     
     func stopWriting() {
+        isWriting = false;
+        dispatchQueue.async {
+            self._stopWriting()
+        }
+    }
+    
+    private func _stopWriting() {
         assetWriter.finishWriting {
             if self.assetWriter.status == .completed {
                 self.delegate?.didWriteMovieSuccess(at: self.outputURL())
@@ -111,6 +131,7 @@ extension MovieWriter {
     }
     
     func process(sampleBuffer: CMSampleBuffer) {
+        guard isWriting == true else { return }
         let formatDesc: CMFormatDescription = CMSampleBufferGetFormatDescription(sampleBuffer)!
         let mediaType: CMMediaType = CMFormatDescriptionGetMediaType(formatDesc)
         if mediaType == kCMMediaType_Video {
@@ -124,9 +145,9 @@ extension MovieWriter {
                 firstSample = false
             }
             // MARK: UnsafeMutablePointer
-            var outputRenderBuffer: UnsafeMutablePointer<CVPixelBuffer?> = UnsafeMutablePointer.allocate(capacity: 100)
+            var outputRenderBuffer: CVPixelBuffer?
             let pixelBufferPool: CVPixelBufferPool? = assetWriterInputPixelBufferAdaptor.pixelBufferPool
-            let createResult = CVPixelBufferPoolCreatePixelBuffer(nil, pixelBufferPool!, outputRenderBuffer)
+            let createResult = CVPixelBufferPoolCreatePixelBuffer(nil, pixelBufferPool!, &outputRenderBuffer)
             if createResult == kCVReturnError {
                 print("Unable to obtain a pixel buffer from the pool.")
                 return
@@ -140,18 +161,19 @@ extension MovieWriter {
                 filteredImage = sourceImage
             }
             
-            ciContext.render(filteredImage!, to: outputRenderBuffer as! CVPixelBuffer, bounds: filteredImage!.extent, colorSpace: colorSpace)
-            
-            if assetWriterVideoInput.isReadyForMoreMediaData == true {
-                if assetWriterInputPixelBufferAdaptor.append(outputRenderBuffer as! CVPixelBuffer, withPresentationTime: timestamp) == false {
-                    print("Error appending pixel buffer.")
+            if outputRenderBuffer != nil {
+                let pixBuffer: CVPixelBuffer = outputRenderBuffer!
+                ciContext.render(filteredImage!, to: pixBuffer, bounds: filteredImage!.extent, colorSpace: colorSpace)
+                
+                if assetWriterVideoInput.isReadyForMoreMediaData == true {
+                    if assetWriterInputPixelBufferAdaptor.append(pixBuffer, withPresentationTime: timestamp) == false {
+                        print("Error appending pixel buffer.")
+                    }
                 }
             }
-            
-            
         }
         
-        else if mediaType == kCMMediaType_Audio {
+        else if firstSample == false && mediaType == kCMMediaType_Audio {
             if assetWriterAudioInput.isReadyForMoreMediaData == true {
                 if assetWriterAudioInput.append(sampleBuffer) == false {
                     print("Error appending audio sample buffer.")
@@ -159,11 +181,6 @@ extension MovieWriter {
             }
         }
     }
-    
-    var isWriting: Bool {
-        return false
-    }
-    
     
 }
 

@@ -8,6 +8,8 @@
 #import <Foundation/Foundation.h>
 #import <AVFoundation/AVCaptureDevice.h>
 #import <AVFoundation/AVMetadataObject.h>
+#import <AVFoundation/AVCaptureAudioDataOutput.h>
+#import <AVFoundation/AVCaptureVideoDataOutput.h>
 #import <UIKit/UIKit.h>
 #import <CoreMedia/CMSampleBuffer.h>
 
@@ -135,6 +137,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, weak) id<CQCaptureManagerDelegate> delegate;
 
 @property (nonatomic, strong, readonly) AVCaptureSession *captureSession; ///< 捕捉会话
+@property (nonatomic, strong, readonly) AVCaptureAudioDataOutput *audioDataOutput;  ///< 音频数据输出
+@property (nonatomic, strong, readonly) AVCaptureVideoDataOutput *videoDataOutput;  ///< 视频数据输出
+@property (nonatomic, strong, readonly) dispatch_queue_t captureQueue; ///< 捕捉队列
 
 @property (nonatomic, assign) AVCaptureSessionPreset videoSessionPreset;  ///< 捕获视频的分辨率
 
