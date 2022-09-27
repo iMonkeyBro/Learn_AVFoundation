@@ -9,65 +9,27 @@ import UIKit
 
 let FilterSelectionChangedNotification: NSNotification.Name? = NSNotification.Name(rawValue: "filter_selection_changed")
 
-
-func centerCropImageRect(sourceRect: CGRect, previewRect: CGRect) -> CGRect {
-    let sourceAspectRatio: CGFloat = sourceRect.size.width/sourceRect.size.height
-    let previewAspectRatio: CGFloat = previewRect.size.width/previewRect.size.height
-    var drawRect = sourceRect
-    if sourceAspectRatio>previewAspectRatio {
-        let scaledHeight = drawRect.size.height*previewAspectRatio
-        drawRect.origin.x += (drawRect.self.width-scaledHeight)/2
-        drawRect.size.width = scaledHeight
-    } else {
-        drawRect.origin.y += (drawRect.size.height-drawRect.size.width/previewAspectRatio)/2
-        drawRect.size.height = drawRect.size.width/previewAspectRatio
-    }
-    return drawRect
-}
-
-func transform(for deviceOrientation: UIDeviceOrientation) -> CGAffineTransform {
-    let result: CGAffineTransform
-    switch deviceOrientation {
-    case .landscapeRight:
-        result = CGAffineTransform(rotationAngle: Double.pi)
-    case .portraitUpsideDown:
-        result = CGAffineTransform(rotationAngle: Double.pi/2*3)
-    case .portrait, .faceUp, .faceDown:
-        result = CGAffineTransform(rotationAngle: Double.pi/2)
-    case .unknown, .landscapeLeft:
-        result = CGAffineTransform.identity
-    @unknown default:
-        result = CGAffineTransform.identity
-    }
-    return result
-}
-
 /**
  使用GLKView 达到预览的效果
  */
 class ImageBufferPreview: GLKView {
-    
-    var image: CIImage?{
+    /// 需要绘制的image
+    var image: CIImage! {
         didSet {
             bindDrawable()
-            filter = PhotoFilters.filters.first!
-            filter?.setValue(oldValue, forKey: kCIInputImageKey)
-            let filteredImage = filter?.outputImage
-            if let `filteredImage` = filteredImage {
-                let cropRect: CGRect = centerCropImageRect(sourceRect: oldValue!.extent, previewRect: drawbleBounds)
-                coreImageContext?.draw(filteredImage, in: drawbleBounds, from: cropRect)
-            }
+            let cropRect: CGRect = WriteUtil.centerCropImageRect(sourceRect: image.extent, previewRect: drawbleBounds)
+            coreImageContext?.draw(image, in: drawbleBounds, from: cropRect)
             self.display()
-            filter?.setValue(nil, forKey: kCIInputImageKey)
         }
     }
     
-    var filter: CIFilter?
+    /// 绘制image上下文
     var coreImageContext: CIContext?
-    private var drawbleBounds: CGRect
+    
+    /// 绘制范围
+    private var drawbleBounds: CGRect = .zero
     
     override init(frame: CGRect, context: EAGLContext) {
-        drawbleBounds = .zero
         super.init(frame: frame, context: context)
         
         enableSetNeedsDisplay = false
@@ -79,7 +41,6 @@ class ImageBufferPreview: GLKView {
         drawbleBounds = bounds
         drawbleBounds.size.width = CGFloat(drawableWidth)
         drawbleBounds.size.height = CGFloat(drawableHeight)
-        NotificationCenter.default.addObserver(self, selector: #selector(filterChanged), name: FilterSelectionChangedNotification, object: nil)
     }
     
     required init?(coder: NSCoder) {
@@ -87,10 +48,7 @@ class ImageBufferPreview: GLKView {
     }
     
     deinit {
-        NotificationCenter.default.removeObserver(self)
+        CQLog("ImageBufferPreview-deinit")
     }
-    
-    @objc private func filterChanged(_ notification: NSNotification) {
-        filter = notification.object as? CIFilter
-    }
+
 }

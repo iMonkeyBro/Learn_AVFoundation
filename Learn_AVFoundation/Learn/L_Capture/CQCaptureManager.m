@@ -206,7 +206,7 @@ static const NSString *VideoZoomFactorContext;
     [self.videoDataOutput setAlwaysDiscardsLateVideoFrames:YES];
     //kCVPixelBufferPixelFormatTypeKey它指定像素的输出格式，这个参数直接影响输出的buffer到生成图像的成功与否，需要与外界指定相应的格式
    // kCVPixelFormatType_420YpCbCr8BiPlanarFullRange  YUV420格式.
-    self.videoDataOutput.videoSettings = @{(__bridge NSString *)kCVPixelBufferPixelFormatTypeKey: @(kCVPixelFormatType_420YpCbCr8BiPlanarFullRange)};
+//    self.videoDataOutput.videoSettings = @{(__bridge NSString *)kCVPixelBufferPixelFormatTypeKey: @(kCVPixelFormatType_420YpCbCr8BiPlanarFullRange)};
     // CUBE Demo 用这个设置 当结合OpenGLES和CoreImage时，kCVPixelFormatType_32BGRA非常适合
     self.videoDataOutput.videoSettings = @{(__bridge NSString *)kCVPixelBufferPixelFormatTypeKey:@(kCVPixelFormatType_32BGRA)};
     // 委托回调会有额外的时间处理buffer，但会增加内存，回调中应尽量高效，才能保证实时性能

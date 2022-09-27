@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class PhotoFilters {
+final class FilterManager {
     static let filters: [CIFilter] = [CIFilter(name: "CIPhotoEffectChrome")!,
                                       CIFilter(name: "CIPhotoEffectFade")!,
                                       CIFilter(name: "CIPhotoEffectInstant")!,
@@ -16,6 +16,18 @@ final class PhotoFilters {
                                       CIFilter(name: "CIPhotoEffectProcess")!,
                                       CIFilter(name: "CIPhotoEffectTonal")!,
                                       CIFilter(name: "CIPhotoEffectTransfer")!]
+    
+    
+    static func filterImage(for filter: CIFilter, pixelBuffer: CVPixelBuffer) -> CIImage {
+        // 原始Image
+        let sourceImage: CIImage = CIImage(cvPixelBuffer: pixelBuffer)
+        // 添加了滤镜Image
+        FilterManager.filters.first!.setValue(sourceImage, forKey: kCIInputImageKey)
+        var filteredImage: CIImage = FilterManager.filters.first!.outputImage ?? sourceImage
+        FilterManager.filters.first!.setValue(nil, forKey: kCIInputImageKey)
+        return filteredImage
+    }
+    
 }
 
 extension CIFilter {
