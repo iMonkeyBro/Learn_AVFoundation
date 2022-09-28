@@ -18,20 +18,20 @@ class ImageBufferPreview: GLKView {
         didSet {
             bindDrawable()
             let cropRect: CGRect = WriteUtil.centerCropImageRect(sourceRect: image.extent, previewRect: drawbleBounds)
-            coreImageContext?.draw(image, in: drawbleBounds, from: cropRect)
+            coreImageContext.draw(image, in: drawbleBounds, from: cropRect)
             self.display()
         }
     }
     
     /// 绘制image上下文
-    var coreImageContext: CIContext?
+    var coreImageContext: CIContext
     
     /// 绘制范围
     private var drawbleBounds: CGRect = .zero
     
-    override init(frame: CGRect, context: EAGLContext) {
-        super.init(frame: frame, context: context)
-        
+    override init(frame: CGRect) {
+        coreImageContext = CIContext(eaglContext: context, options: [CIContextOption.workingColorSpace: nil])
+        super.init(frame: frame, context: EAGLContext(api: .openGLES2)!)
         enableSetNeedsDisplay = false
         isOpaque = true
         backgroundColor = .black

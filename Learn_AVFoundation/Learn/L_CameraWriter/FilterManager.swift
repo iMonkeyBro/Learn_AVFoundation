@@ -22,9 +22,9 @@ final class FilterManager {
         // 原始Image
         let sourceImage: CIImage = CIImage(cvPixelBuffer: pixelBuffer)
         // 添加了滤镜Image
-        FilterManager.filters.first!.setValue(sourceImage, forKey: kCIInputImageKey)
-        var filteredImage: CIImage = FilterManager.filters.first!.outputImage ?? sourceImage
-        FilterManager.filters.first!.setValue(nil, forKey: kCIInputImageKey)
+        filter.setValue(sourceImage, forKey: kCIInputImageKey)
+        var filteredImage: CIImage = filter.outputImage ?? sourceImage
+//        filter.setValue(nil, forKey: kCIInputImageKey)
         return filteredImage
     }
     
