@@ -63,7 +63,6 @@
 		90B86B9E281A950A009E4220 /* CQPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90B86B9D281A9509009E4220 /* CQPlayer.swift */; };
 		90D3CA4028A4FE3C00F7E240 /* L_CameraWrite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90D3CA3F28A4FE3C00F7E240 /* L_CameraWrite.swift */; };
 		90D3CA4328A505C500F7E240 /* ImageBufferPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90D3CA4228A505C500F7E240 /* ImageBufferPreview.swift */; };
-		90D3CA4528A6567700F7E240 /* ContextManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90D3CA4428A6567700F7E240 /* ContextManager.swift */; };
 		90D3CA4E28AE418600F7E240 /* FilterManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90D3CA4D28AE418600F7E240 /* FilterManager.swift */; };
 		90D3CA5128AE430E00F7E240 /* NSString+CQ.m in Sources */ = {isa = PBXBuildFile; fileRef = 90D3CA5028AE430E00F7E240 /* NSString+CQ.m */; };
 		90D3CAB328B71EA300F7E240 /* MovieWriter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90D3CAB228B71EA300F7E240 /* MovieWriter.swift */; };
@@ -186,7 +185,6 @@
 		90B86B9D281A9509009E4220 /* CQPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CQPlayer.swift; sourceTree = "<group>"; };
 		90D3CA3F28A4FE3C00F7E240 /* L_CameraWrite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = L_CameraWrite.swift; sourceTree = "<group>"; };
 		90D3CA4228A505C500F7E240 /* ImageBufferPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageBufferPreview.swift; sourceTree = "<group>"; };
-		90D3CA4428A6567700F7E240 /* ContextManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContextManager.swift; sourceTree = "<group>"; };
 		90D3CA4D28AE418600F7E240 /* FilterManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterManager.swift; sourceTree = "<group>"; };
 		90D3CA4F28AE430E00F7E240 /* NSString+CQ.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSString+CQ.h"; sourceTree = "<group>"; };
 		90D3CA5028AE430E00F7E240 /* NSString+CQ.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSString+CQ.m"; sourceTree = "<group>"; };
@@ -424,7 +422,6 @@
 				90D3CAB228B71EA300F7E240 /* MovieWriter.swift */,
 				90D3CA4D28AE418600F7E240 /* FilterManager.swift */,
 				902B390228E2E5DC00035198 /* WriteUtil.swift */,
-				90D3CA4428A6567700F7E240 /* ContextManager.swift */,
 			);
 			path = L_CameraWriter;
 			sourceTree = "<group>";
@@ -744,7 +741,6 @@
 				90E9F11F2878342100E9FC41 /* CQShaderProgram.m in Sources */,
 				90D547012850A8810053ADEF /* L_AVKit.swift in Sources */,
 				902923E827D359D9004E7D13 /* JXDatabaseConnector.swift in Sources */,
-				90D3CA4528A6567700F7E240 /* ContextManager.swift in Sources */,
 				9DF46B7527D12EEB007369CF /* UITableViewExtension.swift in Sources */,
 				902C9D9027D8D2640060AB4C /* L_AVAsset.swift in Sources */,
 				90D3CA5128AE430E00F7E240 /* NSString+CQ.m in Sources */,

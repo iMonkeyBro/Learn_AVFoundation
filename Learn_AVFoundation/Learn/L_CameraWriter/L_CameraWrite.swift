@@ -51,8 +51,7 @@ class L_CameraWrite: BaseViewController {
         // 预览
         let eaglContext = EAGLContext(api: .openGLES2)!
         let ciContext = CIContext(eaglContext: eaglContext, options: [CIContextOption.workingColorSpace: nil])
-        preview = ImageBufferPreview(frame: CGRect(x: 0, y: CQScreenTool.safeAreaTop()+64, width: view.bounds.size.width, height: view.bounds.size.height-CQScreenTool.safeAreaTop()-64), context: eaglContext)
-        preview.coreImageContext = ciContext
+        preview = ImageBufferPreview(frame: CGRect(x: 0, y: CQScreenTool.safeAreaTop()+64, width: view.bounds.size.width, height: view.bounds.size.height-CQScreenTool.safeAreaTop()-64))
         view.addSubview(preview)
         
         captureManager.startCaptureVideoData()

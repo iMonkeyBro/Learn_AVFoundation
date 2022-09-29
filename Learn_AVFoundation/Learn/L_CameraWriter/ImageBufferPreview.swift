@@ -7,8 +7,6 @@
 
 import UIKit
 
-let FilterSelectionChangedNotification: NSNotification.Name? = NSNotification.Name(rawValue: "filter_selection_changed")
-
 /**
  使用GLKView 达到预览的效果
  */
@@ -24,14 +22,15 @@ class ImageBufferPreview: GLKView {
     }
     
     /// 绘制image上下文
-    var coreImageContext: CIContext
+    private(set) var coreImageContext: CIContext
     
     /// 绘制范围
     private var drawbleBounds: CGRect = .zero
     
     override init(frame: CGRect) {
-        coreImageContext = CIContext(eaglContext: context, options: [CIContextOption.workingColorSpace: nil])
-        super.init(frame: frame, context: EAGLContext(api: .openGLES2)!)
+        let eaglContext = EAGLContext(api: .openGLES2)!
+        coreImageContext = CIContext(eaglContext: eaglContext, options: [CIContextOption.workingColorSpace: nil])
+        super.init(frame: frame, context: eaglContext)
         enableSetNeedsDisplay = false
         isOpaque = true
         backgroundColor = .black

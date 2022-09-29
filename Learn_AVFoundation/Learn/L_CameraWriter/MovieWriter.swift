@@ -24,7 +24,7 @@ final class MovieWriter {
     /// 是否正在写入标识
     private(set) var isWritingFlag: Bool = false
     /// coreImage上下文
-    private let ciContext: CIContext = {
+    var ciContext: CIContext = {
         let eaglContext = EAGLContext(api: .openGLES2)!
         let ciContext = CIContext(eaglContext: eaglContext, options: [CIContextOption.workingColorSpace: nil])
         return ciContext
