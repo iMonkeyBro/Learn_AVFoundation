@@ -31,7 +31,11 @@ static const NSString *VideoZoomFactorContext;
 
 @interface CQCaptureManager ()<AVCaptureFileOutputRecordingDelegate, AVCaptureVideoDataOutputSampleBufferDelegate, AVCaptureAudioDataOutputSampleBufferDelegate, AVCaptureMetadataOutputObjectsDelegate>
 /*********公共**********/
-@property (nonatomic, strong) dispatch_queue_t captureQueue; ///< 捕捉队列
+/**
+ 为了不阻塞主线程，最好为AVCaptureOutput分配专门的串行队列
+ */
+@property (nonatomic, strong) dispatch_queue_t captureVideoQueue; ///< 捕捉视频队列
+@property (nonatomic, strong) dispatch_queue_t captureAudioQueue; ///< 捕捉音频队列
 @property (nonatomic, strong) AVCaptureSession *captureSession; ///< 捕捉会话
 /*********视频相关**********/
 // captureSession下活跃的视频输入,一个捕捉会话下会有很多，设置个成员变量方便拿
@@ -202,7 +206,7 @@ static const NSString *VideoZoomFactorContext;
 - (void)configVideoDataOutput {
     // 视频Buffer输出
     self.videoDataOutput = [[AVCaptureVideoDataOutput alloc] init];
-    [self.videoDataOutput setSampleBufferDelegate:self queue:self.captureQueue];
+    [self.videoDataOutput setSampleBufferDelegate:self queue:self.captureVideoQueue];
     [self.videoDataOutput setAlwaysDiscardsLateVideoFrames:YES];
     //kCVPixelBufferPixelFormatTypeKey它指定像素的输出格式，这个参数直接影响输出的buffer到生成图像的成功与否，需要与外界指定相应的格式
    // kCVPixelFormatType_420YpCbCr8BiPlanarFullRange  YUV420格式.
@@ -249,7 +253,7 @@ static const NSString *VideoZoomFactorContext;
 /// 配置音频数据输出
 - (BOOL)configAudioDataOutput {
     self.audioDataOutput = [[AVCaptureAudioDataOutput alloc] init];
-    [self.audioDataOutput setSampleBufferDelegate:self queue:self.captureQueue];
+    [self.audioDataOutput setSampleBufferDelegate:self queue:self.captureAudioQueue];
     if([self.captureSession canAddOutput:self.audioDataOutput]){
         [self.captureSession beginConfiguration];
         [self.captureSession addOutput:self.audioDataOutput];
@@ -300,7 +304,7 @@ static const NSString *VideoZoomFactorContext;
     // 检查是否处于运行状态
     if (![self.captureSession isRunning]) {
         // 使用同步调用会损耗一定的时间，则用异步的方式处理
-        dispatch_sync(self.captureQueue, ^{
+        dispatch_sync(self.captureVideoQueue, ^{
             [self.captureSession startRunning];
         });
     }
@@ -310,7 +314,7 @@ static const NSString *VideoZoomFactorContext;
 - (void)stopSessionSync {
     // 检查是否处于运行状态
     if ([self.captureSession isRunning]) {
-        dispatch_sync(self.captureQueue, ^{
+        dispatch_sync(self.captureVideoQueue, ^{
             [self.captureSession stopRunning];
         });
     }
@@ -321,7 +325,7 @@ static const NSString *VideoZoomFactorContext;
     // 检查是否处于运行状态
     if (![self.captureSession isRunning]) {
         // 使用同步调用会损耗一定的时间，则用异步的方式处理
-        dispatch_async(self.captureQueue, ^{
+        dispatch_async(self.captureVideoQueue, ^{
             [self.captureSession startRunning];
         });
     }
@@ -331,7 +335,7 @@ static const NSString *VideoZoomFactorContext;
 - (void)stopSessionAsync {
     // 检查是否处于运行状态
     if ([self.captureSession isRunning]) {
-        dispatch_async(self.captureQueue, ^{
+        dispatch_async(self.captureVideoQueue, ^{
             [self.captureSession stopRunning];
         });
     }
@@ -539,7 +543,7 @@ static const NSString *VideoZoomFactorContext;
 
 /// 获取视频文件封面图
 - (void)getVideoCoverImageWithVideoURL:(NSURL *)videoURL callBlock:(void(^)(UIImage *))callBlock {
-    dispatch_async(self.captureQueue, ^{
+    dispatch_async(self.captureVideoQueue, ^{
         AVAsset *asset = [AVAsset assetWithURL:videoURL];
         AVAssetImageGenerator *imageGenerator = [AVAssetImageGenerator assetImageGeneratorWithAsset:asset];
         // 设置maximumSize 宽为100，高为0 根据视频的宽高比来计算图片的高度
@@ -1129,11 +1133,18 @@ static const NSString *VideoZoomFactorContext;
 }
 
 #pragma mark - Lazy Load
-- (dispatch_queue_t)captureQueue {
-    if (!_captureQueue) {
-        _captureQueue = dispatch_queue_create("CQ_VideoQueue", NULL);
+- (dispatch_queue_t)captureVideoQueue {
+    if (!_captureVideoQueue) {
+        _captureVideoQueue = dispatch_queue_create("CQ_VideoQueue", NULL);
     }
-    return _captureQueue;
+    return _captureVideoQueue;
+}
+
+- (dispatch_queue_t)captureAudioQueue {
+    if (!_captureAudioQueue) {
+        _captureAudioQueue = dispatch_queue_create("CQ_AudioQueue", NULL);
+    }
+    return _captureAudioQueue;
 }
 
 @end

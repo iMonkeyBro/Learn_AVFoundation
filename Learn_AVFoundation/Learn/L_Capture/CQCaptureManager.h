@@ -139,7 +139,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong, readonly) AVCaptureSession *captureSession; ///< 捕捉会话
 @property (nonatomic, strong, readonly) AVCaptureAudioDataOutput *audioDataOutput;  ///< 音频数据输出
 @property (nonatomic, strong, readonly) AVCaptureVideoDataOutput *videoDataOutput;  ///< 视频数据输出
-@property (nonatomic, strong, readonly) dispatch_queue_t captureQueue; ///< 捕捉队列
+@property (nonatomic, strong, readonly) dispatch_queue_t captureVideoQueue; ///< 捕捉队列
 
 @property (nonatomic, assign) AVCaptureSessionPreset videoSessionPreset;  ///< 捕获视频的分辨率
 

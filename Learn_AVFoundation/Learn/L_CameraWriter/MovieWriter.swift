@@ -47,6 +47,12 @@ final class MovieWriter {
         self.videoSettings = videoSettings
         self.audioSettings = audioSettings
         
+        /**
+         AVAssetWriter通过多个(音频、视频等)AVAssetWriterInput对象配置。AVAssetWriterInput通过mediaType和outputSettings来初始化，我们可以在outputSettings中进行视频比特率、视频宽高、关键帧间隔等细致的配置，这也是AVAssetWrite相比AVAssetExportSession明显的优势。AVAssetWriterInput在附加数据后会在最终输出时生成一个独立的AVAssetTrack.
+
+         此处用到了PixelBufferAdaptor来附加CVPixelBuffer类型的数据，它在附加CVPixelBuffer对象的视频样本时能提供最优性能。
+         */
+        
         // assetWriter
         assetWriter = try! AVAssetWriter(url: WriteUtil.outputURL(), fileType: .mov)
         
@@ -110,6 +116,12 @@ extension MovieWriter {
     }
     
     func process(image: CIImage, atTime time: CMTime) {
+        /**
+         数据保存阶段将加工后的媒体资源进行编码并写入到容器文件中，比如mp4文件或.mov文件等。此处使用AVAssetWriter，它支持实时写入。
+         它默认期望接收到的数据也是CMSampleBuffer格式。但也可以通过pixelBufferAdaptor适配成它所期望的数据，这里改为了写入CVPixelBuffer。
+         这里函数我们要求传入CIImage,然后将CIImage渲染成CVPixelBuffer，再进行写入。
+         */
+        
         guard isWritingFlag == true else { return }
         if isFirstSampleFlag == true {
             if assetWriter.startWriting() == true {
@@ -132,6 +144,7 @@ extension MovieWriter {
             return
         }
         
+        // 将CIImage渲染到CVPixelBuffer，再进行写入
         ciContext.render(image, to: outputRenderBuffer!, bounds: image.extent, colorSpace: colorSpace)
         if videoInput.isReadyForMoreMediaData == true {
             let result = inputPixelBufferAdaptor.append(outputRenderBuffer!, withPresentationTime: time)
@@ -143,7 +156,7 @@ extension MovieWriter {
     
     func process(audioBuffer: CMSampleBuffer) {
         guard isWritingFlag == true else { return }
-        guard isFirstSampleFlag == true else { return }
+        guard isFirstSampleFlag == false else { return }
         if audioInput.isReadyForMoreMediaData == true {
             let result = audioInput.append(audioBuffer)
             if result == false {

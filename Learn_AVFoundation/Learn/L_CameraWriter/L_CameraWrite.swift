@@ -11,6 +11,7 @@ class L_CameraWrite: BaseViewController {
 
     private let captureManager: CQCaptureManager = CQCaptureManager()
     private var preview: ImageBufferPreview!
+    private var preview2: ImagePreview!
     private var movieWriter: MovieWriter!
     private var currentFilter: CIFilter = FilterManager.filters[0]
     
@@ -54,6 +55,9 @@ class L_CameraWrite: BaseViewController {
         preview = ImageBufferPreview(frame: CGRect(x: 0, y: CQScreenTool.safeAreaTop()+64, width: view.bounds.size.width, height: view.bounds.size.height-CQScreenTool.safeAreaTop()-64))
         view.addSubview(preview)
         
+        preview2 = ImagePreview(frame: CGRect(x: 0, y: CQScreenTool.safeAreaTop()+64, width: view.bounds.size.width, height: view.bounds.size.height-CQScreenTool.safeAreaTop()-64))
+        view.addSubview(preview2)
+        
         captureManager.startCaptureVideoData()
         
         view.addSubview(recordBtn)
@@ -85,14 +89,26 @@ extension L_CameraWrite: CQCaptureManagerDelegate {
          原书中Demo，将原始CMSampleBuffer 分别传给展示层和写入层，展示层和写入层分别加滤镜，从代码维护和性能上都不好，改为这里加滤镜，给到展示和写入的都是加了滤镜的
          */
         
-        guard let imageBuffer: CVPixelBuffer = CMSampleBufferGetImageBuffer(sampleBuffer) else { return }
-        let filteredImage = FilterManager.filterImage(for: currentFilter, pixelBuffer: imageBuffer)
+        /**
+         为了达到实时滤镜的效果，需要在每一帧的回调数据中，都对每一帧的图像数据都应用当前滤镜的效果，从而用户可以在拍摄过程中不断切换各种滤镜。
+         */
+        
+        /**
+         数据加工阶段可以基于CMSampleBuffer进行各种处理，包括加滤镜等，都在这个阶段。sampleBuffer会包含一个CVPixelBuffer，它是一个带有单个视频帧原始像素数据的Core Video对象，据此我们可以进行像素级别的加工。
+         */
+        
+        guard let pixelBuffer: CVPixelBuffer = CMSampleBufferGetImageBuffer(sampleBuffer) else { return }
+        let filteredImage: CIImage = FilterManager.filterImage(for: currentFilter, pixelBuffer: pixelBuffer)
         
         // 写入
         movieWriter.process(image: filteredImage, atTime: CMSampleBufferGetPresentationTimeStamp(sampleBuffer))
 
         // 展示
-        preview.image = filteredImage  
+//        preview.image = filteredImage
+        Asyncs.asyncMain {
+            self.preview2.image = UIImage(ciImage: filteredImage)
+        }
+        
     }
     
     func captureAudioSampleBuffer(_ sampleBuffer: CMSampleBuffer) {
