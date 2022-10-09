@@ -24,38 +24,38 @@ class L_AVComposition: AVPlayerViewController {
         let audioAsset1 = AVURLAsset(url: audioUrl, options: optionl)
         audioAsset1.loadValuesAsynchronously(forKeys: keys)
         // 视频资源1
-        let videoUrl1: URL = Bundle.main.url(forResource: "01_nebula", withExtension: "mp4")!
+        guard let videoUrl1: URL = Bundle.main.url(forResource: "01_nebula", withExtension: "mp4") else { return }
         let videoAsset1 = AVURLAsset(url: videoUrl1, options: optionl)
         videoAsset1.loadValuesAsynchronously(forKeys: keys)
         // 视频资源2
-        let videoUrl2: URL = Bundle.main.url(forResource: "02_blackhole", withExtension: "mp4")!
+        guard let videoUrl2: URL = Bundle.main.url(forResource: "02_blackhole", withExtension: "mp4") else { return }
         let videoAsset2 = AVURLAsset(url: videoUrl2, options: optionl)
         videoAsset2.loadValuesAsynchronously(forKeys: keys)
         // 创建可变创作，添加视频轨道 音频轨道
         let composition: AVMutableComposition = AVMutableComposition()
-        let videoTrack: AVMutableCompositionTrack = composition.addMutableTrack(withMediaType: .video, preferredTrackID: kCMPersistentTrackID_Invalid)!
-        let audioTrack: AVMutableCompositionTrack = composition.addMutableTrack(withMediaType: .audio, preferredTrackID: kCMPersistentTrackID_Invalid)!
+        guard let videoTrack: AVMutableCompositionTrack = composition.addMutableTrack(withMediaType: .video, preferredTrackID: kCMPersistentTrackID_Invalid) else { return }
+        guard let audioTrack: AVMutableCompositionTrack = composition.addMutableTrack(withMediaType: .audio, preferredTrackID: kCMPersistentTrackID_Invalid) else { return }
         
         var cursorTime: CMTime = .zero
         let videoDuration: CMTime = CMTimeMake(value: 5, timescale: 1)
         let videoRange: CMTimeRange = CMTimeRange(start: .zero, duration: videoDuration)
         // 从视频资源1获取轨道
-        let videoTrack1: AVAssetTrack = videoAsset1.tracks(withMediaType: .video).first!
+        guard let videoTrack1: AVAssetTrack = videoAsset1.tracks(withMediaType: .video).first else { return }
         // 将视频资源1的轨道添加到视频轨道
-        try! videoTrack.insertTimeRange(videoRange, of: videoTrack1, at: cursorTime)
+        try? videoTrack.insertTimeRange(videoRange, of: videoTrack1, at: cursorTime)
         
         cursorTime = CMTimeAdd(cursorTime, videoDuration)
         // 从视频资源2获取轨道
-        let videoTrack2: AVAssetTrack = videoAsset2.tracks(withMediaType: .video).first!
+        guard let videoTrack2: AVAssetTrack = videoAsset2.tracks(withMediaType: .video).first else { return }
         // 将视频资源2的轨道添加到视频轨道
-        try! videoTrack.insertTimeRange(videoRange, of: videoTrack2, at: cursorTime)
+        try? videoTrack.insertTimeRange(videoRange, of: videoTrack2, at: cursorTime)
         
         cursorTime = .zero
         let audioRange: CMTimeRange = CMTimeRange(start: .zero, duration: composition.duration)
         // 从音频资源1获取轨道
-        let audioTrack1: AVAssetTrack = audioAsset1.tracks(withMediaType: .audio).first!
+        guard let audioTrack1: AVAssetTrack = audioAsset1.tracks(withMediaType: .audio).first else { return }
         // 将音频资源1的轨道添加到音频轨道
-        try! audioTrack.insertTimeRange(audioRange, of: audioTrack1, at: cursorTime)
+        try? audioTrack.insertTimeRange(audioRange, of: audioTrack1, at: cursorTime)
         
         // 测试播放创作效果
         player = AVPlayer(playerItem: AVPlayerItem(asset: composition))
