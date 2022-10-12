@@ -17,6 +17,7 @@
 		90085D2228F1951F00C4D0EE /* John F. Kennedy.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 90085D1E28F1951F00C4D0EE /* John F. Kennedy.m4a */; };
 		90085D2328F1951F00C4D0EE /* Ronald Reagan.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 90085D1F28F1951F00C4D0EE /* Ronald Reagan.m4a */; };
 		90085D2628F19C5400C4D0EE /* L_AVComposition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90085D2528F19C5400C4D0EE /* L_AVComposition.swift */; };
+		90085D2828F5584700C4D0EE /* AVCompositionExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90085D2728F5584700C4D0EE /* AVCompositionExtension.swift */; };
 		901525D4286AF5AE008EF88D /* CQCameraZoomView.m in Sources */ = {isa = PBXBuildFile; fileRef = 901525D3286AF5AE008EF88D /* CQCameraZoomView.m */; };
 		901525D7286D488A008EF88D /* AVCaptureDevice+Rate.m in Sources */ = {isa = PBXBuildFile; fileRef = 901525D6286D488A008EF88D /* AVCaptureDevice+Rate.m */; };
 		9017F58E281441F50090345A /* L_AVPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9017F58D281441F40090345A /* L_AVPlayer.swift */; };
@@ -129,6 +130,7 @@
 		90085D1E28F1951F00C4D0EE /* John F. Kennedy.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "John F. Kennedy.m4a"; sourceTree = "<group>"; };
 		90085D1F28F1951F00C4D0EE /* Ronald Reagan.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Ronald Reagan.m4a"; sourceTree = "<group>"; };
 		90085D2528F19C5400C4D0EE /* L_AVComposition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = L_AVComposition.swift; sourceTree = "<group>"; };
+		90085D2728F5584700C4D0EE /* AVCompositionExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AVCompositionExtension.swift; sourceTree = "<group>"; };
 		901525D2286AF5AE008EF88D /* CQCameraZoomView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CQCameraZoomView.h; sourceTree = "<group>"; };
 		901525D3286AF5AE008EF88D /* CQCameraZoomView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CQCameraZoomView.m; sourceTree = "<group>"; };
 		901525D5286D488A008EF88D /* AVCaptureDevice+Rate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AVCaptureDevice+Rate.h"; sourceTree = "<group>"; };
@@ -312,6 +314,7 @@
 			isa = PBXGroup;
 			children = (
 				90085D2528F19C5400C4D0EE /* L_AVComposition.swift */,
+				90085D2728F5584700C4D0EE /* AVCompositionExtension.swift */,
 			);
 			path = L_AVComposition;
 			sourceTree = "<group>";
@@ -564,7 +567,6 @@
 		9DF46B7727D1319C007369CF /* Learn */ = {
 			isa = PBXGroup;
 			children = (
-				90085D2428F19C3200C4D0EE /* L_AVComposition */,
 				9DF46B7827D1324E007369CF /* L_AVSpeechSynthesizer.swift */,
 				902388CA27FF212400C9F922 /* L_AVAudioPlayer.swift */,
 				902923D127D25240004E7D13 /* L_AudioLooper.swift */,
@@ -578,6 +580,7 @@
 				905C3E602857165E005C83AF /* L_AVAssetReaderWriter.swift */,
 				905C3E622857398E005C83AF /* L_Waveform */,
 				90D3CA4128A4FE4300F7E240 /* L_CameraWriter */,
+				90085D2428F19C3200C4D0EE /* L_AVComposition */,
 			);
 			path = Learn;
 			sourceTree = "<group>";
@@ -821,6 +824,7 @@
 				90085D2628F19C5400C4D0EE /* L_AVComposition.swift in Sources */,
 				901525D4286AF5AE008EF88D /* CQCameraZoomView.m in Sources */,
 				90AFD520286593EB008198A4 /* UIButton+CQExtension.m in Sources */,
+				90085D2828F5584700C4D0EE /* AVCompositionExtension.swift in Sources */,
 				90E9F11F2878342100E9FC41 /* CQShaderProgram.m in Sources */,
 				90D547012850A8810053ADEF /* L_AVKit.swift in Sources */,
 				902923E827D359D9004E7D13 /* JXDatabaseConnector.swift in Sources */,
