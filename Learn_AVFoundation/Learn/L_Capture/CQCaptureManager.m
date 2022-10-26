@@ -12,13 +12,6 @@
 #import "NSFileManager+CQ.h"
 #import "AVCaptureDevice+Rate.h"
 
-#define kasync_main_safe(block)\
-if ([NSThread isMainThread]) {\
-block();\
-} else {\
-dispatch_async(dispatch_get_main_queue(), block);\
-}
-
 static const NSString *CameraAdjustingExposureContext;
 static const NSString *RampingVideoZoomContext;
 static const NSString *VideoZoomFactorContext;
@@ -49,7 +42,7 @@ static const NSString *VideoZoomFactorContext;
 @property (nonatomic, strong) AVCaptureDeviceInput *audioDeviceInput;  ///< 音频输入设备
 @property (nonatomic, strong) AVCaptureAudioDataOutput *audioDataOutput;  ///< 音频数据输出
 /*********Metadata相关**********/
-@property (nonatomic, strong) AVCaptureMetadataOutput *metadataOutput;  ///< 音频数据输出
+@property (nonatomic, strong) AVCaptureMetadataOutput *metadataOutput;  ///< 元数据输出
 
 @end
 
@@ -582,7 +575,7 @@ static const NSString *VideoZoomFactorContext;
     [self stopSessionSync];
 }
 
-/// 捕捉视频数据
+/// 捕捉静音视频数据
 - (void)startCaptureMuteVideoData {
     if (!self.isConfigSessionPreset) [self configSessionPreset:AVCaptureSessionPresetMedium];
     if (!self.videoDeviceInput) {
