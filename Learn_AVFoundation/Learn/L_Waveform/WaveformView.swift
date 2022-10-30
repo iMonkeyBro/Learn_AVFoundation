@@ -19,7 +19,7 @@ class WaveformView: UIView {
         didSet {
             SampleDataProvider.loadAudioSamples(from: asset!) {[weak self] data in
                 guard let `self` = self else { return }
-                self.filter = THSampleDataFilter(data: data)
+                self.filter = SampleDataFilter(sampleData: data!)
                 self.loadingView.stopAnimating()
                 
                 // 调用该函数会调用drawRect
@@ -36,7 +36,7 @@ class WaveformView: UIView {
             setNeedsDisplay()
         }
     }
-    private var filter: THSampleDataFilter?
+    private var filter: SampleDataFilter?
     private lazy var loadingView: UIActivityIndicatorView = {
         let loading: UIActivityIndicatorView = UIActivityIndicatorView(style: .whiteLarge)
         loading.center = CGPoint(x: bounds.width/2, y: bounds.height/2)
@@ -63,7 +63,7 @@ class WaveformView: UIView {
         guard filter != nil else { return }
         
         let contenxt: CGContext = UIGraphicsGetCurrentContext()!
-        // 1.我们希望在视图内呈现这个波形，所以首先基于自定的高宽常量来缩放图像上下文
+        // 1.自定的高宽常量来缩放图像上下文
         // 然后计算xy偏移量，转换上下文，在缩放上下文中适当调整偏移
         contenxt.scaleBy(x: Metric.widthScaling, y: Metric.heightScaling)
         let xOffset: CGFloat = (1-Metric.widthScaling)*bounds.width
@@ -71,7 +71,7 @@ class WaveformView: UIView {
         contenxt.translateBy(x: xOffset/2, y: yOffset/2)
         
         // 2.根据视图尺寸获取筛选样本，
-        let filteredSamples = try? filter?.filteredSamples(for: bounds.size)
+        let filteredSamples =  filter?.filteredSamples(for: bounds.size)
         guard let `filteredSamples` = filteredSamples else { return }
         
         let midY = rect.midY
@@ -81,20 +81,21 @@ class WaveformView: UIView {
         halfPath.move(to: CGPoint(x: 0.0, y: midY))
         // 迭代向路径中添加点，索引作为x，样本值为y
         for (index,element) in filteredSamples.enumerated() {
-            let sample: CGFloat = CGFloat(element.floatValue)
+            let sample: CGFloat = CGFloat(element)
             halfPath.addLine(to: CGPoint(x: CGFloat(index), y: midY - sample))
         }
         // 上半部的最后一个点
         halfPath.addLine(to: CGPoint(x: CGFloat(filteredSamples.count), y: midY))
         
-        // 4.创建第二个CGMutablePath，传递halfPath，使用这个Bezier路径绘制完整的波形
+        // 4.基于halfPath创建fullPath，用来绘制完整波形
         let fullPath = CGMutablePath()
         fullPath.addPath(halfPath)
         
-        // 5.要绘制下半部，需要对上半部路径translate和scale，使上半部路径翻转到下面，填满整个波形
-        let transform = CGAffineTransform.identity
-        transform.translatedBy(x: 0, y: rect.height)
-        transform.scaledBy(x: 1.0, y: -1.0)
+        // 5.绘制下半部，对上半部translate和scale，使上半部翻转到下面，填满整个波形
+        var transform = CGAffineTransform.identity
+        transform = transform.translatedBy(x: 0, y: rect.height)
+        transform = transform.scaledBy(x: 1.0, y: -1.0)
+        fullPath.addPath(halfPath,transform: transform)
         
         // 6.将完成的路径添加到图像上下文，根据指定的waveColor填充颜色，
         contenxt.addPath(fullPath)

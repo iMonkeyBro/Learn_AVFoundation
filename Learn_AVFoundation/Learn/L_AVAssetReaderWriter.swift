@@ -16,14 +16,14 @@ class L_AVAssetReaderWriter: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // 创建AVAssetReader AVAssetReaderTrackOutput
+        // 示例音频文件AVAssetTrack
         let videoUrl: URL = Bundle.main.url(forResource: "hubblecast2", withExtension: "m4v")!
         let asset: AVAsset = AVAsset(url: videoUrl)
         let track: AVAssetTrack = asset.tracks(withMediaType: .video).first!
-        // 创建AVAssetReader，传递读取AVAsset实例
+        // 创建AVAssetReader，读取AVAsset实例
         assetReader = try! AVAssetReader(asset: asset)
-        let readerOutSettings: [String : Any] = [kCVPixelBufferPixelFormatTypeKey as String: kCVPixelFormatType_32BGRA]
         // 创建AVAssetReaderTrackOutput从资源的视频轨道读取样本，将视频帧解压缩为BGRA格式
+        let readerOutSettings: [String : Any] = [kCVPixelBufferPixelFormatTypeKey as String: kCVPixelFormatType_32BGRA]
         let trackOutput: AVAssetReaderTrackOutput = AVAssetReaderTrackOutput(track: track, outputSettings: readerOutSettings)
         // AVAssetReader添加AVAssetReaderTrackOutput
         guard assetReader.canAdd(trackOutput) else { return }

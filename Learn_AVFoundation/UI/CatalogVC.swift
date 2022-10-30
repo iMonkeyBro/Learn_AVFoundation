@@ -35,7 +35,7 @@ class CatalogVC: BaseViewController {
                                                 ["title": "学习音频波形图", "vc": "L_Waveform"],
                                                 ["title": "相机(AVAssetWrite写入)", "vc": "L_CameraWrite"],
                                                 ["title": "AVComposition", "vc": "L_AVComposition"],
-                                                ["title": "--", "vc": "BaseViewController"],
+                                                ["title": "CMTime学习", "vc": "L_CMTime"],
                                                 ["title": "--", "vc": "BaseViewController"],]
     
     override func viewDidLoad() {

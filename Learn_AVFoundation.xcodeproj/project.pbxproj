@@ -85,6 +85,7 @@
 		90E9F123287C0A9100E9FC41 /* Shader.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 90E9F121287C0A9100E9FC41 /* Shader.vsh */; };
 		9D38CD3828EC523500106B56 /* ImagePreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D38CD3728EC523500106B56 /* ImagePreview.swift */; };
 		9D49D91C281AE7BD009C4BE2 /* hubblecast2.m4v in Resources */ = {isa = PBXBuildFile; fileRef = 9D49D91B281AE7BD009C4BE2 /* hubblecast2.m4v */; };
+		9D91CAF9290ECBA400F2F4C9 /* L_CMTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D91CAF8290ECBA400F2F4C9 /* L_CMTime.swift */; };
 		9DF46B6027D12938007369CF /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DF46B5F27D12938007369CF /* BaseViewController.swift */; };
 		9DF46B6227D1294E007369CF /* BaseNavController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DF46B6127D1294E007369CF /* BaseNavController.swift */; };
 		9DF46B6427D129D2007369CF /* CatalogVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DF46B6327D129D2007369CF /* CatalogVC.swift */; };
@@ -222,6 +223,7 @@
 		90E9F121287C0A9100E9FC41 /* Shader.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = Shader.vsh; sourceTree = "<group>"; };
 		9D38CD3728EC523500106B56 /* ImagePreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePreview.swift; sourceTree = "<group>"; };
 		9D49D91B281AE7BD009C4BE2 /* hubblecast2.m4v */ = {isa = PBXFileReference; lastKnownFileType = file; path = hubblecast2.m4v; sourceTree = "<group>"; };
+		9D91CAF8290ECBA400F2F4C9 /* L_CMTime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = L_CMTime.swift; sourceTree = "<group>"; };
 		9DF46B5F27D12938007369CF /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		9DF46B6127D1294E007369CF /* BaseNavController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseNavController.swift; sourceTree = "<group>"; };
 		9DF46B6327D129D2007369CF /* CatalogVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatalogVC.swift; sourceTree = "<group>"; };
@@ -581,6 +583,7 @@
 				905C3E622857398E005C83AF /* L_Waveform */,
 				90D3CA4128A4FE4300F7E240 /* L_CameraWriter */,
 				90085D2428F19C3200C4D0EE /* L_AVComposition */,
+				9D91CAF8290ECBA400F2F4C9 /* L_CMTime.swift */,
 			);
 			path = Learn;
 			sourceTree = "<group>";
@@ -862,6 +865,7 @@
 				90AFD51D2865636A008198A4 /* CQCameraShutterButton.m in Sources */,
 				902388CB27FF212400C9F922 /* L_AVAudioPlayer.swift in Sources */,
 				90AFD51B2865636A008198A4 /* CQCameraOperateView.m in Sources */,
+				9D91CAF9290ECBA400F2F4C9 /* L_CMTime.swift in Sources */,
 				902923D227D25240004E7D13 /* L_AudioLooper.swift in Sources */,
 				902923EC27D359D9004E7D13 /* JXTextPreviewViewController.swift in Sources */,
 				90AFD526286598C0008198A4 /* CQAuthorizationTool.m in Sources */,

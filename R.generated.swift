@@ -130,20 +130,30 @@ struct R: Rswift.Validatable {
     fileprivate init() {}
   }
 
-  /// This `R.file` struct is generated, and contains static references to 13 files.
+  /// This `R.file` struct is generated, and contains static references to 18 files.
   struct file {
     /// Resource file `01 Demo AAC.m4a`.
     static let demoAACM4a = Rswift.FileResource(bundle: R.hostingBundle, name: "01 Demo AAC", pathExtension: "m4a")
+    /// Resource file `01 Star Gazing.m4a`.
+    static let starGazingM4a = Rswift.FileResource(bundle: R.hostingBundle, name: "01 Star Gazing", pathExtension: "m4a")
     /// Resource file `02 Demo ID3v2.2.mp3`.
     static let demoID3v22Mp3 = Rswift.FileResource(bundle: R.hostingBundle, name: "02 Demo ID3v2.2", pathExtension: "mp3")
+    /// Resource file `02 Keep Going.m4a`.
+    static let keepGoingM4a = Rswift.FileResource(bundle: R.hostingBundle, name: "02 Keep Going", pathExtension: "m4a")
     /// Resource file `03 Demo ID3v2.3.mp3`.
     static let demoID3v23Mp3 = Rswift.FileResource(bundle: R.hostingBundle, name: "03 Demo ID3v2.3", pathExtension: "mp3")
     /// Resource file `04 Demo ID3v2.4.mp3`.
     static let demoID3v24Mp3 = Rswift.FileResource(bundle: R.hostingBundle, name: "04 Demo ID3v2.4", pathExtension: "mp3")
+    /// Resource file `04_quasar.mp4`.
+    static let _quasarMp4 = Rswift.FileResource(bundle: R.hostingBundle, name: "04_quasar", pathExtension: "mp4")
     /// Resource file `Charlie The Unicorn.m4v`.
     static let charlieTheUnicornM4v = Rswift.FileResource(bundle: R.hostingBundle, name: "Charlie The Unicorn", pathExtension: "m4v")
     /// Resource file `Hubblecast.mov`.
     static let hubblecastMov = Rswift.FileResource(bundle: R.hostingBundle, name: "Hubblecast", pathExtension: "mov")
+    /// Resource file `John F. Kennedy.m4a`.
+    static let johnFKennedyM4a = Rswift.FileResource(bundle: R.hostingBundle, name: "John F. Kennedy", pathExtension: "m4a")
+    /// Resource file `Ronald Reagan.m4a`.
+    static let ronaldReaganM4a = Rswift.FileResource(bundle: R.hostingBundle, name: "Ronald Reagan", pathExtension: "m4a")
     /// Resource file `Shader.fsh`.
     static let shaderFsh = Rswift.FileResource(bundle: R.hostingBundle, name: "Shader", pathExtension: "fsh")
     /// Resource file `Shader.vsh`.
@@ -165,9 +175,21 @@ struct R: Rswift.Validatable {
       return fileResource.bundle.url(forResource: fileResource)
     }
 
+    /// `bundle.url(forResource: "01 Star Gazing", withExtension: "m4a")`
+    static func starGazingM4a(_: Void = ()) -> Foundation.URL? {
+      let fileResource = R.file.starGazingM4a
+      return fileResource.bundle.url(forResource: fileResource)
+    }
+
     /// `bundle.url(forResource: "02 Demo ID3v2.2", withExtension: "mp3")`
     static func demoID3v22Mp3(_: Void = ()) -> Foundation.URL? {
       let fileResource = R.file.demoID3v22Mp3
+      return fileResource.bundle.url(forResource: fileResource)
+    }
+
+    /// `bundle.url(forResource: "02 Keep Going", withExtension: "m4a")`
+    static func keepGoingM4a(_: Void = ()) -> Foundation.URL? {
+      let fileResource = R.file.keepGoingM4a
       return fileResource.bundle.url(forResource: fileResource)
     }
 
@@ -183,6 +205,12 @@ struct R: Rswift.Validatable {
       return fileResource.bundle.url(forResource: fileResource)
     }
 
+    /// `bundle.url(forResource: "04_quasar", withExtension: "mp4")`
+    static func _quasarMp4(_: Void = ()) -> Foundation.URL? {
+      let fileResource = R.file._quasarMp4
+      return fileResource.bundle.url(forResource: fileResource)
+    }
+
     /// `bundle.url(forResource: "Charlie The Unicorn", withExtension: "m4v")`
     static func charlieTheUnicornM4v(_: Void = ()) -> Foundation.URL? {
       let fileResource = R.file.charlieTheUnicornM4v
@@ -192,6 +220,18 @@ struct R: Rswift.Validatable {
     /// `bundle.url(forResource: "Hubblecast", withExtension: "mov")`
     static func hubblecastMov(_: Void = ()) -> Foundation.URL? {
       let fileResource = R.file.hubblecastMov
+      return fileResource.bundle.url(forResource: fileResource)
+    }
+
+    /// `bundle.url(forResource: "John F. Kennedy", withExtension: "m4a")`
+    static func johnFKennedyM4a(_: Void = ()) -> Foundation.URL? {
+      let fileResource = R.file.johnFKennedyM4a
+      return fileResource.bundle.url(forResource: fileResource)
+    }
+
+    /// `bundle.url(forResource: "Ronald Reagan", withExtension: "m4a")`
+    static func ronaldReaganM4a(_: Void = ()) -> Foundation.URL? {
+      let fileResource = R.file.ronaldReaganM4a
       return fileResource.bundle.url(forResource: fileResource)
     }
 

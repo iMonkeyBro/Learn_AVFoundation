@@ -9,37 +9,42 @@ import UIKit
 
 class L_Waveform: BaseViewController {
 
-    private var waveformView: THWaveformView!
+    private var waveformView: WaveformView!
+    private var waveformView2: THWaveformView!
     private var asset: AVAsset!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         let fileUrl: URL = Bundle.main.url(forResource: "kenengfou", withExtension: "mp3")!
         asset = AVAsset(url: fileUrl)
-        
-//        test()
-        
         asset = AVAsset(url: fileUrl)
-        waveformView = THWaveformView(frame: CGRect(x: 10, y: 100, width: 286, height: 80))
+        waveformView = WaveformView(frame: CGRect(x: 10, y: 100, width: 286, height: 80))
         waveformView.waveColor = .red
         waveformView.backgroundColor = .green
         waveformView.asset = asset
         
-        view.addSubview(waveformView)
+        waveformView2 = THWaveformView(frame: CGRect(x: 10, y: 200, width: 286, height: 80))
+        waveformView2.waveColor = .red
+        waveformView2.backgroundColor = .green
+        waveformView2.asset = asset
         
+        view.addSubview(waveformView)
+        view.addSubview(waveformView2)
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         waveformView.frame = CGRect(x: 10, y: 100, width: waveformView.frame.width-10, height: waveformView.frame.height-10)
+        waveformView2.frame = CGRect(x: 10, y: 100, width: waveformView2.frame.width-10, height: waveformView2.frame.height-10)
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         waveformView.frame = CGRect(x: 10, y: 100, width: waveformView.frame.width+10, height: waveformView.frame.height+10)
+        waveformView2.frame = CGRect(x: 10, y: 100, width: waveformView2.frame.width-10, height: waveformView2.frame.height-10)
     }
     
     private func test() {
-        THSampleDataProvider.loadAudioSamples(from: asset) { data in
-            let filter: THSampleDataFilter = THSampleDataFilter(data: data!)
+        SampleDataProvider.loadAudioSamples(from: asset) { data in
+            let filter: SampleDataFilter = SampleDataFilter(sampleData: data!)
             let filteredSamples = filter.filteredSamples(for: self.view.bounds.size)
         }
     }
