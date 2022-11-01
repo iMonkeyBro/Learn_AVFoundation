@@ -29,7 +29,12 @@ class SampleDataFilter {
 //            [UInt8](UnsafeBufferPointer(start: $0, count: sampleData.count))
 //        }
 //        let bytes2 = UnsafeMutablePointer(&bytes)
-//        let dataBytes = (sampleData as NSData).bytes
+        let by = UnsafePointer<UInt8>(bytes)
+      
+        let dataBytes: UnsafeRawPointer = (sampleData as NSData).bytes
+        var dataBytes1 = dataBytes.assumingMemoryBound(to: Int.self)
+        var dataBytes12 = unsafeBitCast(dataBytes, to: UnsafeMutablePointer<Int>.self)
+       
         
         var maxSample: Int = 0
         
@@ -37,8 +42,7 @@ class SampleDataFilter {
             var sampleBin: [Int] = []
             
             for j:UInt in 0..<binSize {
-                var value : Int = Int(bytes[Int(i+j)])
-//                let vv = CFSwapInt16LittleToHost(dataBytes.loa)
+                var value : Int = Int(by[Int(i+j)])
                 sampleBin.append(value)
             }
             

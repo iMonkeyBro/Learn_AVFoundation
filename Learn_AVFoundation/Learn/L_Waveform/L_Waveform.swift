@@ -15,8 +15,7 @@ class L_Waveform: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let fileUrl: URL = Bundle.main.url(forResource: "kenengfou", withExtension: "mp3")!
-        asset = AVAsset(url: fileUrl)
+        let fileUrl: URL = Bundle.main.url(forResource: "01 Demo AAC", withExtension: "m4a")!
         asset = AVAsset(url: fileUrl)
         waveformView = WaveformView(frame: CGRect(x: 10, y: 100, width: 286, height: 80))
         waveformView.waveColor = .red

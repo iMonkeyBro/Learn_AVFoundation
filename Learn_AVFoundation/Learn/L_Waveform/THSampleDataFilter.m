@@ -55,6 +55,8 @@
         SInt16 sampleBin[binSize];
         
         for (NSUInteger j = 0; j < binSize; j++) {
+//            if ((i+j)<100) NSLog(@"%hd",bytes[i + j]);
+            
             // 因为要时刻记得字节序，CFSwapInt16LittleToHost确保样本是按主机内置的字节顺序处理
             sampleBin[j] = CFSwapInt16LittleToHost(bytes[i + j]);
         }

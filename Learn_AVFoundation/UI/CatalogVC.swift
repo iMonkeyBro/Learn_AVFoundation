@@ -32,10 +32,14 @@ class CatalogVC: BaseViewController {
                                                 ["title": "AVFoundation捕捉", "vc": "L_Capture"],
                                                 ["title": "Cube相机", "vc": "L_CubeCamera"],
                                                 ["title": "AVAssetReader/Writer(读取和写入资源)", "vc": "L_AVAssetReaderWriter"],
-                                                ["title": "学习音频波形图", "vc": "L_Waveform"],
+                                                ["title": "音频波形图", "vc": "L_Waveform"],
                                                 ["title": "相机(AVAssetWrite写入)", "vc": "L_CameraWrite"],
                                                 ["title": "AVComposition", "vc": "L_AVComposition"],
                                                 ["title": "CMTime学习", "vc": "L_CMTime"],
+                                                ["title": "AVAduioMix(混合音频)", "vc": "L_AVAuidoMix"],
+                                                ["title": "--", "vc": "BaseViewController"],
+                                                ["title": "--", "vc": "BaseViewController"],
+                                                ["title": "--", "vc": "BaseViewController"],
                                                 ["title": "--", "vc": "BaseViewController"],]
     
     override func viewDidLoad() {
