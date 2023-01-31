@@ -18,7 +18,7 @@ public extension CQ where Base == UICollectionView {
         return base
     }
     /// 通过Cell类获取复用cell
-    func equeueReusableCell<T: UICollectionViewCell>(_ cellClass: T.Type, for indexPath: IndexPath) -> T {
+    func dequeueReusableCell<T: UICollectionViewCell>(_ cellClass: T.Type, for indexPath: IndexPath) -> T {
         guard let cell = base.dequeueReusableCell(withReuseIdentifier: String(describing: T.self), for: indexPath) as? T else {
             fatalError("未能通过 \(String(describing: T.self)) 取出 \(String(describing: cellClass))，请检查注册的实际情况")
         }
